@@ -5,7 +5,8 @@
  */
 package synthgw;
 
-import userInterface.Gui;
+import javafx.fxml.FXML;
+
 
 /**
  *
@@ -18,7 +19,7 @@ public class SynthGW {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Gui gui = new Gui();
+        FXML fx;
     }
     
 }
