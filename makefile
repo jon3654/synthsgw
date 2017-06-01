@@ -11,7 +11,7 @@ make:
 		mkdir build; \
 	fi;
 
-	$(JC) $(ARGS) src/synthgw/*.java src/userInterface/*.java
+	$(JC) $(ARGS) src/*/*.java
 clean:
 	rm -r build
 run: 
