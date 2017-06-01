@@ -6,6 +6,9 @@ Download JRE 8 [here](http://www.oracle.com/technetwork/java/javase/downloads/jr
 To run the program from the command line:
 
   `git clone https://github.com/jon3654/synthsgw.git`
+  
   `cd synthsgw`
+  
   `make`
+  
   `make run`
