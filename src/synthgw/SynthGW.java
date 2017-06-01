@@ -5,7 +5,7 @@
  */
 package synthgw;
 
-import javafx.fxml.FXML;
+import userInterface.UIRunnable;
 
 
 /**
@@ -19,7 +19,9 @@ public class SynthGW {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        FXML fx;
+        UIRunnable runner = new UIRunnable();
+        Thread thread = new Thread(runner);
+        thread.start();
     }
     
 }
