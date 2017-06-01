@@ -5,8 +5,13 @@
  */
 package userInterface;
 
-public class UIRunnable implements Runnable{
-    public void run(){
+/**
+ *
+ * @author jon
+ */
+public class UIRunnable implements Runnable{ 
+    @Override
+    public void run() {
         mainWindow ui = new mainWindow();
         ui.setVisible(true);
     }
