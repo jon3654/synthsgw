@@ -12,4 +12,4 @@ make:
 
 	$(JC) $(ARGS) src/synthgw/*.java src/userInterface/*.java
 clean:
-	rm src/synthgw/*.class src/userInterface/*.class
+	rm -r build
