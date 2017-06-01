@@ -1,7 +1,5 @@
 ARGS = -d build -verbose -cp build -g
 JC = javac
-MAIN = ./build/synthgw/SynthGW
-JVM= java
 .SUFFIXES: .java .class
 
 make:
