@@ -8,10 +8,6 @@ package synthgw;
 import userInterface.UIRunnable;
 
 
-/**
- *
- * @author jon
- */
 public class SynthGW {
 
     /**

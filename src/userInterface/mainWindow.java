@@ -5,10 +5,6 @@
  */
 package userInterface;
 
-/**
- *
- * @author jon
- */
 public class mainWindow extends javax.swing.JFrame {
 
     /**

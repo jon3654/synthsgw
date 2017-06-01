@@ -5,10 +5,6 @@
  */
 package userInterface;
 
-/**
- *
- * @author jon
- */
 public class UIRunnable implements Runnable{
     public void run(){
         mainWindow ui = new mainWindow();
