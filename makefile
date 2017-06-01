@@ -1,5 +1,15 @@
-JFLAGS = -g
+ARGS = -d build -g
 JC = javac
 .SUFFIXES: .java .class
 make:
-	$(JC) $(JFLAGS) src/synthgw/*.java src/userInterface/*.java
+	if [ -d build ] ; \
+	then \
+     		rm -r build;  \
+		mkdir build; \
+	else \
+		mkdir build; \
+	fi;
+
+	$(JC) $(ARGS) src/synthgw/*.java src/userInterface/*.java
+clean:
+	rm src/synthgw/*.class src/userInterface/*.class
