@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package userInterface;
+// had to import from same package to fix runtime error
+import userInterface.UIRunnable;    
 
 public class mainWindow extends javax.swing.JFrame {
 
