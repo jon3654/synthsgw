@@ -24,4 +24,4 @@ Alternatively, without make, run:
   java -classpath build synthgw.SynthGW
   ```
   
-  Will later include a guide on how to use it as a jar file.
+  Will later include a guide on how to use SynthsGW as a jar file.
