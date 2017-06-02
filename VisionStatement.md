@@ -13,3 +13,6 @@ songs is made easy. This way, amateur producers can quickly get the sound they
 desire by taking advantage of the interface to organize these musical moments,
 in a way that is definitive and easy. The software’s GUI makes moving,
 stitching, and cutting sections of music easy.
+
+In addition to the above, our software is targeted to amateur musicians who may
+not have the budget of larger production facilities.
