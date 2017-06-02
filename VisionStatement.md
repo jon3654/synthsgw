@@ -12,4 +12,5 @@ Unlike other synth and beat software, being able to quickly see portions of
 songs is made easy. This way, amateur producers can quickly get the sound they
 desire by taking advantage of the interface to organize these musical moments,
 in a way that is definitive and easy. The software’s GUI makes moving,
-stitching, and cutting sections of music easy.
+stitching, and cutting sections of music easy, as well as exporting the song to
+mp3 to share with others.
