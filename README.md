@@ -7,7 +7,7 @@ Get make for [OSX by installing XCode](https://developer.apple.com/xcode/), for 
 
 Download git [here](https://git-scm.com/downloads).
 
-##Building and running SynthsGW
+## Building and running SynthsGW
 
 To run the program from the command line using make:
 
