@@ -1,5 +1,5 @@
 # synthsgw
-## Dependencies: 
+## Dependencies
 Java Runtime Environment 8 (JRE 8), make (optional but makes compilation simpler), git.
 
 Download JRE 8 [here](http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html)
