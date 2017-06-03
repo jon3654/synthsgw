@@ -5,16 +5,16 @@ JC = javac
 make:
 	if [ -d build ] ; \
 	then \
-     		rm -r build;  \
-		mkdir build; \
-	else \
-		mkdir build; \
-	fi;
+                rm -r build;  \
+	fi; \
+	mkdir build;
 
 	$(JC) $(ARGS) src/*/*.java
 clean:
-	rm -r build
+	rm -r build MANIFEST.MF SynthsGW.jar
 run: 
 	java -classpath build synthgw.SynthGW
-
+jar:
+	echo Main-Class: synthgw.SynthGW > MANIFEST.MF
+	jar cvmf MANIFEST.MF SynthsGW.jar build/*/*.class
 
