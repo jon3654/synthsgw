@@ -38,7 +38,7 @@ cd synthsgw
   make jar
   java -jar SynthsGW.jar
   ```
-### To run the program as a jar without make:
+### Alternatively, without make:
   ```
   jar cvfe SynthsGW.jar synthgw.SynthGW -C build .
   java -jar SynthsGW.jar
