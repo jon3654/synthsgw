@@ -14,4 +14,3 @@ desire by taking advantage of the interface to organize these musical moments,
 in a way that is definitive and easy. The software’s GUI makes moving,
 stitching, and cutting sections of music easy, as well as exporting the song to
 mp3 to share with others.
->>>>>>> 9f8b76b77bc4a08f120c572b6ecd292e1d7aa999
