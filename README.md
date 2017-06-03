@@ -35,7 +35,7 @@ To run the program as a jar file using make:
   java -jar SynthsGW.jar
   ```
 To run the program as a jar without make:
-  ``
+  ```
   git clone https://github.com/jon3654/synthsgw.git
   cd synthsgw
   jar cvfe SynthsGW.jar synthgw.SynthGW -C build .
