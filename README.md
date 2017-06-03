@@ -38,7 +38,7 @@ make run
 java -classpath build synthgw.SynthGW
   ```
 #### Before running the following commands, ensure that SynthsGW is already built.
-
+#### See the previous sections on building SynthsGW.
 
 ### To run the program as a jar file using make:
 ```
