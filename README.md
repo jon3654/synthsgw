@@ -19,12 +19,13 @@ Download git [here](https://git-scm.com/downloads).
 ```
 cd synthsgw
 ```
-### To build SynthsGW with make:
+### Build SynthsGW with make by running:
 ```
 make
 ```
-### To build SynthsGW without make:
-```mkdir build
+### Build SynthsGW without make by running:
+```
+mkdir build
 javac -d build -cp build -g src/*/*.java
 ```
 
