@@ -1,6 +1,6 @@
 ARGS = -d build -verbose -cp build -g src/*/*.java
 JC = javac
-CLASSES= build/synthgw/*.class build/userInterface/*.class
+CLASSES= build/*/*.class
 .SUFFIXES: .java .class
 
 make:
