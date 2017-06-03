@@ -13,34 +13,40 @@ Download git [here](https://git-scm.com/downloads).
 ### Download synthsGW by running the command:
 
 ```
-  git clone https://github.com/jon3654/synthsgw.git
+ git clone https://github.com/jon3654/synthsgw.git
 ```
 ### Before runnning the following commands, ensure that you're in the synthsgw directory by running:
 ```
 cd synthsgw
 ```
+### To build SynthsGW with make:
+```
+make
+```
+### To build SynthsGW without make:
+```mkdir build
+javac -d build -cp build -g src/*/*.java
+```
 
 ### To run the program from the command line using make:
   ```
-  make
-  make run
+make run
   ```
 
 ### Alternatively, without make:
 ```
-  mkdir build
-  javac -d build -cp build -g src/*/*.java
-  java -classpath build synthgw.SynthGW
+java -classpath build synthgw.SynthGW
   ```
-  
+#### Before running the following commands, ensure that SynthsGW is already built.
+
+
 ### To run the program as a jar file using make:
 ```
-  make
-  make jar
-  java -jar SynthsGW.jar
+make jar
+java -jar SynthsGW.jar
   ```
 ### Alternatively, without make:
   ```
-  jar cvfe SynthsGW.jar synthgw.SynthGW -C build .
-  java -jar SynthsGW.jar
+jar cvfe SynthsGW.jar synthgw.SynthGW -C build .
+java -jar SynthsGW.jar
   ```
