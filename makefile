@@ -1,5 +1,6 @@
-ARGS = -d build -verbose -cp build -g
+ARGS = -d build -verbose -cp build -g src/*/*.java
 JC = javac
+CLASSES= build/synthgw/*.class build/userInterface/*.class
 .SUFFIXES: .java .class
 
 make:
@@ -9,12 +10,22 @@ make:
 	fi; \
 	mkdir build;
 
-	$(JC) $(ARGS) src/*/*.java
+	$(JC) $(ARGS)
+
 clean:
-	rm -r build MANIFEST.MF SynthsGW.jar
+	if [ -d build ] ; \
+	then \
+                rm -r build;  \
+	fi; \
+
+	if [ -d SynthsGW.jar ] ; \
+	then \
+                rm SynthsGW.jar;  \
+	fi; \
+
+
 run: 
 	java -classpath build synthgw.SynthGW
-jar:
-	echo Main-Class: synthgw.SynthGW > MANIFEST.MF
-	jar cvmf MANIFEST.MF SynthsGW.jar build/*/*.class
 
+jar:
+	jar cvfe SynthsGW.jar synthgw.SynthGW $(CLASSES)
