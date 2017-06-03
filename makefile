@@ -1,6 +1,5 @@
 ARGS = -d build -verbose -cp build -g src/*/*.java
 JC = javac
-CLASSES= build/*/*.class
 .SUFFIXES: .java .class
 
 make:
@@ -28,4 +27,4 @@ run:
 	java -classpath build synthgw.SynthGW
 
 jar:
-	jar cvfe SynthsGW.jar synthgw.SynthGW $(CLASSES)
+	jar cvfe SynthsGW.jar synthgw.SynthGW -C build .
