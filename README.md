@@ -1,11 +1,13 @@
 # synthsgw
-Dependencies: Java Runtime Environment 8 (JRE 8), make.
+Dependencies: Java Runtime Environment 8 (JRE 8), make (optional but makes compilation simpler), git.
 
 Download JRE 8 [here](http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html)
 
 Get make for [OSX by installing XCode](https://developer.apple.com/xcode/), for [Windows](http://gnuwin32.sourceforge.net/packages/make.htm), or for Linux [here](https://ftp.gnu.org/gnu/make/) if your distro doesn't already have it in its repositories.
 
-To run the program from the command line:
+Download git [here](https://git-scm.com/downloads).
+
+To run the program from the command line using make:
 
   ```
   git clone https://github.com/jon3654/synthsgw.git
@@ -14,7 +16,7 @@ To run the program from the command line:
   make run
   ```
 
-Alternatively, without make, run:
+Alternatively, without make:
 
 ```
   git clone https://github.com/jon3654/synthsgw.git
@@ -24,4 +26,18 @@ Alternatively, without make, run:
   java -classpath build synthgw.SynthGW
   ```
   
-  Will later include a guide on how to use SynthsGW as a jar file.
+To run the program as a jar file using make:
+```
+  git clone https://github.com/jon3654/synthsgw.git
+  cd synthsgw
+  make
+  make jar
+  java -jar SynthsGW.jar
+  ```
+To run the program as a jar without make:
+  ``
+  git clone https://github.com/jon3654/synthsgw.git
+  cd synthsgw
+  jar cvfe SynthsGW.jar synthgw.SynthGW -C build .
+  java -jar SynthsGW.jar
+  ```
