@@ -1,5 +1,6 @@
 ARGS = -d build -verbose -cp build -g src/*/*.java
 JC = javac
+VIEW = src/view/fxml/
 .SUFFIXES: .java .class
 
 make:
@@ -10,6 +11,8 @@ make:
 	mkdir build;
 
 	$(JC) $(ARGS)
+
+	cp -r $(VIEW) build
 
 clean:
 	if [ -d build ] ; \
