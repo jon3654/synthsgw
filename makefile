@@ -28,8 +28,8 @@ clean:
 	fi; \
 
 
-run: 
+run: make
 	java -classpath "`pwd`/build" App
 
-jar:
+jar: make
 	jar cvfe SynthsGW.jar App -C build .
