@@ -14,6 +14,7 @@ make:
 
 	# Moves fxml file(s) to build directory so that `make jar` and `make run`
 	# work correctly.
+move:
 	cp -r $(VIEW) build
 
 clean:
@@ -29,7 +30,7 @@ clean:
 
 
 run: 
-	java -classpath build App
+	java -classpath build synthgw.SynthGW
 
 jar:
 	jar cvfe SynthsGW.jar App -C build .
