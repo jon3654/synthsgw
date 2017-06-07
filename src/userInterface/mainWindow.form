@@ -71,7 +71,7 @@
             </Menu>
             <Menu class="javax.swing.JMenu" name="jMenu4">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Load"/>
+                <Property name="text" type="java.lang.String" value="Open"/>
               </Properties>
               <SubComponents>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem9">
@@ -79,15 +79,18 @@
                     <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                       <KeyStroke key="Ctrl+L"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Load Project"/>
+                    <Property name="text" type="java.lang.String" value="Open Project"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem9ActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
                   <Properties>
                     <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                       <KeyStroke key="Shift+Alt+L"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Load Synthesizer"/>
+                    <Property name="text" type="java.lang.String" value="Open Synthesizer"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem2ActionPerformed"/>
@@ -98,8 +101,19 @@
                     <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                       <KeyStroke key="Shift+Ctrl+L"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Load Beat"/>
+                    <Property name="text" type="java.lang.String" value="Open Beat"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem5ActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem11">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Open mp3"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem11ActionPerformed"/>
+                  </Events>
                 </MenuItem>
               </SubComponents>
             </Menu>
@@ -168,12 +182,12 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="400" max="32767" attributes="0"/>
+          <EmptySpace min="0" pref="800" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="278" max="32767" attributes="0"/>
+          <EmptySpace min="0" pref="578" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
