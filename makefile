@@ -29,7 +29,7 @@ clean:
 
 
 run: 
-	java -classpath build App
+	java -classpath `pwd`/build App
 
 jar:
 	jar cvfe SynthsGW.jar App -C build .
