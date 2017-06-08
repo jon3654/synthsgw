@@ -9,23 +9,33 @@ import java.io.File;
 
 // class that stores open files
 public class FileArray {
-    File file[];
+    static int MAX = 10;    // max num of files allowed to be open at the same time
+    File file[];    // file array for storing files
+    
     int i;  // var that keeps track of how many files are open
     
     // class constructor
     public FileArray(){
-        file = new File[10];
+        file = new File[MAX];
         i = 0;
     }
     
     // adds a file to the array
     public void addFile(File in){
-        file[i] = in;
-        i++;
+        if(i < MAX){
+            file[i] = in;
+            i++;
+        }
+    }
+    
+    // closes the most recently opened file
+    public void close(){
+        if(i > 0)
+            removeFile(i-1);
     }
     
     // removes a file from the array
-    public void removeFile(int n){
+    private void removeFile(int n){
         for(int j = n; n < i; n++){
             file[n] = file[n+1];
         }
