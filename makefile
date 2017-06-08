@@ -6,7 +6,7 @@ MAINCLASS = com.github.synthsgw.SynthsGW
 # FX testing variables
 ARGSFX = -d build -verbose -cp build -g src.bak/*/*.java
 MAINFX = com.github.synthsgw.view.App
-VIEW = src.bak/view/fxml/
+VIEW = src.bak/view/mainScene.fxml
 
 make:
 	if [ -d build ] ; \
