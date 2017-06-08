@@ -1,8 +1,12 @@
 ARGS = -d build -verbose -cp build -g src/*/*.java
 JC = javac
-VIEW = src/view/fxml/
 MAINCLASS = com.github.synthsgw.SynthsGW
 .SUFFIXES: .java .class
+
+# FX testing variables
+ARGSFX = -d build -verbose -cp build -g src.bak/*/*.java
+MAINFX = com.github.synthsgw.view.App
+VIEW = src.bak/view/fxml/
 
 make:
 	if [ -d build ] ; \
@@ -34,3 +38,14 @@ run:
 
 jar:
 	jar cvfe SynthsGW.jar $(MAINCLASS) -C build .
+
+# JavaFX build targets
+
+makefx: clean
+	mkdir build;
+	$(JC) $(ARGSFX)
+	cp -r $(VIEW) build
+
+runfx: makefx
+	java -classpath build $(MAINFX)
+
