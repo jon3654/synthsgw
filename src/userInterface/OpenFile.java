@@ -39,7 +39,6 @@ public class OpenFile {
     // returns 0 if it is, -1 otherwise
     private int checkExt(String str){
         if(str.equals(fileExt)){
-            System.out.println(fileExt);
             return 0;
         }
         else return -1;

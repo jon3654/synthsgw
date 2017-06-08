@@ -13,10 +13,6 @@ public class PlayBack {
     Media song;
     MediaPlayer player;
     public PlayBack(File inFile){
-        // if no file is available prints an error message
-        if(inFile == null){
-            System.out.println("No file opened for playback");
-        }
         // instantiates Media class
         song = new Media(inFile.toURI().toString());
         // instantiates MediaPlayer class
