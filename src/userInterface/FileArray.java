@@ -35,6 +35,8 @@ public class FileArray {
     
     // returns the most recently added file
     public File getFile(){
+        if (i == 0)
+            return null;
         return file[i-1];
     }
 }

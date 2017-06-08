@@ -24,9 +24,9 @@ public class OpenFile {
     
     // method that opens the file
     public File openFile(){
-        int returnVal = fc.showOpenDialog(comp);
+        int ret = fc.showOpenDialog(comp);
         File file = null;
-        if (returnVal == JFileChooser.APPROVE_OPTION){
+        if (ret == JFileChooser.APPROVE_OPTION){
             file = fc.getSelectedFile();
             // checks if file is of the correct type
             if(checkExt(file.getName().substring(file.getName().lastIndexOf('.') + 1)) == 0)

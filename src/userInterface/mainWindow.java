@@ -13,9 +13,7 @@ import javax.swing.SwingUtilities;
 
 public class mainWindow extends javax.swing.JFrame {
 
-    /**
-     * Creates new form mainWindow
-     */
+    // class constructor
     public mainWindow() throws InterruptedException {
         file = new FileArray();
         
@@ -279,22 +277,38 @@ public class mainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        // checks if a file is open and displays error if not
+        if(file.getFile() == null){
+            JOptionPane.showMessageDialog(jFrame1, "No file open");
+            return;
+        }
+        // calls pause method
         playback.pause();
         
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         
-        // calls play method
+        // checks if a file is open and displays error if not
+        if(file.getFile() == null){
+            JOptionPane.showMessageDialog(jFrame1, "No file open");
+            return;
+        }
+        // instantiates playback if null
         if(playback == null){
             playback = new PlayBack(file.getFile());
         }            
+        // calls play method
         playback.play();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+        // checks if a file is open and displays error if not
+        if(file.getFile() == null){
+            JOptionPane.showMessageDialog(jFrame1, "No file open");
+            return;
+        }
+        // calls pstop method
         playback.stop();
     }//GEN-LAST:event_jButton5ActionPerformed
 
