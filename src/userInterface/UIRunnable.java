@@ -5,6 +5,9 @@
  */
 package userInterface;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author jon
@@ -12,7 +15,12 @@ package userInterface;
 public class UIRunnable implements Runnable{ 
     @Override
     public void run() {
-        mainWindow ui = new mainWindow();
-        ui.setVisible(true);
-    }
+        mainWindow ui;
+        try {
+            ui = new mainWindow();
+            ui.setVisible(true);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(UIRunnable.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            }
 }

@@ -5,18 +5,31 @@
  */
 package userInterface;
 // had to import from same package to fix runtime error
-import java.awt.Component;
 import java.io.File;
-import javax.swing.JFileChooser;    
+import java.util.concurrent.CountDownLatch;
+import javafx.embed.swing.JFXPanel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 public class mainWindow extends javax.swing.JFrame {
 
     /**
      * Creates new form mainWindow
      */
-    public mainWindow() {
+    public mainWindow() throws InterruptedException {
         file = new FileArray();
+        
+        // fixes error with JavaFX not being initialized
+        final CountDownLatch latch = new CountDownLatch(1);
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new JFXPanel(); // initializes JavaFX environment
+                latch.countDown();
+            }
+        });
+        latch.await();
+
         initComponents();
     }
 
@@ -253,7 +266,7 @@ public class mainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
@@ -266,6 +279,10 @@ public class mainWindow extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        // instantiates PlayBack class
+        PlayBack playback = new PlayBack(file.getFile());
+        // calls play method
+        playback.play();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
