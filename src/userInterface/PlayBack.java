@@ -27,4 +27,12 @@ public class PlayBack {
     public void play(){
         player.play();
     }
+    
+    public void pause(){
+        player.pause();
+    }
+    
+    public void stop(){
+        player.stop();
+    }
 }
