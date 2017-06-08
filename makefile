@@ -47,5 +47,6 @@ makefx: clean
 	cp -r $(VIEW) build
 
 runfx: makefx
-	java -classpath build $(MAINFX)
+	cd build; \
+	java -classpath . $(MAINFX)
 
