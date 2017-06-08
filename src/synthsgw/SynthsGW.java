@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package synthgw;
+package synthsgw;
 
 import userInterface.UIRunnable;
 
 
-public class SynthGW {
+public class SynthsGW {
 
     /**
      * @param args the command line arguments
