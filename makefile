@@ -12,8 +12,6 @@ make:
 
 	$(JC) $(ARGS)
 
-	# Moves fxml file(s) to build directory so that `make jar` and `make run`
-	# work correctly.
 move:
 	cp -r $(VIEW) build
 
