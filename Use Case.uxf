@@ -512,8 +512,8 @@ bg=blue</panel_attributes>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>360</x>
-      <y>60</y>
+      <x>450</x>
+      <y>50</y>
       <w>120</w>
       <h>40</h>
     </coordinates>
@@ -537,13 +537,13 @@ bg=blue</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>240</x>
-      <y>70</y>
-      <w>140</w>
-      <h>80</h>
+      <y>60</y>
+      <w>230</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 &lt;&lt;extends&gt;&gt;</panel_attributes>
-    <additional_attributes>120.0;10.0;10.0;60.0</additional_attributes>
+    <additional_attributes>210.0;10.0;10.0;70.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -620,8 +620,8 @@ bg=blue</panel_attributes>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>260</x>
-      <y>1030</y>
+      <x>230</x>
+      <y>1060</y>
       <w>120</w>
       <h>40</h>
     </coordinates>
@@ -632,8 +632,8 @@ bg=blue</panel_attributes>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>320</x>
-      <y>970</y>
+      <x>400</x>
+      <y>1010</y>
       <w>120</w>
       <h>40</h>
     </coordinates>
@@ -645,7 +645,7 @@ bg=blue</panel_attributes>
     <id>UMLUseCase</id>
     <coordinates>
       <x>290</x>
-      <y>900</y>
+      <y>890</y>
       <w>120</w>
       <h>40</h>
     </coordinates>
@@ -670,24 +670,24 @@ bg=blue</panel_attributes>
     <coordinates>
       <x>200</x>
       <y>870</y>
-      <w>150</w>
-      <h>180</h>
+      <w>140</w>
+      <h>210</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 &lt;&lt;extends&gt;&gt;</panel_attributes>
-    <additional_attributes>120.0;160.0;10.0;10.0</additional_attributes>
+    <additional_attributes>90.0;190.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>200</x>
       <y>870</y>
-      <w>150</w>
-      <h>140</h>
+      <w>220</w>
+      <h>180</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 &lt;&lt;extends&gt;&gt;</panel_attributes>
-    <additional_attributes>120.0;120.0;10.0;10.0</additional_attributes>
+    <additional_attributes>200.0;160.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -695,10 +695,10 @@ bg=blue</panel_attributes>
       <x>200</x>
       <y>870</y>
       <w>110</w>
-      <h>70</h>
+      <h>60</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 &lt;&lt;extends&gt;&gt;</panel_attributes>
-    <additional_attributes>90.0;50.0;10.0;10.0</additional_attributes>
+    <additional_attributes>90.0;40.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>
