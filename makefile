@@ -1,6 +1,7 @@
 ARGS = -d build -verbose -cp build -g src/*/*.java
 JC = javac
 VIEW = src/view/fxml/
+MAINCLASS = com.github.synthsgw.SynthsGW
 .SUFFIXES: .java .class
 
 make:
@@ -21,14 +22,15 @@ clean:
                 rm -r build;  \
 	fi; \
 
-	if [ -d SynthsGW.jar ] ; \
+	if [ -e SynthsGW.jar ] ; \
 	then \
                 rm SynthsGW.jar;  \
 	fi; \
 
 
 run: 
-	java -classpath build synthsgw.SynthsGW
+	cd build; \
+	java $(MAINCLASS)
 
 jar:
-	jar cvfe SynthsGW.jar App -C build .
+	jar cvfe SynthsGW.jar $(MAINCLASS) -C build .
