@@ -323,7 +323,9 @@ public class mainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
-        file.close();
+        int ret = file.close();
+        if(ret == -1)
+            JOptionPane.showMessageDialog(jFrame1, "No file open");
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     /**

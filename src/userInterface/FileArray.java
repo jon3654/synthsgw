@@ -29,9 +29,12 @@ public class FileArray {
     }
     
     // closes the most recently opened file
-    public void close(){
-        if(i > 0)
+    public int close(){
+        if(i > 0){
             removeFile(i-1);
+            return 0;
+        }
+        return -1;
     }
     
     // removes a file from the array
