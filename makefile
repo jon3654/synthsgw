@@ -28,7 +28,7 @@ clean:
 
 
 run: 
-	java -classpath build synthgw.SynthGW
+	java -classpath build synthsgw.SynthsGW
 
 jar:
 	jar cvfe SynthsGW.jar App -C build .
