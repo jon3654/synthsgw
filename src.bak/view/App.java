@@ -14,7 +14,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class App extends Application {
-    private static final String SCENE_FILE = "/fxml/mainScene.fxml"; 
+    private static final String SCENE_FILE = "/mainScene.fxml"; 
     private static final String WINDOW_TITLE = "Window Title";
     public static void main(String [] args) {
 	launch(args);
