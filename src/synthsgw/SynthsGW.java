@@ -5,7 +5,7 @@
  */
 package synthsgw;
 
-import userInterface.UIRunnable;
+import userInterface.mainWindow;
 
 
 public class SynthsGW {
@@ -13,11 +13,11 @@ public class SynthsGW {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         // TODO code application logic here
-        UIRunnable runner = new UIRunnable();
-        Thread thread = new Thread(runner);
-        thread.start();
+        mainWindow ui = new mainWindow();
+        ui.setVisible(true);
+
     }
     
 }
