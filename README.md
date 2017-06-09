@@ -46,7 +46,7 @@ make run
 
 ### Alternatively, without make:
 ```
-java -classpath build synthgw.SynthGW
+java -classpath build synthsgw.SynthsGW
 ```
 ### Or make the jar yourself
 ### To compress what you've built into a jar file with make:
@@ -57,5 +57,5 @@ make jar
 ### To compress what you've built into a jar file yourself without make:
 #### Note that this will overwrite the already included jar file
 ```
-jar cvfe SynthsGW.jar synthgw.SynthGW -C build .
+jar cvfe SynthsGW.jar synthsgw.SynthsGW -C build .
 ```
