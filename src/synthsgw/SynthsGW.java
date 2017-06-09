@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.github.synthsgw;
+package synthsgw;
 
-import com.github.synthsgw.userInterface.mainWindow;
+import userInterface.mainWindow;
 
 
 public class SynthsGW {

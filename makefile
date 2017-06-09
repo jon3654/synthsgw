@@ -32,9 +32,8 @@ clean:
 	fi; \
 
 
-run: 
-	cd build; \
-	java $(MAINCLASS)
+run:
+	java -classpath build $(MAINCLASS)
 
 jar:
 	jar cvfe SynthsGW.jar $(MAINCLASS) -C build .
