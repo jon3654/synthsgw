@@ -1,6 +1,6 @@
 # synthsgw
 ## Dependencies
-Java Runtime Environment 8 (JRE 8) if you want to only use the jar or Java SE Development Kit 8 if you want to compile SynthsGW yourself, make (optional but makes compilation simpler), git.
+Java SE Runtime Environment 8 (JRE 8) if you want to only use the jar or Java SE Development Kit 8 if you want to compile SynthsGW yourself, make (optional but makes compilation simpler), git.
 
 Download JRE 8 [here](http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html)
 or 
