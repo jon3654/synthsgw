@@ -38,19 +38,8 @@ mkdir build
 javac -d build -cp build -g src/*/*.java
 ```
 #### Before running the following commands, ensure that SynthsGW is already built.
-
-### To compress what you've built into a jar file yourself, with make:
-```
-make jar
-```
-### To compress what you've built into a jar file yourself, without make:
-#### Note that this will overwrite the already included jar file
-```
-jar cvfe SynthsGW.jar synthgw.SynthGW -C build .
-```
-
-## Running SynthsGW
-### To run the program from the command line using make:
+## Running SynthsGW after its built
+### Run the program using make:
   ```
 make run
   ```
@@ -58,4 +47,15 @@ make run
 ### Alternatively, without make:
 ```
 java -classpath build synthgw.SynthGW
+```
+### Or make the jar yourself
+### To compress what you've built into a jar file with make:
+#### Note that this will overwrite the already included jar file
+```
+make jar
+```
+### To compress what you've built into a jar file yourself without make:
+#### Note that this will overwrite the already included jar file
+```
+jar cvfe SynthsGW.jar synthgw.SynthGW -C build .
 ```
