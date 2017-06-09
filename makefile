@@ -1,6 +1,6 @@
 ARGS = -d build -verbose -cp build -g src/*/*.java
 JC = javac
-MAINCLASS = com.github.synthsgw.SynthsGW
+MAINCLASS = synthsgw.SynthsGW
 .SUFFIXES: .java .class
 
 # FX testing variables
