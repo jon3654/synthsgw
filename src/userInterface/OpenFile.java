@@ -14,24 +14,29 @@ public class OpenFile {
     final JFileChooser fc;
     Component comp;
     String fileExt;
+    String songName;
     
     // class constructor
     public OpenFile(String str){
         comp = null;
         fc = new JFileChooser();
         fileExt = str;
+        
     }
     
     // method that opens the file
     public File openFile(){
         int ret = fc.showOpenDialog(comp);
         File file = null;
+        
         if (ret == JFileChooser.APPROVE_OPTION){
             file = fc.getSelectedFile();
+            songName = file.getName();
             // checks if file is of the correct type
             if(checkExt(file.getName().substring(file.getName().lastIndexOf('.') + 1)) == 0)
                 return file;
         }
+        
         return null;
     }
     
