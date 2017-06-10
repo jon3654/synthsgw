@@ -311,7 +311,8 @@ public class mainWindow extends javax.swing.JFrame {
         file.addFile(inFile);
         
         //Actions to show the Panel for the song name
-        //jFrame1.add(jPanel1);
+        String songName = openFile.songName;
+        jLabel1.setText(songName);
         
         
         // if null is returned then the file wasn't properly opened
@@ -366,8 +367,10 @@ public class mainWindow extends javax.swing.JFrame {
         playback.stop();
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    //Action to Close the current file
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
         int ret = file.close();
+        jLabel1.setText("mp3 File Name");
         if(ret == -1)
             JOptionPane.showMessageDialog(jFrame1, "No file open");
     }//GEN-LAST:event_jMenuItem12ActionPerformed
