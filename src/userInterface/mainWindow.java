@@ -15,8 +15,6 @@ public class mainWindow extends javax.swing.JFrame {
 
     // class constructor
     public mainWindow() throws InterruptedException {
-        file = new FileArray();
-        
         // fixes error with JavaFX not being initialized
         final CountDownLatch latch = new CountDownLatch(1);
         SwingUtilities.invokeLater(new Runnable() {
@@ -306,9 +304,8 @@ public class mainWindow extends javax.swing.JFrame {
         // calls constructor for OpenFile
         // lets the class know that it should be opening an mp3
         openFile = new OpenFile("mp3");
-        // opens the File and places it in FileArray
-        File inFile = openFile.openFile();
-        file.addFile(inFile);
+        // opens the File and places it in file array
+        openFile.openFile();
         
         //Actions to show the Panel for the song name
         String songName = openFile.songName;
@@ -333,7 +330,7 @@ public class mainWindow extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // checks if a file is open and displays error if not
-        if(file.getFile() == null){
+        if(openFile.getFile() == null){
             JOptionPane.showMessageDialog(jFrame1, "No file open");
             return;
         }
@@ -345,13 +342,13 @@ public class mainWindow extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         
         // checks if a file is open and displays error if not
-        if(file.getFile() == null){
+        if(openFile.getFile() == null){
             JOptionPane.showMessageDialog(jFrame1, "No file open");
             return;
         }
         // instantiates playback if null
         if(OpenFile.getPlayer() == null){
-            OpenFile.openPlayer(file.getFile());
+            OpenFile.openPlayer(openFile.getFile());
         }            
         // calls play method
         openFile.play();
@@ -359,7 +356,7 @@ public class mainWindow extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // checks if a file is open and displays error if not
-        if(file.getFile() == null){
+        if(OpenFile.getFile() == null){
             JOptionPane.showMessageDialog(jFrame1, "No file open");
             return;
         }
@@ -369,7 +366,7 @@ public class mainWindow extends javax.swing.JFrame {
 
     //Action to Close the current file
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
-        int ret = file.close();
+        int ret = openFile.close();
         jLabel1.setText("mp3 File Name");
         if(ret == -1)
             JOptionPane.showMessageDialog(jFrame1, "No file open");
@@ -438,6 +435,5 @@ public class mainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
-    private FileArray file;
     OpenFile openFile;
 }
