@@ -10,9 +10,9 @@ import java.io.File;
 // class that stores open files
 public class FileArray {
     static int MAX = 10;    // max num of files allowed to be open at the same time
-    File file[];    // file array for storing files
+    static File file[];    // file array for storing files
     
-    int i;  // var that keeps track of how many files are open
+    static int i;  // var that keeps track of how many files are open
     
     // class constructor
     public FileArray(){
@@ -47,7 +47,7 @@ public class FileArray {
     }
     
     // returns the most recently added file
-    public File getFile(){
+    public static File getFile(){
         if (i == 0)
             return null;
         return file[i-1];

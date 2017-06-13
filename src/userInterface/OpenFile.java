@@ -7,21 +7,32 @@ package userInterface;
 
 import java.awt.Component;
 import java.io.File;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javax.swing.JFileChooser;
 
 
 public class OpenFile {
     final JFileChooser fc;
-    Component comp;
-    String fileExt;
+    private static Component comp;
+    private static String fileExt;
     String songName;
+    private static Media song;
+    private static MediaPlayer player;
+
     
     // class constructor
     public OpenFile(String str){
         comp = null;
         fc = new JFileChooser();
         fileExt = str;
-        
+    }
+    
+    public static void openPlayer(File inFile){
+        // instantiates Media class
+        song = new Media(inFile.toURI().toString());
+        // instantiates MediaPlayer class
+        player = new MediaPlayer(song);
     }
     
     // method that opens the file
@@ -48,4 +59,22 @@ public class OpenFile {
         }
         else return -1;
     }
+    
+    public static MediaPlayer getPlayer(){
+        return player;
+    }
+    
+    // plays loaded file
+    public void play(){
+        player.play();
+    }
+    
+    public void pause(){
+        player.pause();
+    }
+    
+    public void stop(){
+        player.stop();
+    }
+
 }

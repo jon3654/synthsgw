@@ -305,7 +305,7 @@ public class mainWindow extends javax.swing.JFrame {
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
         // calls constructor for OpenFile
         // lets the class know that it should be opening an mp3
-        OpenFile openFile = new OpenFile("mp3");
+        openFile = new OpenFile("mp3");
         // opens the File and places it in FileArray
         File inFile = openFile.openFile();
         file.addFile(inFile);
@@ -338,7 +338,7 @@ public class mainWindow extends javax.swing.JFrame {
             return;
         }
         // calls pause method
-        playback.pause();
+        openFile.pause();
         
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -350,11 +350,11 @@ public class mainWindow extends javax.swing.JFrame {
             return;
         }
         // instantiates playback if null
-        if(playback == null){
-            playback = new PlayBack(file.getFile());
+        if(OpenFile.getPlayer() == null){
+            OpenFile.openPlayer(file.getFile());
         }            
         // calls play method
-        playback.play();
+        openFile.play();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -364,7 +364,7 @@ public class mainWindow extends javax.swing.JFrame {
             return;
         }
         // calls pstop method
-        playback.stop();
+        openFile.stop();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     //Action to Close the current file
@@ -439,5 +439,5 @@ public class mainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
     private FileArray file;
-    private PlayBack playback;
+    OpenFile openFile;
 }
