@@ -108,8 +108,6 @@ public class mainWindow extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(169, 169, 169));
         jPanel1.setForeground(new java.awt.Color(169, 169, 169));
 
-        jLabel1.setText("mp3 File Name");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -268,7 +266,7 @@ public class mainWindow extends javax.swing.JFrame {
                     .addComponent(jButton6))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 462, Short.MAX_VALUE))
+                .addGap(0, 478, Short.MAX_VALUE))
         );
 
         pack();
@@ -309,6 +307,7 @@ public class mainWindow extends javax.swing.JFrame {
         
         //Actions to show the Panel for the song name
         String songName = openFile.songName;
+        jPanel1.add(jLabel1);
         jLabel1.setText(songName);
         
         
@@ -367,7 +366,6 @@ public class mainWindow extends javax.swing.JFrame {
     //Action to Close the current file
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
         int ret = openFile.close();
-        jLabel1.setText("mp3 File Name");
         if(ret == -1)
             JOptionPane.showMessageDialog(jFrame1, "No file open");
     }//GEN-LAST:event_jMenuItem12ActionPerformed

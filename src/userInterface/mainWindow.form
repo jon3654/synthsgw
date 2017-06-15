@@ -221,7 +221,7 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="462" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="478" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -293,9 +293,6 @@
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="mp3 File Name"/>
-          </Properties>
         </Component>
       </SubComponents>
     </Container>

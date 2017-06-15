@@ -85,7 +85,7 @@ public class OpenFile {
         // returns -1 if no file is open
         if(i < 1) return -1;
         
-        for(int j = n; n < i; j++){
+        for(int j = n; n < i-1; j++){
             file[j] = file[j+1];
         }
         file[i] = null;
