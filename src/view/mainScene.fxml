@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="functionality.Controller">
+   <top>
+      <VBox prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <MenuBar>
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                        <Menu mnemonicParsing="false" text="New">
+                          <items>
+                            <MenuItem mnemonicParsing="false" text="New Project" />
+                              <MenuItem mnemonicParsing="false" text="New Beat" />
+                              <MenuItem mnemonicParsing="false" text="New Synth" />
+                          </items>
+                        </Menu>
+                    <MenuItem fx:id="close" mnemonicParsing="false" text="Close" />
+                        <Menu mnemonicParsing="false" text="Open">
+                          <items>
+                              <MenuItem mnemonicParsing="false" text="Open Project" />
+                              <MenuItem mnemonicParsing="false" text="Open Synth" />
+                              <MenuItem mnemonicParsing="false" text="Open Beat" />
+                            <MenuItem fx:id="openMP3" mnemonicParsing="false" onAction="#openMP3" text="Open MP3" />
+                          </items>
+                        </Menu>
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                  <items>
+                        <MenuItem mnemonicParsing="false" text="Undo" />
+                    <MenuItem mnemonicParsing="false" text="Delete" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="About" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+            <ToolBar prefHeight="40.0" prefWidth="200.0">
+              <items>
+                <Button mnemonicParsing="false" text="Play" />
+                  <Button mnemonicParsing="false" text="Pause" />
+                  <Button mnemonicParsing="false" text="Stop" />
+              </items>
+            </ToolBar>
+         </children>
+      </VBox>
+   </top>
+   <bottom>
+      <ToolBar prefHeight="22.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <items>
+            <Label text="Some kind of status" />
+         </items>
+      </ToolBar>
+   </bottom>
+   <center>
+      <SplitPane dividerPositions="0.20735524256651017" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="702.0" prefWidth="307.0" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
+        </items>
+      </SplitPane>
+   </center>
+</BorderPane>
