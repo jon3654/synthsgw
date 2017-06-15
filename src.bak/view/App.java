@@ -3,7 +3,7 @@
  * Entry point for the application.
  */
 
-package com.github.synthsgw.view;
+package view;
 
 import java.io.IOException;
 
@@ -14,7 +14,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class App extends Application {
-    private static final String SCENE_FILE = "/mainScene.fxml"; 
+    private static final String SCENE_FILE = "mainScene.fxml"; 
     private static final String WINDOW_TITLE = "Window Title";
     public static void main(String [] args) {
 	launch(args);
@@ -23,9 +23,9 @@ public class App extends Application {
 @Override
 public void start(Stage stage) {
 	//FIXME
-	System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-	System.out.println(System.getProperty("user.dir"));
-	System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+//	System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+//	System.out.println(System.getProperty("user.dir"));
+//	System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 	//FIXME
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource(SCENE_FILE)); 
