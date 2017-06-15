@@ -156,6 +156,7 @@ public class mainWindow extends javax.swing.JFrame {
                 jMenuItem4ActionPerformed(evt);
             }
         });
+		
         jMenu3.add(jMenuItem4);
 
         jMenu1.add(jMenu3);
@@ -281,7 +282,10 @@ public class mainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        // TODO add your handling code here:
+        // this doesn't do anything yet, it'll eventually contain
+		// everything to make and control beats 
+		BeatMaker beatBox = new BeatMaker();
+		
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
