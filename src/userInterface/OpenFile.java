@@ -14,7 +14,7 @@ import javax.swing.JFileChooser;
 public class OpenFile {
     final JFileChooser fc;
     private static Component comp;
-    private static String fileExt;
+    private static String fileExtension;
     String songName;
     private static Media song;
     private static MediaPlayer player;
@@ -26,7 +26,7 @@ public class OpenFile {
     public OpenFile(String str){
         comp = null;
         fc = new JFileChooser();
-        fileExt = str;
+        fileExtension = str;
         file = new File[10];
         i = 0;
     }
@@ -60,7 +60,7 @@ public class OpenFile {
     // method that checks that the extension is correct
     // returns 0 if it is, -1 otherwise
     private int checkExt(String str){
-        if(str.equals(fileExt)){
+        if(str.equals(fileExtension)){
             return 0;
         }
         else return -1;
