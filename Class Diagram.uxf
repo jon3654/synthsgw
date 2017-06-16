@@ -4,95 +4,40 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>80</x>
-      <y>60</y>
-      <w>210</w>
-      <h>190</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;SynthsGW&gt;&gt;
-Package::synthsgw
-
---
-
-main()</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
       <x>460</x>
       <y>60</y>
       <w>210</w>
       <h>190</h>
     </coordinates>
-    <panel_attributes>&lt;&lt;mainWindow&gt;&gt;
-Package::userInterface
+    <panel_attributes>&lt;&lt;App&gt;&gt;
+Package::View
 --
 
-initComponents()</panel_attributes>
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>80</x>
-      <y>330</y>
+      <x>170</x>
+      <y>320</y>
       <w>210</w>
-      <h>190</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;FileArray&gt;&gt;
-Package::userInterface
---
-
-File file[MAX]
-int i
-
---
-
-addFile()
-closeFile()
-removeFile(int n)
-getFile()</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>460</x>
-      <y>330</y>
-      <w>210</w>
-      <h>190</h>
+      <h>250</h>
     </coordinates>
     <panel_attributes>&lt;&lt;OpenFile&gt;&gt;
-Package::userInterface
+Package::functionality
 --
 
 JFileChooser fc
 Component comp
-
+Media song
+MediaPlayer player
+File file[MAX]
+int i
 --
 
 openFile()
-checkExt()</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>830</x>
-      <y>330</y>
-      <w>210</w>
-      <h>190</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;PlayBack&gt;&gt;
-Package::userInterface
---
-
-Media song
-MediaPlayer player
-
---
-
+checkExt()
 play()
 pause()
 stop()</panel_attributes>
@@ -101,45 +46,38 @@ stop()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>560</x>
+      <x>270</x>
       <y>240</y>
-      <w>400</w>
-      <h>110</h>
+      <w>320</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;380.0;90.0</additional_attributes>
+    <additional_attributes>300.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>770</x>
+      <y>330</y>
+      <w>210</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;BeatMaker&gt;&gt;
+Package::functionality
+--
+
+</panel_attributes>
+    <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>560</x>
       <y>240</y>
-      <w>30</w>
+      <w>340</w>
       <h>110</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>280</x>
-      <y>160</y>
-      <w>200</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;180.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>160</x>
-      <y>240</y>
-      <w>430</w>
-      <h>110</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>410.0;10.0;10.0;90.0</additional_attributes>
+    <additional_attributes>10.0;10.0;320.0;90.0</additional_attributes>
   </element>
 </diagram>
