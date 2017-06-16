@@ -1,12 +1,8 @@
 ARGS = -d build -verbose -cp build -g src/*/*.java
 JC = javac
-MAINCLASS = synthsgw.SynthsGW
+MAINCLASS = com.github.synthsgw.view.App
+VIEW = src/view/fxml
 .SUFFIXES: .java .class
-
-# FX testing variables
-ARGSFX = -d build -verbose -cp build -g src.bak/*/*.java
-MAINFX = com.github.synthsgw.view.App
-VIEW = src.bak/view/mainScene.fxml
 
 make:
 	if [ -d build ] ; \
@@ -17,7 +13,6 @@ make:
 
 	$(JC) $(ARGS)
 
-move:
 	cp -r $(VIEW) build
 
 clean:
