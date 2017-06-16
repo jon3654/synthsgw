@@ -7,8 +7,14 @@ public class BeatMaker{
 	Sequence sequence;
 	Track track;
 	
+	String[] instrumentsNames = {"Bass Drum", "Closed Hi-Hat", 
+		"Open Hi-Hat", "Acoustic Snare", "Crash Cymbal", "Hand Clap", 
+		"High Tom", "Low-mid Tom"};
+	
+	int [] instruments = {35, 42, 46, 38, 49, 39, 50, 47};
+	
 	public BeatMaker(){
-		System.out.println("this is just here for testing");
+		startUp();
 	}
 	
 	public void startUp(){
@@ -22,10 +28,13 @@ public class BeatMaker{
 			
 			sequence = new Sequence(Sequence.PPQ, 4);
 			track = sequence.createTrack();
-			sequencer.setTempoInBPM(120);
+			sequencer.setTempoInBPM(120/*this needs to be some value 
+									     read from the Metronome class*/);
 		}
 		catch(Exception e){
 			e.printStackTrace();
 		}
 	}
+	
+
 }
