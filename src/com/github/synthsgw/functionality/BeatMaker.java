@@ -1,4 +1,4 @@
-package userInterface;
+package com.github.synthsgw.functionality;
 
 import javax.sound.midi.*;
 

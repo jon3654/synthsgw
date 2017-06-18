@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package functionality;
+package com.github.synthsgw.functionality;
 
 import java.io.File;
 import javafx.scene.media.Media;
