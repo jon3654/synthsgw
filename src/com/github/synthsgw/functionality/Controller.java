@@ -24,4 +24,20 @@ public class Controller {
         //Actions to show the Panel for the song name
         String songName = openFile.songName;
     }
+    
+    public void play(){
+        openFile.play();
+    }
+    
+    public void pause(){
+        openFile.pause();
+    }
+    
+    public void stop(){
+        openFile.stop();
+    }
+    
+    public void close(){
+        openFile.close();
+    }
 }

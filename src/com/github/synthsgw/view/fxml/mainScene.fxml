@@ -21,7 +21,7 @@
                               <MenuItem mnemonicParsing="false" text="New Synth" />
                           </items>
                         </Menu>
-                    <MenuItem fx:id="close" mnemonicParsing="false" text="Close" />
+                    <MenuItem fx:id="close" mnemonicParsing="false" onAction="#close" text="Close" />
                         <Menu mnemonicParsing="false" text="Open">
                           <items>
                               <MenuItem mnemonicParsing="false" text="Open Project" />
@@ -47,9 +47,9 @@
             </MenuBar>
             <ToolBar prefHeight="40.0" prefWidth="200.0">
               <items>
-                <Button mnemonicParsing="false" text="Play" />
-                  <Button mnemonicParsing="false" text="Pause" />
-                  <Button mnemonicParsing="false" text="Stop" />
+                <Button mnemonicParsing="false" onAction="#play" text="Play" />
+                  <Button mnemonicParsing="false" onAction="#pause" text="Pause" />
+                  <Button mnemonicParsing="false" onAction="#stop" text="Stop" />
               </items>
             </ToolBar>
          </children>

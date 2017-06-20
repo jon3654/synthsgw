@@ -6,6 +6,8 @@
 package com.github.synthsgw.functionality;
 
 import java.io.File;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
@@ -41,19 +43,18 @@ public class OpenFile {
     public int openFile(){
         File openFile = null;
         
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Open Resource File");
-            openFile = fileChooser.showOpenDialog(stage);
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Resource File");
+        openFile = fileChooser.showOpenDialog(stage);
                         
-            songName = openFile.getName();
-            // checks if file is of the correct type
-            if(checkExt(openFile.getName().substring(openFile.getName().lastIndexOf('.') + 1)) == 0){
-                file[i] = openFile;
-                i++;
-                return 0;
-            }
-        
-        
+        songName = openFile.getName();
+        // checks if file is of the correct type
+        if(checkExt(openFile.getName().substring(openFile.getName().lastIndexOf('.') + 1)) == 0){
+            file[i] = openFile;
+            openPlayer(openFile);
+            i++;
+            return 0;
+        }
         return -1;
     }
     
@@ -95,16 +96,29 @@ public class OpenFile {
 
     
     // plays loaded file
-    public void play(){
-        player.play();
+    public static void play(){
+        if(i < 1) 
+            noFileOpen();
+        else
+            player.play();
+        
     }
     
-    public void pause(){
-        player.pause();
+    public static void pause(){
+        if(i < 1) noFileOpen();
+        else player.pause();
     }
     
-    public void stop(){
-        player.stop();
+    public static void stop(){
+        if(i < 1) noFileOpen();
+        else player.stop();
     }
-
+    
+    public static void noFileOpen(){
+        Alert popup = new Alert(AlertType.INFORMATION);
+        popup.setTitle("Error");
+        popup.setHeaderText("No file open");
+        popup.setContentText("You currently do not have a file open for playback");
+        popup.show();    
+    }
 }
