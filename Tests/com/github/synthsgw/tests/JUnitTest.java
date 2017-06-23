@@ -6,20 +6,17 @@ package com.github.synthsgw.tests;
  * and open the template in the editor.
  */
 
+import com.github.synthsgw.functionality.OpenFile;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
-/**
- *
- * @author jon
- */
-public class JUnitTests {
-    
-    public JUnitTests() {
+public class JUnitTest {
+        
+    public JUnitTest() {
     }
     
     @BeforeClass
@@ -43,4 +40,17 @@ public class JUnitTests {
     //
     // @Test
     // public void hello() {}
+    
+    @Test
+    public void CheckExtWithCorrectExtension_test(){
+        OpenFile file = new OpenFile("mp3");
+        assertEquals(file.checkExt("mp3"), 0);
+    }
+    
+    @Test
+    public void CheckExtWithoutCorrectExtension_test(){
+        OpenFile file = new OpenFile("mp3");
+        assertEquals(file.checkExt("asd"),-1);
+    }
+    
 }
