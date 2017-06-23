@@ -56,6 +56,9 @@ public class OpenFile {
             numberOfOpenFiles++;
             return 0;
         }
+        else
+            wrongFileOpen();
+        
         return -1;
     }
     
@@ -119,7 +122,13 @@ public class OpenFile {
         Alert popup = new Alert(AlertType.INFORMATION);
         popup.setTitle("Error");
         popup.setHeaderText("No file open");
-        popup.setContentText("You currently do not have a file open for playback");
         popup.show();    
+    }
+    
+    public static void wrongFileOpen(){
+        Alert popup = new Alert(AlertType.INFORMATION);
+        popup.setTitle("Error");
+        popup.setHeaderText("Wrong file type");
+        popup.show();
     }
 }
