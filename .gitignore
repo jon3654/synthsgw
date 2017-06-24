@@ -1,4 +1,8 @@
-build
 SynthsGW.jar
+build
+
 .DS_Store
 /dist/
+
+*.swp
+

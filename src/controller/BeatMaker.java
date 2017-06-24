@@ -1,4 +1,10 @@
-package com.github.synthsgw.functionality;
+/* BeatMaker.java
+ *
+ * Handles beats
+ * TODO Make a better description of this file
+ */
+
+package com.github.synthsgw.controller;
 
 import javax.sound.midi.*;
 

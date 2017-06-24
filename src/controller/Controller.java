@@ -1,16 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/* Controller.java
+ *
+ * Put short description of class here
  */
-package com.github.synthsgw.functionality;
+
+package com.github.synthsgw.controller;
 
 import javafx.event.ActionEvent;
 
-/**
- *
- * @author jon
- */
 public class Controller {
     OpenFile openFile;
     

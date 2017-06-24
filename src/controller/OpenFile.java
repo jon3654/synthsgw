@@ -1,9 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/* OpenFile.java
+ *
+ * Handles opening files
  */
-package com.github.synthsgw.functionality;
+
+package com.github.synthsgw.controller;
 
 import java.io.File;
 import javafx.scene.control.Alert;

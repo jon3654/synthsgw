@@ -1,4 +1,4 @@
-ARGS = -d build -verbose -cp build -g src/*/*.java
+ARGS = -d build -verbose -cp build -g 
 JC = javac
 MAINCLASS = com.github.synthsgw.view.App
 VIEW = src/view/fxml
@@ -6,41 +6,29 @@ VIEW = src/view/fxml
 
 make:
 	if [ -d build ] ; \
-	then \
-                rm -r build;  \
+		then rm -r build;  \
 	fi; \
 	mkdir build;
 
-	$(JC) $(ARGS)
+	find src -name "*.java" > sources.tmp
+	$(JC) $(ARGS) @sources.tmp
 
 	cp -r $(VIEW) build
 
 clean:
 	if [ -d build ] ; \
-	then \
-                rm -r build;  \
+		then rm -r build;  \
 	fi; \
-
 	if [ -e SynthsGW.jar ] ; \
-	then \
-                rm SynthsGW.jar;  \
+		then rm SynthsGW.jar;  \
 	fi; \
-
+	if [ -e sources.tmp ] ; \
+		then rm sources.tmp; \
+	fi
 
 run:
 	java -classpath build $(MAINCLASS)
 
 jar:
 	jar cvfe SynthsGW.jar $(MAINCLASS) -C build .
-
-# JavaFX build targets
-
-makefx: clean
-	mkdir build;
-	$(JC) $(ARGSFX)
-	cp -r $(VIEW) build
-
-runfx: makefx
-	cd build; \
-	java -classpath . $(MAINFX)
 
