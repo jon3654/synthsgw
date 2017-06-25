@@ -104,22 +104,35 @@ public class OpenFile {
 
     
     // plays loaded file
-    public static void play(){
-        if(numberOfOpenFiles < 1) 
-            noFileOpen();
-        else
+    public static int play(){
+        if(numberOfOpenFiles < 1) {
+            return -1;
+        }
+        else{
             player.play();
+            return 0;
+        }
         
     }
     
-    public static void pause(){
-        if(numberOfOpenFiles < 1) noFileOpen();
-        else player.pause();
+    public static int pause(){
+        if(numberOfOpenFiles < 1){
+            return -1;
+        }
+        else{
+            player.pause();
+            return 0;
+        }
     }
     
-    public static void stop(){
-        if(numberOfOpenFiles < 1) noFileOpen();
-        else player.stop();
+    public static int stop(){
+        if(numberOfOpenFiles < 1){ 
+            return -1;
+        }
+        else{ 
+            player.stop();
+            return 0;
+        }
     }
     
     public static void noFileOpen(){

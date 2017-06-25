@@ -23,15 +23,21 @@ public class Controller {
     }
     
     public void play(){
-        OpenFile.play();
+        int ret = OpenFile.play();
+        if(ret == -1)
+            OpenFile.noFileOpen();
     }
     
     public void pause(){
-        OpenFile.pause();
+        int ret = OpenFile.pause();
+        if(ret == -1)
+            OpenFile.noFileOpen();
     }
     
     public void stop(){
-        OpenFile.stop();
+        int ret = OpenFile.stop();
+        if(ret == -1)
+            OpenFile.noFileOpen();
     }
     
     public void close(){
