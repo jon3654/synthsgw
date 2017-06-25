@@ -81,6 +81,7 @@ public class OpenFile {
         return file[numberOfOpenFiles-1];
     }
     
+    // public method to close file
     public int close(){
         return removeFile(numberOfOpenFiles-1);
     }
@@ -88,7 +89,9 @@ public class OpenFile {
     // removes a file from the array
     private int removeFile(int n){
         // returns -1 if no file is open
-        if(numberOfOpenFiles < 1) return -1;
+        if(numberOfOpenFiles < 1) 
+            return -1;
+        
         
         for(int j = n; n < numberOfOpenFiles-1; j++){
             file[j] = file[j+1];

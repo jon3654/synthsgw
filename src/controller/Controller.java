@@ -3,8 +3,9 @@
  * Put short description of class here
  */
 
-package com.github.synthsgw.controller;
+package controller;
 
+import controller.OpenFile;
 import javafx.event.ActionEvent;
 
 public class Controller {
@@ -22,18 +23,20 @@ public class Controller {
     }
     
     public void play(){
-        openFile.play();
+        OpenFile.play();
     }
     
     public void pause(){
-        openFile.pause();
+        OpenFile.pause();
     }
     
     public void stop(){
-        openFile.stop();
+        OpenFile.stop();
     }
     
     public void close(){
-        openFile.close();
+        int ret = openFile.close();
+        if(ret == -1)
+            OpenFile.noFileOpen();
     }
 }
