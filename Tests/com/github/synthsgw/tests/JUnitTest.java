@@ -7,6 +7,7 @@ package com.github.synthsgw.tests;
  */
 
 import controller.OpenFile;
+import java.io.File;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
@@ -59,4 +60,22 @@ public class JUnitTest {
         assertEquals(file.close(), -1);
     }
     
+    @Test
+    public void AttemptToPlayFileWhileNoneIsOpen(){
+        OpenFile file = new OpenFile("mp3");
+        assertEquals(file.play(), -1);
+    }
+    
+    @Test
+    public void AttemptToPauseFileWhileNoneIsOpen(){
+        OpenFile file = new OpenFile("mp3");
+        assertEquals(file.pause(), -1);
+    }
+    
+    @Test
+    public void AttemptToStopFileWhileNoneIsOpen(){
+        OpenFile file = new OpenFile("mp3");
+        assertEquals(file.stop(), -1);
+    }
+
 }
