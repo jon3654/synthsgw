@@ -3,7 +3,7 @@
  * Handles opening files
  */
 
-package com.github.synthsgw.controller;
+package controller;
 
 import java.io.File;
 import javafx.scene.control.Alert;
@@ -64,7 +64,7 @@ public class OpenFile {
     
     // method that checks that the extension is correct
     // returns 0 if it is, -1 otherwise
-    private int checkExt(String str){
+    public int checkExt(String str){
         if(str.equals(fileExt)){
             return 0;
         }
