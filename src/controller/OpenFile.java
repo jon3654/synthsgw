@@ -49,7 +49,8 @@ public class OpenFile {
                         
         songName = openFile.getName();
         // checks if file is of the correct type
-        if(checkExt(openFile.getName().substring(openFile.getName().lastIndexOf('.') + 1)) == 0){
+        if(checkExt(openFile.getName().substring(
+				openFile.getName().lastIndexOf('.') + 1)) == 0) {
             file[numberOfOpenFiles] = openFile;
             // intializes the player
             openPlayer(openFile);

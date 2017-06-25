@@ -1,6 +1,6 @@
 ARGS = -d build -verbose -cp build -g 
 JC = javac
-MAINCLASS = com.github.synthsgw.view.App
+MAINCLASS = com.github.synthsgw.App
 VIEW = src/view/fxml
 .SUFFIXES: .java .class
 
