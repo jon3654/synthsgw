@@ -3,7 +3,7 @@
  * Entry point for the application.
  */
 
-package com.github.synthsgw.view;
+package com.github.synthsgw;
 
 import java.io.IOException;
 
