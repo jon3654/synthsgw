@@ -6,7 +6,7 @@ package com.github.synthsgw.tests;
  * and open the template in the editor.
  */
 
-import com.github.synthsgw.functionality.OpenFile;
+import controller.OpenFile;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
@@ -42,15 +42,21 @@ public class JUnitTest {
     // public void hello() {}
     
     @Test
-    public void CheckExtWithCorrectExtension_test(){
+    public void CheckExtWithCorrectExtension(){
         OpenFile file = new OpenFile("mp3");
         assertEquals(file.checkExt("mp3"), 0);
     }
     
     @Test
-    public void CheckExtWithoutCorrectExtension_test(){
+    public void CheckExtWithoutCorrectExtension(){
         OpenFile file = new OpenFile("mp3");
         assertEquals(file.checkExt("asd"),-1);
+    }
+    
+    @Test
+    public void AttemptToCloseFileWhileNoneIsOpen(){
+        OpenFile file = new OpenFile("mp3");
+        assertEquals(file.close(), -1);
     }
     
 }
