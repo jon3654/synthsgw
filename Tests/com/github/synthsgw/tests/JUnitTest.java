@@ -83,6 +83,16 @@ public class JUnitTest extends ApplicationTest{
     public void AttemptToPlayFileWhileNoneIsOpen(){
         OpenFile file = new OpenFile("mp3");
         assertEquals(file.play(), -1);
+        
+    }
+    
+    @Test
+    public void AttemptToPlayFileWhileOneIsOPen(){
+        OpenFile file = new OpenFile("mp3");
+        File newFile = new File("Tests/test.mp3");
+        OpenFile.numberOfOpenFiles++;
+        OpenFile.openPlayer(newFile);
+        assertEquals(file.play(), 0);
     }
     
     @Test
@@ -92,9 +102,27 @@ public class JUnitTest extends ApplicationTest{
     }
     
     @Test
+    public void AttemptToPauseFileWhileOneIsOpen(){
+        OpenFile file = new OpenFile("mp3");
+        File newFile = new File("Tests/test.mp3");
+        OpenFile.numberOfOpenFiles++;
+        OpenFile.openPlayer(newFile);
+        assertEquals(file.pause(), 0);
+    }
+    
+    @Test
     public void AttemptToStopFileWhileNoneIsOpen(){
         OpenFile file = new OpenFile("mp3");
         assertEquals(file.stop(), -1);
+    }
+    
+    @Test
+    public void AttemptToStopFileWhileOneIsOpen(){
+        OpenFile file = new OpenFile("mp3");
+        File newFile = new File("Tests/test.mp3");
+        OpenFile.numberOfOpenFiles++;
+        OpenFile.openPlayer(newFile);
+        assertEquals(file.stop(), 0);
     }
 
 }
