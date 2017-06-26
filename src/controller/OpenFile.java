@@ -17,12 +17,12 @@ public class OpenFile {
     Window stage;
     FileChooser fileChooser;
     private static String fileExt;
-    String songName;
+    public String songName;
     private static Media song;
     private static MediaPlayer player;
     static File file[];
     static int MAX = 10;
-    static int numberOfOpenFiles;
+    public static int numberOfOpenFiles;
     
     // class constructor
     public OpenFile(String str){

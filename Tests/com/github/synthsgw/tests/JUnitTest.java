@@ -8,32 +8,42 @@ package com.github.synthsgw.tests;
 
 import controller.OpenFile;
 import java.io.File;
-import org.junit.After;
-import org.junit.AfterClass;
+import java.io.IOException;
+import static javafx.application.Application.launch;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import static org.junit.Assert.assertEquals;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
+import org.testfx.framework.junit.ApplicationTest;
 
-public class JUnitTest {
+
+public class JUnitTest extends ApplicationTest{
+    
+    private static final String SCENE_FILE = "/view/fxml/mainScene.fxml"; 
+    private static final String WINDOW_TITLE = "Window Title";
+	
+    @Override
+    public void start(Stage stage) {
+	FXMLLoader loader = new FXMLLoader();
+	loader.setLocation(getClass().getResource(SCENE_FILE)); 
+
+	try {
+  		Parent root = loader.load();
+		Scene scene = new Scene(root);
+		stage.setScene(scene);
+	} catch(IOException e) {
+			e.printStackTrace();
+		System.exit(-1);
+	}
+
+	stage.setTitle(WINDOW_TITLE);
+	stage.show();
+    }
+
         
     public JUnitTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
     }
 
     // TODO add test methods here.
@@ -58,6 +68,15 @@ public class JUnitTest {
     public void AttemptToCloseFileWhileNoneIsOpen(){
         OpenFile file = new OpenFile("mp3");
         assertEquals(file.close(), -1);
+    }
+    
+    @Test
+    public void AttemptToCloseFileWhileOneIsOpen(){
+        OpenFile file = new OpenFile("mp3");
+        File newFile = new File("Tests/test.mp3");
+        OpenFile.numberOfOpenFiles++;
+        OpenFile.openPlayer(newFile);
+        assertEquals(file.close(), 0);
     }
     
     @Test

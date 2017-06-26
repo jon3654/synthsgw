@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import com.github.synthsgw.model.Settings;
+import controller.OpenFile;
 
 public class SceneController {
     OpenFile openFile;
