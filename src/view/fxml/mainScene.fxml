@@ -21,7 +21,7 @@
                               <MenuItem mnemonicParsing="false" text="New Synth" />
                           </items>
                         </Menu>
-                    <MenuItem fx:id="close" mnemonicParsing="false" onAction="#close" text="Close" />
+                    <MenuItem fx:id="close" mnemonicParsing="false" onAction="#close" text="Close File" />
                         <Menu mnemonicParsing="false" text="Open">
                           <items>
                               <MenuItem mnemonicParsing="false" text="Open Project" />
