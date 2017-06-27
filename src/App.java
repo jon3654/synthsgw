@@ -1,6 +1,6 @@
 /* App.java
  *
- * Entry point for the application.
+ * Entry point for the application using JavaFX
  */
 
 package com.github.synthsgw;
@@ -21,22 +21,22 @@ public class App extends Application {
 		launch(args);
 	}
 	
-	@Override
-	public void start(Stage stage) {
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource(SCENE_FILE)); 
+    @Override
+    public void start(Stage stage) {
+	FXMLLoader loader = new FXMLLoader();
+	loader.setLocation(getClass().getResource(SCENE_FILE)); 
 
-		try {
-			Parent root = loader.load();
-			Scene scene = new Scene(root);
-			stage.setScene(scene);
-		} catch(IOException e) {
-			e.printStackTrace();
-			System.exit(-1);
-		}
-
-		stage.setTitle(WINDOW_TITLE);
-		stage.show();
+	try {
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+	} catch(IOException e) {
+            e.printStackTrace();
+            System.exit(-1);
 	}
+
+	stage.setTitle(WINDOW_TITLE);
+	stage.show();
+    }
 }
 
