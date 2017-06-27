@@ -21,23 +21,24 @@ public class SceneController {
     OpenFile openFile;
 
 	@FXML
-	public void openMetronome() {
-		Stage stage = new Stage();
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource(Settings.METRONOME_FXML));
+        
+    public void openMetronome() {
+	Stage stage = new Stage();
+	FXMLLoader loader = new FXMLLoader();
+	loader.setLocation(getClass().getResource(Settings.METRONOME_FXML));
 
-		try {
-			Parent root = loader.load();
-			Scene scene = new Scene(root);
-			stage.setScene(scene);
-		} catch(IOException e) {
-			e.printStackTrace();
-			System.exit(-2);
-		}
-
-		stage.setTitle(Settings.METRONOME_TITLE);
-		stage.show();
+	try {
+		Parent root = loader.load();
+		Scene scene = new Scene(root);
+		stage.setScene(scene);
+	} catch(IOException e) {
+		e.printStackTrace();
+		System.exit(-2);
 	}
+
+	stage.setTitle(Settings.METRONOME_TITLE);
+	stage.show();
+    }
     
     public void openMP3(ActionEvent e){
         // calls constructor for OpenFile
@@ -48,6 +49,13 @@ public class SceneController {
         
         //Actions to show the Panel for the song name
         String songName = openFile.songName;
+    }
+    
+    //This function displays a new panel for the type of sound that has been
+    //opened/made
+    public void loadNewSoundPanel()
+    {
+        
     }
     
     public void play(){
