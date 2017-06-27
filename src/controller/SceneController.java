@@ -55,6 +55,8 @@ public class SceneController {
     //opened/made
     public void loadNewSoundPanel()
     {
+        //Use a vbox with javaFx, so that it hopefully fills in the spots when
+        //something is closed?
         
     }
     
