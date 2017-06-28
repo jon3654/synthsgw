@@ -16,6 +16,9 @@ import javafx.stage.Stage;
 
 import com.github.synthsgw.model.Settings;
 import controller.OpenFile;
+import java.awt.Desktop;
+import java.net.URI;
+import javafx.scene.control.Hyperlink;
 
 public class SceneController {
     OpenFile openFile;
@@ -58,6 +61,13 @@ public class SceneController {
         //Use a vbox with javaFx, so that it hopefully fills in the spots when
         //something is closed?
         
+    }
+    
+    public void goToGithub() throws Exception
+    {
+        //Hyperlink to go to GitHub Page
+        Desktop link = Desktop.getDesktop();
+        link.browse(new URI("https://github.com/jon3654/synthsgw"));
     }
     
     public void play(){
