@@ -18,7 +18,7 @@
                         <Menu mnemonicParsing="false" text="New">
                           <items>
                             <MenuItem mnemonicParsing="false" text="New Project" />
-                              <MenuItem mnemonicParsing="false" text="New Beat" />
+                              <MenuItem mnemonicParsing="false" onAction="#newBeat" text="New Beat" />
                               <MenuItem mnemonicParsing="false" text="New Synth" />
                           </items>
                         </Menu>

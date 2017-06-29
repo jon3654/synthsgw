@@ -94,5 +94,10 @@ public class SceneController {
         else
             openFile.close();
     }
+    
+    public void newBeat(){
+        BeatMaker beat = new BeatMaker();
+        beat.startUp();
+    }
 
 }
