@@ -22,7 +22,7 @@ public class OpenFile {
     private static MediaPlayer player;
     static File file[];
     static int MAX = 10;
-    public static int numberOfOpenFiles;
+    public static int numberOfOpenFiles = 0;
     
     // class constructor
     public OpenFile(String str){

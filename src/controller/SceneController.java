@@ -70,19 +70,29 @@ public class SceneController {
         link.browse(new URI("https://github.com/jon3654/synthsgw"));
     }
     
-    public void play(){
-        openFile.play();
+        public void play(){
+        int ret = OpenFile.play();
+        if(ret == -1)
+            OpenFile.noFileOpen();
     }
     
     public void pause(){
-        openFile.pause();
+        int ret = OpenFile.pause();
+        if(ret == -1)
+            OpenFile.noFileOpen();
     }
     
     public void stop(){
-        openFile.stop();
+        int ret = OpenFile.stop();
+        if(ret == -1)
+            OpenFile.noFileOpen();
     }
     
     public void close(){
-        openFile.close();
+        if(openFile == null)
+            OpenFile.noFileOpen();
+        else
+            openFile.close();
     }
+
 }
