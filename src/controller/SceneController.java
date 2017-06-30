@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import com.github.synthsgw.model.Settings;
+import controller.BeatMaker;
 import controller.OpenFile;
 import java.awt.Desktop;
 import java.net.URI;
@@ -25,19 +26,14 @@ import javafx.scene.layout.AnchorPane;
 
 public class SceneController {
     OpenFile openFile;
-
+    BeatMaker beat;
     
     @FXML
     SplitPane main_split_pane;
     AnchorPane left_split_pane; 
     AnchorPane right_split_pane;
-    
-    
             
     @FXML
-    
-    
-        
     public void openMetronome() {
 	Stage stage = new Stage();
 	FXMLLoader loader = new FXMLLoader();
@@ -119,20 +115,6 @@ public class SceneController {
     
     // opens up the beatmaker
     public void newBeat(){
-        Stage stage1 = new Stage();
-	FXMLLoader loader = new FXMLLoader();
-	loader.setLocation(getClass().getResource(Settings.BEATMAKER_FXML));
-	try {
-		Parent root1 = loader.load();
-		Scene scene1 = new Scene(root1);
-		stage1.setScene(scene1);
-	} catch(IOException e) {
-		e.printStackTrace();
-		System.exit(-2);
-	}
-
-	stage1.setTitle(Settings.BEATMAKER_TITLE);
-	stage1.show();
-    }
-
+        beat = new BeatMaker();
+    }    
 }

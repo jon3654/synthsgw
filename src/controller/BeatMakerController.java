@@ -5,8 +5,17 @@
  */
 package controller;
 
+import javafx.fxml.FXML;
+
 public class BeatMakerController {
-    public void bassDrum(){}
+    BeatMaker beat;
+    
+    @FXML
+    protected void initialize(){
+    }
+    public void bassDrum(){
+        
+    }
     public void closedHiHat(){}
     public void openHiHat(){}
     public void acousticSnare(){}
