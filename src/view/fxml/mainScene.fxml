@@ -33,12 +33,12 @@
                         </Menu>
                   </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
+                <Menu fx:id="edit" mnemonicParsing="false" text="Edit">
                   <items>
                         <MenuItem mnemonicParsing="false" text="Undo" />
                     <MenuItem mnemonicParsing="false" text="Delete" />
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" onAction="#openMetronome" text="Metronome" />
+                        <MenuItem fx:id="metronome" mnemonicParsing="false" onAction="#openMetronome" text="Metronome" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">

@@ -76,6 +76,7 @@ public class SceneController {
         mp3Pane.setText(songName);
         mp3Pane.setLayoutX(45);
         mp3Pane.setLayoutY(200);
+        left_split_pane = new AnchorPane();
         left_split_pane.getChildren().addAll(mp3Pane);
         
         

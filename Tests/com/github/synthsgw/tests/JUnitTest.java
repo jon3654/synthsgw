@@ -6,13 +6,16 @@ package com.github.synthsgw.tests;
  * and open the template in the editor.
  */
 
+import com.github.synthsgw.controller.SceneController;
 import controller.OpenFile;
 import java.io.File;
 import java.io.IOException;
 import static javafx.application.Application.launch;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
@@ -83,7 +86,6 @@ public class JUnitTest extends ApplicationTest{
     public void AttemptToPlayFileWhileNoneIsOpen(){
         OpenFile file = new OpenFile("mp3");
         assertEquals(file.play(), -1);
-        
     }
     
     @Test
@@ -124,5 +126,37 @@ public class JUnitTest extends ApplicationTest{
         OpenFile.openPlayer(newFile);
         assertEquals(file.stop(), 0);
     }
-
+    
+//    @Test
+//    public void OpenMetronome(){
+//        Platform.runLater(new Runnable(){
+//            @Override
+//            public void run() {
+//                SceneController controller = new SceneController();
+//                controller.openMetronome();
+//                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//            }  
+//        });
+//    }
+    
+    @Test
+    public void OpenBeatMaker(){
+        SceneController controller = new SceneController();
+        controller.newBeat();
+    }
+    
+    @Test
+    public void goToGithub() throws Exception{
+        SceneController controller = new SceneController();
+        controller.goToGithub();
+    }
+    
+    @Test
+    public void loadNewSoundPanel(){
+        OpenFile file = new OpenFile("mp3");
+        File newFile = new File("Tests/test.mp3");
+        OpenFile.numberOfOpenFiles++;
+        SceneController controller = new SceneController();
+        controller.loadNewSoundPanel(SCENE_FILE);
+    }
 }
