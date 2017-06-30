@@ -6,6 +6,7 @@ package com.github.synthsgw.tests;
  * and open the template in the editor.
  */
 
+import com.github.synthsgw.controller.MetronomeController;
 import com.github.synthsgw.controller.SceneController;
 import controller.OpenFile;
 import java.io.File;
@@ -56,7 +57,7 @@ public class JUnitTest extends ApplicationTest{
     // public void hello() {}
     
     @Test
-    public void CheckExtWithCorrectExtension(){
+    public void checkExtWithCorrectExtension(){
         OpenFile file = new OpenFile("mp3");
         assertEquals(file.checkExt("mp3"), 0);
     }
@@ -68,13 +69,13 @@ public class JUnitTest extends ApplicationTest{
     }
     
     @Test
-    public void AttemptToCloseFileWhileNoneIsOpen(){
+    public void attemptToCloseFileWhileNoneIsOpen(){
         OpenFile file = new OpenFile("mp3");
         assertEquals(file.close(), -1);
     }
     
     @Test
-    public void AttemptToCloseFileWhileOneIsOpen(){
+    public void attemptToCloseFileWhileOneIsOpen(){
         OpenFile file = new OpenFile("mp3");
         File newFile = new File("Tests/test.mp3");
         OpenFile.numberOfOpenFiles++;
@@ -83,13 +84,13 @@ public class JUnitTest extends ApplicationTest{
     }
     
     @Test
-    public void AttemptToPlayFileWhileNoneIsOpen(){
+    public void attemptToPlayFileWhileNoneIsOpen(){
         OpenFile file = new OpenFile("mp3");
         assertEquals(file.play(), -1);
     }
     
     @Test
-    public void AttemptToPlayFileWhileOneIsOPen(){
+    public void attemptToPlayFileWhileOneIsOPen(){
         OpenFile file = new OpenFile("mp3");
         File newFile = new File("Tests/test.mp3");
         OpenFile.numberOfOpenFiles++;
@@ -98,13 +99,13 @@ public class JUnitTest extends ApplicationTest{
     }
     
     @Test
-    public void AttemptToPauseFileWhileNoneIsOpen(){
+    public void attemptToPauseFileWhileNoneIsOpen(){
         OpenFile file = new OpenFile("mp3");
         assertEquals(file.pause(), -1);
     }
     
     @Test
-    public void AttemptToPauseFileWhileOneIsOpen(){
+    public void attemptToPauseFileWhileOneIsOpen(){
         OpenFile file = new OpenFile("mp3");
         File newFile = new File("Tests/test.mp3");
         OpenFile.numberOfOpenFiles++;
@@ -113,13 +114,13 @@ public class JUnitTest extends ApplicationTest{
     }
     
     @Test
-    public void AttemptToStopFileWhileNoneIsOpen(){
+    public void attemptToStopFileWhileNoneIsOpen(){
         OpenFile file = new OpenFile("mp3");
         assertEquals(file.stop(), -1);
     }
     
     @Test
-    public void AttemptToStopFileWhileOneIsOpen(){
+    public void attemptToStopFileWhileOneIsOpen(){
         OpenFile file = new OpenFile("mp3");
         File newFile = new File("Tests/test.mp3");
         OpenFile.numberOfOpenFiles++;
@@ -140,7 +141,7 @@ public class JUnitTest extends ApplicationTest{
 //    }
     
     @Test
-    public void OpenBeatMaker(){
+    public void openBeatMaker(){
         SceneController controller = new SceneController();
         controller.newBeat();
     }
@@ -159,4 +160,5 @@ public class JUnitTest extends ApplicationTest{
         SceneController controller = new SceneController();
         controller.loadNewSoundPanel(SCENE_FILE);
     }
+    
 }
