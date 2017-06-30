@@ -38,7 +38,6 @@ public class BeatMaker {
 
 
 	public BeatMaker(){
-            System.out.println("Test");
             setUpMidi();
             buildGUI();
 	}
