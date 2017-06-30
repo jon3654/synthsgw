@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="controller.BeatMakerController">
+   <children>
+      <AnchorPane layoutY="-1.0" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <Button fx:id="bassDrum" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#bassDrum" prefHeight="27.0" prefWidth="111.0" text="Bass Drum" />
+            <Button fx:id="closedHiHat" layoutX="14.0" layoutY="41.0" mnemonicParsing="false" onAction="#closedHiHat" prefHeight="27.0" prefWidth="111.0" text="Closed Hi-Hat" />
+            <Button fx:id="openHiHat" layoutX="14.0" layoutY="68.0" mnemonicParsing="false" onAction="#openHiHat" prefHeight="27.0" prefWidth="111.0" text="Open Hi-Hat" />
+            <Button fx:id="acousticSnare" layoutX="14.0" layoutY="95.0" mnemonicParsing="false" onAction="#acousticSnare" text="Acoustic Snare" />
+            <Button fx:id="crashSymbol" layoutX="14.0" layoutY="122.0" mnemonicParsing="false" onAction="#crashSymbol" prefHeight="27.0" prefWidth="111.0" text="Crash Symbol" />
+            <Button fx:id="handClap" layoutX="14.0" layoutY="149.0" mnemonicParsing="false" onAction="#handClap" prefHeight="27.0" prefWidth="111.0" text="Hand Clap" />
+            <Button fx:id="highTom" layoutX="14.0" layoutY="176.0" mnemonicParsing="false" onAction="#highTom" prefHeight="27.0" prefWidth="111.0" text="High Tom" />
+            <Button fx:id="lowMidTom" layoutX="14.0" layoutY="203.0" mnemonicParsing="false" onAction="#lowMidTom" prefHeight="27.0" prefWidth="111.0" text="Low-Mid Tom" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

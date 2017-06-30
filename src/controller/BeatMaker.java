@@ -6,6 +6,7 @@
 
 package com.github.synthsgw.controller;
 
+import com.github.synthsgw.model.Settings;
 import javax.sound.midi.*;
 
 public class BeatMaker{
@@ -34,7 +35,7 @@ public class BeatMaker{
 			
 			sequence = new Sequence(Sequence.PPQ, 4);
 			track = sequence.createTrack();
-			sequencer.setTempoInBPM(120/*this needs to be some value 
+			sequencer.setTempoInBPM(Settings.bpm/*this needs to be some value 
 									     read from the Metronome class*/);
 		}
 		catch(Exception e){
