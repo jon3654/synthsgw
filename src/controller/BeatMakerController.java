@@ -6,5 +6,12 @@
 package controller;
 
 public class BeatMakerController {
-    
+    public void bassDrum(){}
+    public void closedHiHat(){}
+    public void openHiHat(){}
+    public void acousticSnare(){}
+    public void crashSymbol(){}
+    public void handClap(){}
+    public void highTom(){}
+    public void lowMidTom(){}
 }
