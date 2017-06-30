@@ -19,11 +19,24 @@ import controller.OpenFile;
 import java.awt.Desktop;
 import java.net.URI;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.SplitPane;
+import javafx.scene.control.TitledPane;
+import javafx.scene.layout.AnchorPane;
 
 public class SceneController {
     OpenFile openFile;
 
-	@FXML
+    
+    @FXML
+    SplitPane main_split_pane;
+    AnchorPane left_split_pane; 
+    AnchorPane right_split_pane;
+    
+    
+            
+    @FXML
+    
+    
         
     public void openMetronome() {
 	Stage stage = new Stage();
@@ -52,14 +65,23 @@ public class SceneController {
         
         //Actions to show the Panel for the song name
         String songName = openFile.songName;
+        
+        loadNewSoundPanel(songName);
     }
     
     //This function displays a new panel for the type of sound that has been
     //opened/made
-    public void loadNewSoundPanel()
+    public void loadNewSoundPanel(String songName)
     {
         //Use a vbox with javaFx, so that it hopefully fills in the spots when
         //something is closed?
+        //Default X positon is 45, y will change
+        TitledPane mp3Pane = new TitledPane();
+        mp3Pane.setText(songName);
+        mp3Pane.setLayoutX(45);
+        mp3Pane.setLayoutY(200);
+        left_split_pane.getChildren().addAll(mp3Pane);
+        
         
     }
     
