@@ -3,6 +3,7 @@
 Click on the following links to see the progress for Sprint 2
 
 https://www.youtube.com/watch?v=_tLChjeKR1c
+
 https://www.youtube.com/watch?v=VREWVBDSXEY
 
 ## Dependencies
