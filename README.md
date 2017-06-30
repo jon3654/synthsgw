@@ -1,4 +1,9 @@
 # synthsgw
+##Progress Videos
+Click on the following link to see the progress for Sprint 2
+
+https://www.youtube.com/watch?v=_tLChjeKR1c
+
 ## Dependencies
 Java SE Runtime Environment 8 (JRE 8) if you want to only use the jar or Java SE Development Kit 8 if you want to compile SynthsGW yourself, make (optional but makes compilation simpler), git.
 
