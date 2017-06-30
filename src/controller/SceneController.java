@@ -66,30 +66,24 @@ public class SceneController {
         //Actions to show the Panel for the song name
         String songName = openFile.songName;
         
+        loadNewSoundPanel(songName);
+    }
+    
+    //This function displays a new panel for the type of sound that has been
+    //opened/made
+    public void loadNewSoundPanel(String songName)
+    {
+        //Use a vbox with javaFx, so that it hopefully fills in the spots when
+        //something is closed?
+        //Default X positon is 45, y will change
         TitledPane mp3Pane = new TitledPane();
         mp3Pane.setText(songName);
         mp3Pane.setLayoutX(45);
         mp3Pane.setLayoutY(200);
         left_split_pane.getChildren().addAll(mp3Pane);
         
-        //loadNewSoundPanel(songName);
+        
     }
-    
-    //This function displays a new panel for the type of sound that has been
-    //opened/made
-//    public void loadNewSoundPanel(String songName)
-//    {
-//        //Use a vbox with javaFx, so that it hopefully fills in the spots when
-//        //something is closed?
-//        //Default X positon is 45, y will change
-//        TitledPane mp3Pane = new TitledPane();
-//        mp3Pane.setText(songName);
-//        mp3Pane.setLayoutX(45);
-//        mp3Pane.setLayoutY(200);
-//        left_split_pane.getChildren().addAll(mp3Pane);
-//        
-//        
-//    }
     
     public void goToGithub() throws Exception
     {
