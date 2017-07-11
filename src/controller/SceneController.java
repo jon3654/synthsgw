@@ -85,7 +85,6 @@ public class SceneController {
         mp3Pane.setContent(testButton);
         
         main_vBox.getChildren().add(mp3Pane);
-        
     }
             
     
@@ -117,8 +116,10 @@ public class SceneController {
     public void close(){
         if(openFile == null)
             OpenFile.noFileOpen();
-        else
+        else{
+            OpenFile.stop();
             openFile.close();
+        }
     }
     
     // opens up the beatmaker
