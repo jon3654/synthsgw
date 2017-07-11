@@ -11,10 +11,12 @@ public class Settings {
 	// Metronome settings
 	public static int bpm;
 
-	public static final String METRONOME_FXML = "/fxml/metronome.fxml";
+	public static final String BEATMAKER_FXML  = "/fxml/BeatMaker.fxml";
+	public static final String BEATMAKER_TITLE = "Beat Maker";
+	public static final String METRONOME_FXML  = "/fxml/metronome.fxml";
 	public static final String METRONOME_TITLE = "Metronome";
-        public static final String BEATMAKER_FXML = "/fxml/BeatMaker.fxml";
-        public static final String BEATMAKER_TITLE = "Beat Maker";
+	public static final String SETTINGS_FXML   = "/fxml/settings.fxml";
+	public static final String SETTINGS_TITLE  = "Settings";
 
 	public static final int MIN_SLIDE_BPM = 40;
 	public static final int MAX_SLIDE_BPM = 170;
