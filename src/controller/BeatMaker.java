@@ -68,14 +68,9 @@ public class BeatMaker {
 		downTempo.addActionListener(new MyDownTempoListener());
 		buttonBox.add(downTempo);
 
-		JButton sendIt = new JButton("sendIt");
+		JButton sendIt = new JButton("Save It");
 		sendIt.addActionListener(new MySendListener());
 		buttonBox.add(sendIt);
-
-
-		JButton saveIt = new JButton("Serialize It");  // new button
-		saveIt.addActionListener(new MySendListener());
-		buttonBox.add(saveIt);
 
 		userMessage = new JTextField();
 		buttonBox.add(userMessage);
