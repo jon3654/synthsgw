@@ -1,5 +1,6 @@
 package controller;
 
+import com.github.synthsgw.model.Settings;
 import static com.github.synthsgw.model.Settings.bpm;
 import java.awt.*;
 import javax.swing.*;
@@ -121,7 +122,7 @@ public class BeatMaker {
 			// sequencer.addMetaEventListener(this);
 			sequence = new Sequence(Sequence.PPQ,4);
 			track = sequence.createTrack();
-			sequencer.setTempoInBPM(bpm);
+			sequencer.setTempoInBPM(Settings.bpm);
 
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -159,7 +160,7 @@ public class BeatMaker {
 
 		try {
 			sequencer.setSequence(sequence);
-                        sequencer.setTempoInBPM(bpm);
+                        sequencer.setTempoInBPM(Settings.bpm);
 			sequencer.setLoopCount(sequencer.LOOP_CONTINUOUSLY);                  
 			sequencer.start();
 		} catch(Exception e) {e.printStackTrace();}
