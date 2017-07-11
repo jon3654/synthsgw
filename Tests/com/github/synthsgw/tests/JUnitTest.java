@@ -152,13 +152,13 @@ public class JUnitTest extends ApplicationTest{
         controller.goToGithub();
     }
     
-    @Test
-    public void loadNewSoundPanel(){
-        OpenFile file = new OpenFile("mp3");
-        File newFile = new File("Tests/test.mp3");
-        OpenFile.numberOfOpenFiles++;
-        SceneController controller = new SceneController();
-        controller.loadNewSoundPanel(SCENE_FILE);
-    }
+//    @Test
+//    public void loadNewSoundPanel(){
+//        OpenFile file = new OpenFile("mp3");
+//        File newFile = new File("Tests/test.mp3");
+//        OpenFile.numberOfOpenFiles++;
+//        SceneController controller = new SceneController();
+//        controller.loadNewSoundPanel(SCENE_FILE);
+//    }
     
 }
