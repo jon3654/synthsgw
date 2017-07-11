@@ -14,9 +14,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import com.github.synthsgw.model.Settings;
-import controller.BeatMaker;
-import controller.OpenFile;
 import java.awt.Desktop;
 import java.net.URI;
 import javafx.scene.control.Button;
@@ -26,6 +23,10 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import /*com.github.synthsgw.*/controller.BeatMaker;
+import /*com.github.synthsgw.*/controller.OpenFile;
+import com.github.synthsgw.model.Settings;
 
 public class SceneController {
     OpenFile openFile;
@@ -37,26 +38,33 @@ public class SceneController {
     @FXML private ToolBar audio_tool_bar;
     @FXML private TitledPane mp3Pane;
     @FXML private VBox main_vBox;
-    
-            
-    @FXML
-    public void openMetronome() {
-	Stage stage = new Stage();
-	FXMLLoader loader = new FXMLLoader();
-	loader.setLocation(getClass().getResource(Settings.METRONOME_FXML));
 
-	try {
-		Parent root = loader.load();
-		Scene scene = new Scene(root);
-		stage.setScene(scene);
-	} catch(IOException e) {
-		e.printStackTrace();
-		System.exit(-2);
+    @FXML
+	public void openMetronome() {
+		displayScene(Settings.METRONOME_FXML, Settings.METRONOME_TITLE);
 	}
 
-	stage.setTitle(Settings.METRONOME_TITLE);
-	stage.show();
-    }
+	@FXML
+	public void openSettings() {
+		displayScene(Settings.SETTINGS_FXML, Settings.SETTINGS_TITLE);
+	}
+
+	public void displayScene(String fxml, String title) {
+		Stage stage = new Stage();
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource(fxml));
+
+		try {
+			Parent root = loader.load();
+			Scene scene = new Scene(root);
+			stage.setScene(scene);
+		} catch(IOException e) {
+			e.printStackTrace();
+			System.exit(-2);
+		} 
+		stage.setTitle(title);
+		stage.show();
+	}
     
     public void openMP3(ActionEvent e){
         // calls constructor for OpenFile
