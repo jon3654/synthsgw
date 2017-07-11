@@ -23,6 +23,14 @@ Click on the following links to see the progress for Sprint 2
 
 [Unit Tests](https://github.com/jon3654/synthsgw/blob/master/Tests/com/github/synthsgw/tests/JUnitTest.java)
 
+## Burndown Chart and Backlogs
+
+[Burndown Chart](https://github.com/jon3654/synthsgw/blob/master/Burndown_Chart.pdf)
+
+[Product Backlog](https://github.com/jon3654/synthsgw/blob/master/Product_Backlog.pdf)
+
+[Sprint Backlog](https://github.com/jon3654/synthsgw/blob/master/Sprint_Backlog.pdf)
+
 ## Dependencies
 Java SE Runtime Environment 8 (JRE 8) if you want to only use the jar or Java SE Development Kit 8 if you want to compile SynthsGW yourself, make (optional but makes compilation simpler), git.
 
