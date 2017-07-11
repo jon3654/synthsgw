@@ -1,5 +1,6 @@
 package controller;
 
+import static com.github.synthsgw.model.Settings.bpm;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -120,7 +121,7 @@ public class BeatMaker {
 			// sequencer.addMetaEventListener(this);
 			sequence = new Sequence(Sequence.PPQ,4);
 			track = sequence.createTrack();
-			sequencer.setTempoInBPM(120);
+			sequencer.setTempoInBPM(bpm);
 
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -194,6 +195,8 @@ public class BeatMaker {
 		public void actionPerformed(ActionEvent a) {
 			// make an arraylist of just the STATE of the checkboxes
 			boolean[] checkboxState = new boolean[256];
+                        
+                        // serialize track here
 
 			for (int i = 0; i < 256; i++) {
 				JCheckBox check = (JCheckBox) checkboxList.get(i);
