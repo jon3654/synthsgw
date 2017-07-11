@@ -8,14 +8,18 @@ package com.github.synthsgw;
 import java.io.IOException;
 
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ToolBar;
 import javafx.stage.Stage;
 
 public class App extends Application {
     private static final String SCENE_FILE = "/fxml/mainScene.fxml"; 
-    private static final String WINDOW_TITLE = "Window Title";
+    private static final String WINDOW_TITLE = "SynthsGW - COP 4331 Project";
+    
 
     public static void main(String [] args) {
 		launch(args);
@@ -37,6 +41,7 @@ public class App extends Application {
 
 	stage.setTitle(WINDOW_TITLE);
 	stage.show();
+        
     }
 }
 

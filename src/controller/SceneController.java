@@ -19,19 +19,25 @@ import controller.BeatMaker;
 import controller.OpenFile;
 import java.awt.Desktop;
 import java.net.URI;
+import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TitledPane;
+import javafx.scene.control.ToolBar;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 
 public class SceneController {
     OpenFile openFile;
     BeatMaker beat;
     
-    @FXML
-    SplitPane main_split_pane;
-    AnchorPane left_split_pane; 
-    AnchorPane right_split_pane;
+    @FXML private SplitPane main_split_pane;
+    @FXML private AnchorPane left_split_pane; 
+    @FXML private AnchorPane right_split_pane;
+    @FXML private ToolBar audio_tool_bar;
+    @FXML private TitledPane mp3Pane;
+    @FXML private VBox main_vBox;
+    
             
     @FXML
     public void openMetronome() {
@@ -62,25 +68,22 @@ public class SceneController {
         //Actions to show the Panel for the song name
         String songName = openFile.songName;
         
-        loadNewSoundPanel(songName);
+        addmp3ToOpenFiles(songName);
+        
     }
     
-    //This function displays a new panel for the type of sound that has been
-    //opened/made
-    public void loadNewSoundPanel(String songName)
+    //This method will add a TitledPane to the VBox with the 
+    //info for the mp3 playing
+    public void addmp3ToOpenFiles(String songName)
     {
-        //Use a vbox with javaFx, so that it hopefully fills in the spots when
-        //something is closed?
-        //Default X positon is 45, y will change
+        //Create a new TitledPane
         TitledPane mp3Pane = new TitledPane();
         mp3Pane.setText(songName);
-        mp3Pane.setLayoutX(45);
-        mp3Pane.setLayoutY(200);
-        left_split_pane = new AnchorPane();
-        left_split_pane.getChildren().addAll(mp3Pane);
         
+        main_vBox.getChildren().add(mp3Pane);
         
     }
+            
     
     public void goToGithub() throws Exception
     {
