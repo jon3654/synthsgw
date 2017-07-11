@@ -21,10 +21,12 @@ import java.awt.Desktop;
 import java.net.URI;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Slider;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TitledPane;
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 public class SceneController {
@@ -69,7 +71,6 @@ public class SceneController {
         String songName = openFile.songName;
         
         addmp3ToOpenFiles(songName);
-        
     }
     
     //This method will add a TitledPane to the VBox with the 
@@ -79,14 +80,18 @@ public class SceneController {
         //Create a new TitledPane
         TitledPane mp3Pane = new TitledPane();
         mp3Pane.setText(songName);
-        mp3Pane.setStyle("-fx-background-color: dodgerblue;");
+        VBox mp3_vbox = new VBox();
         
+        //Elements to be added to the vbox inside the pane
         Button testButton = new Button();
-        mp3Pane.setContent(testButton);
+        Slider mp3Slider = new Slider();
+        mp3_vbox.getChildren().addAll(testButton, mp3Slider);
         
+        mp3Pane.setContent(mp3_vbox);
         main_vBox.getChildren().add(mp3Pane);
-        
+        left_split_pane.getChildren().add(main_vBox);
     }
+        
             
     
     public void goToGithub() throws Exception
@@ -96,7 +101,7 @@ public class SceneController {
         link.browse(new URI("https://github.com/jon3654/synthsgw"));
     }
     
-        public void play(){
+    public void play(){
         int ret = OpenFile.play();
         if(ret == -1)
             OpenFile.noFileOpen();
