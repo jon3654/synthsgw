@@ -75,7 +75,7 @@
    <center>
       <SplitPane fx:id="main_split_pane" dividerPositions="0.7856025039123631" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
-          <AnchorPane fx:id="left_split_pane" minHeight="0.0" minWidth="0.0" prefHeight="702.0" prefWidth="307.0">
+          <AnchorPane fx:id="left_split_pane" minHeight="0.0" minWidth="0.0" prefHeight="702.0" prefWidth="307.0" style="-fx-background-color: lightsteelblue;">
                <children>
                   <VBox fx:id="main_vBox" layoutX="47.0" layoutY="27.0" prefHeight="646.0" prefWidth="910.0" />
                </children></AnchorPane>
