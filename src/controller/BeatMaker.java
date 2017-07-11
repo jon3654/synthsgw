@@ -161,7 +161,7 @@ public class BeatMaker {
 			sequencer.setSequence(sequence);  
 			sequencer.setLoopCount(sequencer.LOOP_CONTINUOUSLY);                  
 			sequencer.start();
-			sequencer.setTempoInBPM(120);
+			sequencer.setTempoInBPM(bpm);
 		} catch(Exception e) {e.printStackTrace();}
 	} // close method
 
