@@ -14,7 +14,6 @@ import javafx.scene.control.TextField;
 import com.github.synthsgw.model.Settings;
 
 public class MetronomeController {
-	private boolean initialized = false;
 	@FXML
 	private Label bpmLabel;
 	@FXML

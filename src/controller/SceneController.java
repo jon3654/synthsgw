@@ -14,9 +14,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import com.github.synthsgw.model.Settings;
-import controller.BeatMaker;
-import controller.OpenFile;
 import java.awt.Desktop;
 import java.net.URI;
 import javafx.event.EventHandler;
@@ -30,6 +27,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
+import /*com.github.synthsgw.*/controller.BeatMaker;
+import /*com.github.synthsgw.*/controller.OpenFile;
+import com.github.synthsgw.model.Settings;
+
 public class SceneController {
     OpenFile openFile;
     BeatMaker beat;
@@ -40,26 +41,38 @@ public class SceneController {
     @FXML private ToolBar audio_tool_bar;
     @FXML private TitledPane mp3Pane;
     @FXML private VBox main_vBox;
-    
-            
-    @FXML
-    public void openMetronome() {
-	Stage stage = new Stage();
-	FXMLLoader loader = new FXMLLoader();
-	loader.setLocation(getClass().getResource(Settings.METRONOME_FXML));
 
-	try {
-		Parent root = loader.load();
-		Scene scene = new Scene(root);
-		stage.setScene(scene);
-	} catch(IOException e) {
-		e.printStackTrace();
-		System.exit(-2);
+	@FXML
+	protected void initialize() {
+		
 	}
 
-	stage.setTitle(Settings.METRONOME_TITLE);
-	stage.show();
-    }
+    @FXML
+	public void openMetronome() {
+		displayScene(Settings.METRONOME_FXML, Settings.METRONOME_TITLE);
+	}
+
+	@FXML
+	public void openSettings() {
+		displayScene(Settings.SETTINGS_FXML, Settings.SETTINGS_TITLE);
+	}
+
+	public void displayScene(String fxml, String title) {
+		Stage stage = new Stage();
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource(fxml));
+
+		try {
+			Parent root = loader.load();
+			Scene scene = new Scene(root);
+			stage.setScene(scene);
+		} catch(IOException e) {
+			e.printStackTrace();
+			System.exit(-2);
+		} 
+		stage.setTitle(title);
+		stage.show();
+	}
     
     public void openMP3(ActionEvent e){
         // calls constructor for OpenFile
@@ -73,7 +86,7 @@ public class SceneController {
         
         addmp3ToOpenFiles(songName);
     }
-    
+
     //This method will add a TitledPane to the VBox with the 
     //info for the mp3 playing
     public void addmp3ToOpenFiles(String songName)
@@ -113,9 +126,7 @@ public class SceneController {
         main_vBox.getChildren().add(mp3Pane);
         left_split_pane.getChildren().add(main_vBox);
     }
-        
-            
-    
+
     public void goToGithub() throws Exception
     {
         //Hyperlink to go to GitHub Page
@@ -144,8 +155,10 @@ public class SceneController {
     public void close(){
         if(openFile == null)
             OpenFile.noFileOpen();
-        else
+        else{
+            OpenFile.stop();
             openFile.close();
+        }
     }
     
     // opens up the beatmaker
