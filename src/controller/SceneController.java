@@ -79,6 +79,10 @@ public class SceneController {
         //Create a new TitledPane
         TitledPane mp3Pane = new TitledPane();
         mp3Pane.setText(songName);
+        mp3Pane.setStyle("-fx-background-color: dodgerblue;");
+        
+        Button testButton = new Button();
+        mp3Pane.setContent(testButton);
         
         main_vBox.getChildren().add(mp3Pane);
         
