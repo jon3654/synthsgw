@@ -41,6 +41,11 @@ public class SceneController {
     @FXML private TitledPane mp3Pane;
     @FXML private VBox main_vBox;
 
+	@FXML
+	protected void initialize() {
+		
+	}
+
     @FXML
 	public void openMetronome() {
 		displayScene(Settings.METRONOME_FXML, Settings.METRONOME_TITLE);
@@ -80,7 +85,7 @@ public class SceneController {
         
         addmp3ToOpenFiles(songName);
     }
-    
+
     //This method will add a TitledPane to the VBox with the 
     //info for the mp3 playing
     public void addmp3ToOpenFiles(String songName)
@@ -99,9 +104,7 @@ public class SceneController {
         main_vBox.getChildren().add(mp3Pane);
         left_split_pane.getChildren().add(main_vBox);
     }
-        
-            
-    
+
     public void goToGithub() throws Exception
     {
         //Hyperlink to go to GitHub Page

@@ -8,6 +8,7 @@ package com.github.synthsgw;
 import java.io.IOException;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -50,11 +51,13 @@ public class App extends Application {
             System.exit(-1);
 	}
         
+	stage.setOnCloseRequest((event) -> {
+		Platform.exit();
+		System.exit(0);
+	});
 
 	stage.setTitle(WINDOW_TITLE);
 	stage.show();
-        
-        
     }
 }
 
