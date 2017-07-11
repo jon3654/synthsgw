@@ -158,10 +158,10 @@ public class BeatMaker {
 		track.add(makeEvent(192,9,1,0,15)); // - so we always go to full 16 beats
 
 		try {
-			sequencer.setSequence(sequence);  
+			sequencer.setSequence(sequence);
+                        sequencer.setTempoInBPM(bpm);
 			sequencer.setLoopCount(sequencer.LOOP_CONTINUOUSLY);                  
 			sequencer.start();
-			sequencer.setTempoInBPM(bpm);
 		} catch(Exception e) {e.printStackTrace();}
 	} // close method
 
