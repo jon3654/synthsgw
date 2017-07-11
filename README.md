@@ -2,9 +2,9 @@
 ## Progress Videos
 Click on the following links to see the progress for Sprint 2
 
-https://www.youtube.com/watch?v=_tLChjeKR1c
+ * https://www.youtube.com/watch?v=_tLChjeKR1c
 
-https://www.youtube.com/watch?v=VREWVBDSXEY
+ * https://www.youtube.com/watch?v=VREWVBDSXEY
 
 ## Dependencies
 Java SE Runtime Environment 8 (JRE 8) if you want to only use the jar or Java SE Development Kit 8 if you want to compile SynthsGW yourself, make (optional but makes compilation simpler), git.
@@ -17,52 +17,52 @@ Get make for [OSX by installing XCode](https://developer.apple.com/xcode/), for 
 
 Download git [here](https://git-scm.com/downloads).
 
-## Cloning the repository
-
-### Download synthsGW by running the command:
-
+## Downloading Source Files
+* Using git bash, run this command
 ```
  git clone https://github.com/jon3654/synthsgw.git
 ```
-#### Before runnning the following commands, ensure that you're in the synthsgw directory by running:
+* Alternatively, you can download a zip file with all of the source code inside from this main GitHub page
+
+* #### Before runnning the following commands, ensure that you're in the synthsgw directory by running:
 ```
 cd synthsgw
 ```
-## Using the included jar file
-### To run SynthsGW without compiling it yourself, simply run:
+## Running synthsGW Program
+### The included jar can be expecuted by running the following command from the git bash command line:
 ```
 java -jar SynthsGW.jar
 ```
 
-## Building SynthsGW
-### Build SynthsGW with make by running:
+## Building & Running SynthsGW
+### Build and Run synthsGW with make:
+* #### Run the following command from git bash line to build the program:
 ```
 make
 ```
-### Build SynthsGW without make by running:
+* #### After it has been built, you can run synthsGw by running this command:
+```
+make run
+```
+
+### Build and Run synthsGW without make:
+* #### The following makes a build directory and puts built code inside:
 ```
 mkdir build
 javac -d build -cp build -g src/*/*.java
 ```
-#### Before running the following commands, ensure that SynthsGW is already built.
-## Running SynthsGW after its built
-### Run the program using make:
-  ```
-make run
-  ```
 
-### Alternatively, without make:
+* #### After the code has been built, run it with this command:
 ```
 java -classpath build synthsgw.SynthsGW
 ```
 ### Or make the jar yourself
-### To compress what you've built into a jar file with make:
-#### Note that this will overwrite the already included jar file
+* #### To compress what you've built into a jar file with make (Note that this will overwrite the already included jar file):
 ```
 make jar
 ```
 ### To compress what you've built into a jar file yourself without make:
-#### Note that this will overwrite the already included jar file
+* #### Note that this will overwrite the already included jar file
 ```
 jar cvfe SynthsGW.jar synthsgw.SynthsGW -C build .
 ```
