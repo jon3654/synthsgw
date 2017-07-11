@@ -5,6 +5,17 @@ Click on the following links to see the progress for Sprint 2
  * https://www.youtube.com/watch?v=_tLChjeKR1c
 
  * https://www.youtube.com/watch?v=VREWVBDSXEY
+ 
+## Diagrams
+[Use Case 1](https://github.com/jon3654/synthsgw/blob/master/diagrams/Use%20Case%201.pdf)
+
+[Use Case 2](https://github.com/jon3654/synthsgw/blob/master/diagrams/Use%20Case%202.pdf)
+
+[Use Case 3](https://github.com/jon3654/synthsgw/blob/master/diagrams/Use%20Case%203.pdf)
+
+[Use Case 4](https://github.com/jon3654/synthsgw/blob/master/diagrams/Use%20Case%204.pdf)
+
+[Class Diagram](https://github.com/jon3654/synthsgw/blob/master/diagrams/Class%20Diagram.pdf)
 
 ## Dependencies
 Java SE Runtime Environment 8 (JRE 8) if you want to only use the jar or Java SE Development Kit 8 if you want to compile SynthsGW yourself, make (optional but makes compilation simpler), git.
