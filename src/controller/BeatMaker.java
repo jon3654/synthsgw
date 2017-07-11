@@ -133,10 +133,10 @@ public class BeatMaker {
 		// this will hold the instruments for each vertical column,
 		// in other words, each tick (may have multiple instruments)
 		ArrayList<Integer> trackList = null;
-
 		sequence.deleteTrack(track);
 		track = sequence.createTrack();
-
+                
+                
 		for (int i = 0; i < 16; i++){
 				trackList = new ArrayList<Integer>();
 			
@@ -159,22 +159,31 @@ public class BeatMaker {
 		track.add(makeEvent(192,9,1,0,15)); // - so we always go to full 16 beats
 
 		try {
-			sequencer.setSequence(sequence);
                         sequencer.setTempoInBPM(Settings.bpm);
+			sequencer.setSequence(sequence);
 			sequencer.setLoopCount(sequencer.LOOP_CONTINUOUSLY);                  
 			sequencer.start();
+                        
 		} catch(Exception e) {e.printStackTrace();}
 	} // close method
 
 	public class MyStartListener implements ActionListener {
 		public void actionPerformed(ActionEvent a) {
-			buildTrackAndStart();
+                    if(sequencer.isOpen()){
+                        sequencer.close();
+                    }
+                    setUpMidi();
+                    buildTrackAndStart();
 		}
 	}
 
 	public class MyStopListener implements ActionListener {
 		public void actionPerformed(ActionEvent a) {
-			sequencer.stop();
+                    sequencer.stop();
+                    if(sequencer.isOpen()){
+                        sequencer.close();
+                    }
+
 		}
 	}
 
@@ -225,6 +234,7 @@ public class BeatMaker {
 					boolean[] selectedState = (boolean[]) otherSeqsMap.get(selected);
 					changeSequence(selectedState);
 					sequencer.stop();
+                                        sequencer.setTempoInBPM(Settings.bpm);
 					buildTrackAndStart();
 				}
 			}
