@@ -17,7 +17,7 @@ Click on the following links to see the progress for Sprint 2
 
 [Class Diagram](https://github.com/jon3654/synthsgw/blob/master/diagrams/Class%20Diagram.pdf)
 
-##Tests
+## Tests
 
 [Manual Tests](https://github.com/jon3654/synthsgw/blob/master/Tests/Manual%20Tests.pdf)
 
