@@ -1,7 +1,6 @@
 package controller;
 
 import com.github.synthsgw.model.Settings;
-import static com.github.synthsgw.model.Settings.bpm;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -11,7 +10,12 @@ import java.io.*;
 import javax.sound.midi.*;
 import java.util.*;
 import java.awt.event.*;
-import java.net.*;
+import javafx.application.Platform;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.event.EventHandler;
+import javafx.stage.FileChooser;
+import javafx.scene.control.MenuItem;
+import javax.imageio.ImageIO;
 
 
 public class BeatMaker { 
@@ -30,6 +34,7 @@ public class BeatMaker {
 	Sequence mySequence = null;
 	Track track;
 	JFrame theFrame;
+        javafx.stage.Window stage;
 
 	String[] instrumentNames = {"Bass Drum", "Closed Hi-Hat", 
 		"Open Hi-Hat","Acoustic Snare", "Crash Cymbal", "Hand Clap", 
@@ -129,7 +134,7 @@ public class BeatMaker {
 		}
 	} // close method
 
-	public void buildTrackAndStart(){
+	public void buildTrack(){
 		// this will hold the instruments for each vertical column,
 		// in other words, each tick (may have multiple instruments)
 		ArrayList<Integer> trackList = null;
@@ -162,18 +167,21 @@ public class BeatMaker {
                         sequencer.setTempoInBPM(Settings.bpm);
 			sequencer.setSequence(sequence);
 			sequencer.setLoopCount(sequencer.LOOP_CONTINUOUSLY);                  
-			sequencer.start();
                         
 		} catch(Exception e) {e.printStackTrace();}
 	} // close method
 
+        public void start(){
+            sequencer.start();
+        }
 	public class MyStartListener implements ActionListener {
 		public void actionPerformed(ActionEvent a) {
                     if(sequencer.isOpen()){
                         sequencer.close();
                     }
                     setUpMidi();
-                    buildTrackAndStart();
+                    buildTrack();
+                    start();
 		}
 	}
 
@@ -203,27 +211,39 @@ public class BeatMaker {
 
 	public class MySendListener implements ActionListener {    // new - save
 		public void actionPerformed(ActionEvent a) {
-			// make an arraylist of just the STATE of the checkboxes
-			boolean[] checkboxState = new boolean[256];
+                    // make an arraylist of just the STATE of the checkboxes
+                    // boolean[] checkboxState = new boolean[256];
                         
-                        // serialize track here
+                    buildTrack();
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            FileChooser fileChooser = new FileChooser();
+                            fileChooser.setTitle("Save MP3");
+                            File file = fileChooser.showSaveDialog(stage);
+                            if (file != null) {
+                                // serialize here
+                            }
+                        }   
+                    });
+                    
 
-			for (int i = 0; i < 256; i++) {
-				JCheckBox check = (JCheckBox) checkboxList.get(i);
-				if (check.isSelected()) {
-					checkboxState[i] = true;
-				}
-			}
-
-			try {
-				out.writeObject(userName + nextNum++ + ": " + userMessage.getText());
-				out.writeObject(checkboxState);
-			} catch(Exception ex) {
-				ex.printStackTrace();
-				System.out.println("sorry dude. Could not send it to the server");
-			}
-		} // close method
-	} // close inner class
+//			for (int i = 0; i < 256; i++) {
+//				JCheckBox check = (JCheckBox) checkboxList.get(i);
+//				if (check.isSelected()) {
+//					checkboxState[i] = true;
+//				}
+//			}
+//
+//			try {
+//				out.writeObject(userName + nextNum++ + ": " + userMessage.getText());
+//				out.writeObject(checkboxState);
+//			} catch(Exception ex) {
+//				ex.printStackTrace();
+//				System.out.println("sorry dude. Could not send it to the server");
+//			}
+            } // close method
+        } // close inner class
 
 	public class MyListSelectionListener implements ListSelectionListener {
 		public void valueChanged(ListSelectionEvent le) {
@@ -235,7 +255,7 @@ public class BeatMaker {
 					changeSequence(selectedState);
 					sequencer.stop();
                                         sequencer.setTempoInBPM(Settings.bpm);
-					buildTrackAndStart();
+					buildTrack();
 				}
 			}
 		}
