@@ -29,12 +29,9 @@ import javafx.scene.layout.VBox;
 import /*com.github.synthsgw.*/controller.BeatMaker;
 import /*com.github.synthsgw.*/controller.OpenFile;
 import com.github.synthsgw.model.Settings;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class SceneController {
-    OpenFile openFile[] = new OpenFile[10];
-    int openFileIndex = 0;
+    OpenFile openFile;
     BeatMaker beat;
     
     @FXML private SplitPane main_split_pane;
@@ -43,7 +40,7 @@ public class SceneController {
     @FXML private ToolBar audio_tool_bar;
     @FXML private TitledPane mp3Pane;
     @FXML private VBox main_vBox;
-    
+
 	@FXML
 	protected void initialize() {
 		
@@ -79,12 +76,12 @@ public class SceneController {
     public void openMP3(ActionEvent e){
         // calls constructor for OpenFile
         // lets the class know that it should be opening an mp3
-        openFile[openFileIndex++] = new OpenFile("mp3");
+        openFile = new OpenFile("mp3");
         // opens the File and places it in file array
-        openFile[openFileIndex-1].openMP3();
+        openFile.openFile();
         
         //Actions to show the Panel for the song name
-        String songName = openFile[openFileIndex-1].songName;
+        String songName = openFile.songName;
         
         addmp3ToOpenFiles(songName);
     }
@@ -105,7 +102,10 @@ public class SceneController {
         
         mp3Pane.setContent(mp3_vbox);
         main_vBox.getChildren().add(mp3Pane);
+<<<<<<< HEAD
+=======
         left_split_pane.getChildren().add(main_vBox);
+>>>>>>> 1024719234244a22fb4a7a7095e65dfabeb93ccc
     }
 
     public void goToGithub() throws Exception
@@ -116,19 +116,19 @@ public class SceneController {
     }
     
     public void play(){
-        int ret = openFile[openFileIndex-1].play();
+        int ret = OpenFile.play();
         if(ret == -1)
             OpenFile.noFileOpen();
     }
     
     public void pause(){
-        int ret = openFile[openFileIndex-1].pause();
+        int ret = OpenFile.pause();
         if(ret == -1)
             OpenFile.noFileOpen();
     }
     
     public void stop(){
-        int ret = openFile[openFileIndex-1].stop();
+        int ret = OpenFile.stop();
         if(ret == -1)
             OpenFile.noFileOpen();
     }
@@ -137,9 +137,8 @@ public class SceneController {
         if(openFile == null)
             OpenFile.noFileOpen();
         else{
-            openFile[openFileIndex-1].stop();
-            openFile[openFileIndex-1].close();
-            openFileIndex--;
+            OpenFile.stop();
+            openFile.close();
         }
     }
     
@@ -147,14 +146,4 @@ public class SceneController {
     public void newBeat(){
         beat = new BeatMaker();
     }    
-    
-    public int openMIDI(){
-        openFile[openFileIndex++] = new OpenFile("mid");
-        try {
-            return openFile[openFileIndex-1].openMIDI();
-        } catch (IOException ex) {
-            Logger.getLogger(SceneController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return -1;
-    }
 }
