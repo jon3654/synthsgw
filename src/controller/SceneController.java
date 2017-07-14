@@ -30,10 +30,14 @@ import javafx.scene.layout.VBox;
 import /*com.github.synthsgw.*/controller.BeatMaker;
 import /*com.github.synthsgw.*/controller.OpenFile;
 import com.github.synthsgw.model.Settings;
+import java.util.Observable;
+import javafx.beans.InvalidationListener;
+import javafx.util.Duration;
 
 public class SceneController {
     OpenFile openFile;
     BeatMaker beat;
+    Duration duration;
     
     @FXML private SplitPane main_split_pane;
     @FXML private AnchorPane left_split_pane; 
@@ -110,9 +114,16 @@ public class SceneController {
             
         });
         
-        
-        //Audio Slider for the timeline of the song
+        //Audio Slider for the timeline of the song and Action Listener
         Slider audio_slider = new Slider();
+        audio_slider.valueProperty().addListener(new InvalidationListener(){
+            public void invalidated(Observable ov){
+                if(audio_slider.isValueChanging()){
+                    OpenFile.getPlayer().seek(duration.multiply(audio_slider.getValue() / 100.0));
+                }
+            }
+        });
+        
         
         //Control the volume of the mp3 with this audio slider
         Slider volume_slider = new Slider();       
