@@ -31,6 +31,8 @@ import /*com.github.synthsgw.*/controller.BeatMaker;
 import /*com.github.synthsgw.*/controller.OpenFile;
 import com.github.synthsgw.model.Settings;
 import java.util.Observable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.InvalidationListener;
 import javafx.util.Duration;
 
@@ -122,6 +124,11 @@ public class SceneController {
                 if(audio_slider.isValueChanging()){
                     OpenFile.getPlayer().seek(duration.multiply(audio_slider.getValue() / 100.0));
                 }
+            }
+
+            @Override
+            public void invalidated(javafx.beans.Observable observable) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
         });
         
