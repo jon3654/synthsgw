@@ -1,4 +1,4 @@
-# synthsgw
+# SynthsGW
 
 Our software is for the amateur musician interested in creating custom synths
 and beats in an interface which allows them to upload their own songs, edit
