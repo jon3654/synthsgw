@@ -27,18 +27,19 @@ import javax.sound.midi.Sequencer;
 public class OpenFile {
     Window stage;
     FileChooser fileChooser;
-    private static String fileExt;
+    private static String fileExtension;
     public String songName;
     private static Media song;
     private static MediaPlayer player;
     static File file;
     Sequencer sequencer;
     InputStream input;
+    BeatMaker beat;
     
     // class constructor
     public OpenFile(String str){
         fileChooser = new FileChooser();
-        fileExt = str;
+        fileExtension = str;
         file = null;
     }
     
@@ -113,7 +114,7 @@ public class OpenFile {
     // method that checks that the extension is correct
     // returns 0 if it is, -1 otherwise
     public int checkExt(String str){
-        if(str.equals(fileExt)){
+        if(str.equals(fileExtension)){
             return 0;
         }
         else return -1;
@@ -156,9 +157,9 @@ public class OpenFile {
             return -1;
         }
         else{
-            if(fileExt.equals("mp3"))
+            if(fileExtension.equals("mp3"))
                 playMP3();
-            else if(fileExt.equals("mid"))
+            else if(fileExtension.equals("mid"))
                 playMIDI();
             return 0;
         }
@@ -179,9 +180,9 @@ public class OpenFile {
             return -1;
         }
         else{
-            if(fileExt.equals("mp3"))
+            if(fileExtension.equals("mp3"))
                 pauseMP3();
-            else if(fileExt.equals("mid"))
+            else if(fileExtension.equals("mid"))
                 pauseMIDI();
             return 0;
         }
@@ -200,9 +201,9 @@ public class OpenFile {
             return -1;
         }
         else{ 
-            if(fileExt.equals("mp3"))
+            if(fileExtension.equals("mp3"))
                 stopMP3();
-            else if(fileExt.equals("mid"))
+            else if(fileExtension.equals("mid"))
                 stopMIDI();
             return 0;
         }
@@ -230,5 +231,18 @@ public class OpenFile {
         popup.setTitle("Error");
         popup.setHeaderText("Wrong file type");
         popup.show();
+    }
+    
+    public String getFileExtension(){
+        return fileExtension;
+    }
+    
+    public int editMIDI(){
+        if(fileExtension.equals("mid")){
+            beat = new BeatMaker();
+            beat.openForEdit(sequencer);
+            return 0;
+        }
+        else return -1;
     }
 }

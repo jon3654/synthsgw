@@ -195,4 +195,12 @@ public class SceneController {
         }
         return -1;
     }
+    
+    public void editMIDI(){
+        if(openFile[openFileIndex-1].getFileExtension().equals("mid")){
+            openFile[openFileIndex-1].editMIDI();
+        }
+        else
+            beat = new BeatMaker();
+    }
 }

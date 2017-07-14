@@ -57,7 +57,7 @@ public class MetronomeController {
 				&& Settings.bpm <= Settings.MAX_SLIDE_BPM)
 			bpmSlider.setValue(Settings.bpm);
 
-		bpmLabel.setText(Integer.toString(Settings.bpm));
+		bpmLabel.setText(Float.toString(Settings.bpm));
 	}
 
 	// Returns an integer <= 0 if the input string is not a valid integer

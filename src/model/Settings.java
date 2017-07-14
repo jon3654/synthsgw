@@ -9,7 +9,7 @@ package com.github.synthsgw.model;
 
 public class Settings {
 	// Metronome settings
-	public static int bpm;
+	public static float bpm;
 
 	public static final String BEATMAKER_FXML  = "/fxml/BeatMaker.fxml";
 	public static final String BEATMAKER_TITLE = "Beat Maker";

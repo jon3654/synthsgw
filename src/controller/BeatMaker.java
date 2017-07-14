@@ -140,8 +140,8 @@ public class BeatMaker {
 		// this will hold the instruments for each vertical column,
 		// in other words, each tick (may have multiple instruments)
 		ArrayList<Integer> trackList = null;
-		sequence.deleteTrack(track);
-		track = sequence.createTrack();
+		//sequence.deleteTrack(track);
+		//track = sequence.createTrack();
                 
                 
 		for (int i = 0; i < 16; i++){
@@ -172,16 +172,30 @@ public class BeatMaker {
                         
 		} catch(Exception e) {e.printStackTrace();}
 	} // close method
+        
+        public void openForEdit(Sequencer sequencer){
+            sequence = sequencer.getSequence();
+            track = sequence.createTrack();
+            try {
+                sequencer.open();
+            } catch (MidiUnavailableException ex) {
+                Logger.getLogger(BeatMaker.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Settings.bpm = sequencer.getTempoInBPM();
+            
+            // need to set check boxes up correctly here
+            
+        }
 
         public void start(){
             sequencer.start();
         }
 	public class MyStartListener implements ActionListener {
 		public void actionPerformed(ActionEvent a) {
-                    if(sequencer.isOpen()){
-                        sequencer.close();
-                    }
-                    setUpMidi();
+                    //if(sequencer.isOpen()){
+                      //  sequencer.close();
+                    //}
+                    //setUpMidi();
                     buildTrack();
                     start();
 		}
