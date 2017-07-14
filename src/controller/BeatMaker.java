@@ -10,6 +10,8 @@ import java.io.*;
 import javax.sound.midi.*;
 import java.util.*;
 import java.awt.event.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.EventHandler;
@@ -188,10 +190,6 @@ public class BeatMaker {
 	public class MyStopListener implements ActionListener {
 		public void actionPerformed(ActionEvent a) {
                     sequencer.stop();
-                    if(sequencer.isOpen()){
-                        sequencer.close();
-                    }
-
 		}
 	}
 
@@ -219,10 +217,15 @@ public class BeatMaker {
                         @Override
                         public void run() {
                             FileChooser fileChooser = new FileChooser();
-                            fileChooser.setTitle("Save MP3");
+                            fileChooser.setTitle("Save MIDI");
                             File file = fileChooser.showSaveDialog(stage);
                             if (file != null) {
-                                // serialize here
+                                try {
+                                    // serialize here
+                                    MidiSystem.write(sequence,1,file);
+                                } catch (IOException ex) {
+                                    Logger.getLogger(BeatMaker.class.getName()).log(Level.SEVERE, null, ex);
+                                }
                             }
                         }   
                     });
