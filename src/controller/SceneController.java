@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.awt.Desktop;
 import java.net.URI;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Slider;
@@ -29,13 +30,15 @@ import javafx.scene.layout.VBox;
 import /*com.github.synthsgw.*/controller.BeatMaker;
 import /*com.github.synthsgw.*/controller.OpenFile;
 import com.github.synthsgw.model.Settings;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Observable;
+import javafx.beans.InvalidationListener;
+import javafx.util.Duration;
 
 public class SceneController {
     OpenFile openFile[] = new OpenFile[10];
     int openFileIndex = 0;
     BeatMaker beat;
+    Duration duration;
     
     @FXML private SplitPane main_split_pane;
     @FXML private AnchorPane left_split_pane; 
@@ -98,11 +101,39 @@ public class SceneController {
         mp3Pane.setText(songName);
         VBox mp3_vbox = new VBox();
         
-        //Elements to be added to the vbox inside the pane
-        Button testButton = new Button();
-        Slider mp3Slider = new Slider();
-        mp3_vbox.getChildren().addAll(testButton, mp3Slider);
+        //Close button for the mp3 song open
+        Button close_button = new Button("X");
+        close_button.setPrefSize(10, 10);
         
+        close_button.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override public void handle(ActionEvent e){
+                //Remove the Mp3 Pane and close the mp3
+                main_vBox.getChildren().remove(mp3Pane);
+                close();
+            }
+            
+        });
+        
+        //Audio Slider for the timeline of the song and Action Listener
+        Slider audio_slider = new Slider();
+        audio_slider.valueProperty().addListener(new InvalidationListener(){
+            public void invalidated(Observable ov){
+                if(audio_slider.isValueChanging()){
+                    OpenFile.getPlayer().seek(duration.multiply(audio_slider.getValue() / 100.0));
+                }
+            }
+        });
+        
+        
+        //Control the volume of the mp3 with this audio slider
+        Slider volume_slider = new Slider();       
+        volume_slider.setPrefWidth(70);
+        volume_slider.setMaxWidth(150);
+        volume_slider.setMinWidth(30);
+       
+        //Add everything to the window
+        mp3_vbox.getChildren().addAll(close_button, audio_slider, volume_slider);
         mp3Pane.setContent(mp3_vbox);
         main_vBox.getChildren().add(mp3Pane);
         left_split_pane.getChildren().add(main_vBox);
