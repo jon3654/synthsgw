@@ -41,7 +41,8 @@
                 </Menu>
                 <Menu fx:id="edit" mnemonicParsing="false" text="Edit">
                   <items>
-                        <MenuItem mnemonicParsing="false" onAction="#editMIDI" text="Edit MIDI" />
+                        <MenuItem mnemonicParsing="false" onAction="#editSynth" text="Edit Synth" />
+                        <MenuItem mnemonicParsing="false" onAction="#editBeat" text="Edit Beat" />
                     <MenuItem mnemonicParsing="false" text="Delete" />
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" onAction="#openMetronome" text="Metronome" />

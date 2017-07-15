@@ -30,7 +30,7 @@ public class MetronomeController {
 		// Registering a ChangeListener for slider's value
 		bpmSlider.valueProperty().addListener(
 			(observable, oldValue, newValue) -> {
-				Settings.bpm = newValue.intValue();
+				Settings.bpm = newValue.floatValue();
 				updateGuiBpm();
 			}
 		);
