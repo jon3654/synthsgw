@@ -188,8 +188,12 @@ public class SceneController {
     }
     
     // opens up the beatmaker
-    public void newBeat(){
+    public int newBeat(){
         beat = new BeatMaker();
+        if(beat != null)
+            return 0;
+        else 
+            return -1;
     }    
     
     public int openMIDI(){
@@ -209,4 +213,6 @@ public class SceneController {
         else
             OpenFile.noFileOpen();
     }
+    
+    public void editSynth(){}
 }
