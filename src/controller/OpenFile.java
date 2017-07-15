@@ -44,6 +44,7 @@ public class OpenFile {
     }
     
     public static void openPlayer(File inFile){
+        file = inFile;
         // instantiates Media class
         song = new Media(inFile.toURI().toString());
         // instantiates MediaPlayer class
@@ -131,6 +132,10 @@ public class OpenFile {
     
     // public method to close file
     public int close(){
+        if(file == null){ 
+            noFileOpen();
+            return -1;
+        }
         file = null;
         return 0;
     }
