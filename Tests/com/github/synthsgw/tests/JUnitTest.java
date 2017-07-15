@@ -27,6 +27,7 @@ public class JUnitTest extends ApplicationTest{
     
     private static final String SCENE_FILE = "/view/fxml/mainScene.fxml"; 
     private static final String WINDOW_TITLE = "Window Title";
+    SceneController controller;
 	
     @Override
     public void start(Stage stage) {
@@ -37,6 +38,7 @@ public class JUnitTest extends ApplicationTest{
   		Parent root = loader.load();
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
+                controller = new SceneController();
 	} catch(IOException e) {
 			e.printStackTrace();
 		System.exit(-1);
@@ -78,8 +80,7 @@ public class JUnitTest extends ApplicationTest{
     public void attemptToCloseFileWhileOneIsOpen(){
         OpenFile file = new OpenFile("mp3");
         File newFile = new File("Tests/test.mp3");
-        OpenFile.numberOfOpenFiles++;
-        OpenFile.openPlayer(newFile);
+        file.openPlayer(newFile);
         assertEquals(file.close(), 0);
     }
     
@@ -93,8 +94,7 @@ public class JUnitTest extends ApplicationTest{
     public void attemptToPlayFileWhileOneIsOPen(){
         OpenFile file = new OpenFile("mp3");
         File newFile = new File("Tests/test.mp3");
-        OpenFile.numberOfOpenFiles++;
-        OpenFile.openPlayer(newFile);
+        file.openPlayer(newFile);
         assertEquals(file.play(), 0);
     }
     
@@ -108,8 +108,7 @@ public class JUnitTest extends ApplicationTest{
     public void attemptToPauseFileWhileOneIsOpen(){
         OpenFile file = new OpenFile("mp3");
         File newFile = new File("Tests/test.mp3");
-        OpenFile.numberOfOpenFiles++;
-        OpenFile.openPlayer(newFile);
+        file.openPlayer(newFile);
         assertEquals(file.pause(), 0);
     }
     
@@ -123,33 +122,40 @@ public class JUnitTest extends ApplicationTest{
     public void attemptToStopFileWhileOneIsOpen(){
         OpenFile file = new OpenFile("mp3");
         File newFile = new File("Tests/test.mp3");
-        OpenFile.numberOfOpenFiles++;
         OpenFile.openPlayer(newFile);
         assertEquals(file.stop(), 0);
     }
     
-//    @Test
-//    public void OpenMetronome(){
-//        Platform.runLater(new Runnable(){
-//            @Override
-//            public void run() {
-//                SceneController controller = new SceneController();
-//                controller.openMetronome();
-//                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//            }  
-//        });
-//    }
+    @Test
+    public void OpenMetronome(){
+        Platform.runLater(new Runnable(){
+            @Override
+            public void run() {
+                SceneController controller = new SceneController();
+                controller.openMetronome();
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }  
+        });
+    }
     
     @Test
     public void openBeatMaker(){
-        SceneController controller = new SceneController();
-        controller.newBeat();
+        assertEquals(controller.newBeat(), 0);
     }
     
     @Test
     public void goToGithub() throws Exception{
-        SceneController controller = new SceneController();
         controller.goToGithub();
+    }
+    
+    @Test
+    public void openMIDIFile(){
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() { 
+                assertEquals(controller.openMIDI(),0);
+            }
+        });
     }
     
 //    @Test
