@@ -145,6 +145,12 @@ public class SceneController {
         main_vBox.getChildren().add(mp3Pane);
         left_split_pane.getChildren().add(main_vBox);
     }
+    
+    //Updates volume, and time values for mp3
+    private void updateValues()
+    {
+      
+    }
 
     public void goToGithub() throws Exception
     {
