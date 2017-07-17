@@ -56,7 +56,7 @@ public class InstrumentController {
 			instrumentName.setText(renamer.getCharacters().toString());
 			instrumentSettingsPane.getChildren().remove(renamer);
 		});
-		/* ...but if that's not the case then this might be necessary.
+		/* ...but if that's not the case then this might be necessary someday.
 		// (don't forget to uncomment the KeyCode import!)
 		renamer.setOnKeyPressed(e -> {
 			if(e.getCode().equals(KeyCode.ENTER)) {
