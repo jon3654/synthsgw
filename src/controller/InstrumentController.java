@@ -32,6 +32,8 @@ public class InstrumentController {
 	protected void initialize() {
 		panSlider.setMin(Settings.MIN_SLIDE_PAN);
 		panSlider.setMax(Settings.MAX_SLIDE_PAN);
+		// *Should* set slider to halfway
+		panSlider.setValue(Settings.MAX_SLIDE_PAN/2 + Settings.MIN_SLIDE_PAN/2);
 	}
 
 	@FXML
