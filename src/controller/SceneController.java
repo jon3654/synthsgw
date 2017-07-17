@@ -7,16 +7,21 @@ package com.github.synthsgw.controller;
 
 import java.io.IOException;
 
+import java.awt.Desktop;
+import java.net.URI;
+import java.util.Observable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javafx.application.Platform;
+import javafx.beans.InvalidationListener;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.awt.Desktop;
-import java.net.URI;
-import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Slider;
@@ -24,17 +29,14 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.TitledPane;
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 import /*com.github.synthsgw.*/controller.BeatMaker;
 import /*com.github.synthsgw.*/controller.OpenFile;
 import com.github.synthsgw.model.Settings;
-import java.util.Observable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.beans.InvalidationListener;
-import javafx.util.Duration;
 
 public class SceneController {
     OpenFile openFile[] = new OpenFile[10];
@@ -48,10 +50,14 @@ public class SceneController {
     @FXML private ToolBar audio_tool_bar;
     @FXML private TitledPane mp3Pane;
     @FXML private VBox main_vBox;
+	@FXML private VBox instrumentPane;
+	@FXML private Button newMidiButton;
+	@FXML private Button newSampleButton;
+	@FXML private HBox newInstrumentButtons;
     
 	@FXML
 	protected void initialize() {
-		
+		// nothing so far
 	}
 
     @FXML
@@ -62,6 +68,24 @@ public class SceneController {
 	@FXML
 	public void openSettings() {
 		displayScene(Settings.SETTINGS_FXML, Settings.SETTINGS_TITLE);
+	}
+
+	@FXML
+	public void addInstrument() {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource(Settings.INSTRUMENT_FXML));
+
+		try {
+			Parent instRoot = loader.load();
+			// Add new instrument gui to bottom of VBox
+			instrumentPane.getChildren().addAll(instRoot);
+			// Move the buttons to the bottom
+			newInstrumentButtons.toFront();
+		} catch(IOException e) {
+			e.printStackTrace();
+			Platform.exit();
+			System.exit(-2);
+		}
 	}
 
 	public void displayScene(String fxml, String title) {
@@ -75,6 +99,7 @@ public class SceneController {
 			stage.setScene(scene);
 		} catch(IOException e) {
 			e.printStackTrace();
+			Platform.exit();
 			System.exit(-2);
 		} 
 		stage.setTitle(title);
@@ -128,7 +153,7 @@ public class SceneController {
 
             @Override
             public void invalidated(javafx.beans.Observable observable) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                throw new UnsupportedOperationException("Not supported yet.");
             }
         });
         
