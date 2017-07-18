@@ -33,6 +33,7 @@ import com.github.synthsgw.model.Settings;
 import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.util.Duration;
 
@@ -48,6 +49,9 @@ public class SceneController {
     @FXML private ToolBar audio_tool_bar;
     @FXML private TitledPane mp3Pane;
     @FXML private VBox main_vBox;
+    private Slider audio_slider;
+    private Slider volume_slider;
+    
     
 	@FXML
 	protected void initialize() {
@@ -107,6 +111,12 @@ public class SceneController {
         Button close_button = new Button("X");
         close_button.setPrefSize(10, 10);
         
+         //Add everything to the window
+        mp3_vbox.getChildren().addAll(close_button, audio_slider, volume_slider);
+        mp3Pane.setContent(mp3_vbox);
+        main_vBox.getChildren().add(mp3Pane);
+        left_split_pane.getChildren().add(main_vBox);
+        
         close_button.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override public void handle(ActionEvent e){
@@ -118,7 +128,6 @@ public class SceneController {
         });
         
         //Audio Slider for the timeline of the song and Action Listener
-        Slider audio_slider = new Slider();
         audio_slider.valueProperty().addListener(new InvalidationListener(){
             public void invalidated(Observable ov){
                 if(audio_slider.isValueChanging()){
@@ -133,23 +142,47 @@ public class SceneController {
         });
         
         
-        //Control the volume of the mp3 with this audio slider
-        Slider volume_slider = new Slider();       
+        //Control the volume of the mp3 with this audio slider      
         volume_slider.setPrefWidth(70);
         volume_slider.setMaxWidth(150);
         volume_slider.setMinWidth(30);
+        volume_slider.valueProperty().addListener(new InvalidationListener(){
+            public void invalidated(Observable ov){
+                if(volume_slider.isValueChanging()){
+                    OpenFile.getPlayer().setVolume(volume_slider.getValue() / 100.0);
+                }
+            }
+
+            @Override
+            public void invalidated(javafx.beans.Observable observable) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
        
-        //Add everything to the window
-        mp3_vbox.getChildren().addAll(close_button, audio_slider, volume_slider);
-        mp3Pane.setContent(mp3_vbox);
-        main_vBox.getChildren().add(mp3Pane);
-        left_split_pane.getChildren().add(main_vBox);
+       
     }
     
     //Updates volume, and time values for mp3
     private void updateValues()
     {
-      
+        if(audio_slider != null && volume_slider!= null)
+        {
+            Platform.runLater(new Runnable(){
+                public void run(){
+                    Duration current_time = OpenFile.getPlayer().getCurrentTime();
+                    //This is where play_time will go for the audio slider
+                    audio_slider.setDisable(duration.isUnknown());
+                    if(!audio_slider.isDisable() && duration.greaterThan(Duration.ZERO) && !audio_slider.isValueChanging())
+                    {
+                        audio_slider.setValue(current_time.divide(duration).toMillis() * 100.0);
+                    }
+                    if(!volume_slider.isValueChanging())
+                    {
+                        volume_slider.setValue((int)Math.round(OpenFile.getPlayer().getVolume() * 100.0));
+                    }
+                }
+            });
+        }
     }
 
     public void goToGithub() throws Exception
