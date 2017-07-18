@@ -30,6 +30,7 @@ import javafx.scene.layout.VBox;
 import /*com.github.synthsgw.*/controller.BeatMaker;
 import /*com.github.synthsgw.*/controller.OpenFile;
 import com.github.synthsgw.model.Settings;
+import controller.Synth;
 import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -248,4 +249,8 @@ public class SceneController {
     }
     
     public void editSynth(){}
+    
+    public void newSynth(){
+        Synth synth = new Synth();
+    }
 }
