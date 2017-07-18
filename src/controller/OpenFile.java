@@ -132,10 +132,8 @@ public class OpenFile {
     
     // public method to close file
     public int close(){
-        if(file == null){ 
-            noFileOpen();
+        if(file == null) 
             return -1;
-        }
         file = null;
         return 0;
     }

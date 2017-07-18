@@ -21,33 +21,33 @@
          <children>
             <MenuBar>
               <menus>
-                <Menu mnemonicParsing="false" text="File">
+                <Menu fx:id="fileButton" mnemonicParsing="false" text="File">
                   <items>
-                        <Menu mnemonicParsing="false" text="New">
+                        <Menu fx:id="newButton" mnemonicParsing="false" text="New">
                           <items>
                             <MenuItem mnemonicParsing="false" text="New Project" />
-                              <MenuItem mnemonicParsing="false" onAction="#newBeat" text="New Beat" />
-                              <MenuItem mnemonicParsing="false" text="New Synth" />
+                              <MenuItem fx:id="newBeatButton" mnemonicParsing="false" onAction="#newBeat" text="New Beat" />
+                              <MenuItem fx:id="newSynthButton" mnemonicParsing="false" onAction="#newSynth" text="New Synth" />
                           </items>
                         </Menu>
                     <MenuItem fx:id="close" mnemonicParsing="false" onAction="#close" text="Close File" />
                         <Menu mnemonicParsing="false" text="Open">
                           <items>
-                              <MenuItem mnemonicParsing="false" onAction="#openMIDI" text="Open Midi" />
-                            <MenuItem fx:id="openMP3" mnemonicParsing="false" onAction="#openMP3" text="Open MP3" />
+                              <MenuItem fx:id="openMIDIButton" mnemonicParsing="false" onAction="#openMIDI" text="Open Midi" />
+                            <MenuItem fx:id="openMP3Button" mnemonicParsing="false" onAction="#openMP3" text="Open MP3" />
                           </items>
                         </Menu>
                   </items>
                 </Menu>
-                <Menu fx:id="edit" mnemonicParsing="false" text="Edit">
+                <Menu fx:id="editButton" mnemonicParsing="false" text="Edit">
                   <items>
-                        <MenuItem mnemonicParsing="false" onAction="#editSynth" text="Edit Synth" />
-                        <MenuItem mnemonicParsing="false" onAction="#editBeat" text="Edit Beat" />
+                        <MenuItem fx:id="editSynthButton" mnemonicParsing="false" onAction="#editSynth" text="Edit Synth" />
+                        <MenuItem fx:id="editBeatButton" mnemonicParsing="false" onAction="#editBeat" text="Edit Beat" />
                     <MenuItem mnemonicParsing="false" text="Delete" />
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" onAction="#openMetronome" text="Metronome" />
+                        <MenuItem fx:id="metronomeButton" mnemonicParsing="false" onAction="#openMetronome" text="Metronome" />
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" onAction="#openSettings" text="Settings" />
+                        <MenuItem fx:id="settingsButton" mnemonicParsing="false" onAction="#openSettings" text="Settings" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
