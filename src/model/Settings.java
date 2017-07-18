@@ -20,9 +20,15 @@ public class Settings {
 
 	// Instrument (gui) settings
 	public static final String INSTRUMENT_FXML = "/fxml/instrument.fxml";
+	public static final String INST_ICON_FXML  = "/fxml/instrumentIcon.fxml";
 
 	public static final short MIN_SLIDE_PAN = 0;
 	public static final short MAX_SLIDE_PAN = 127;
+
+	public static final String INSTPANE_DEF_COLOR
+			= "-fx-background-color: lightblue";
+	public static final String INSTPANE_ACC_COLOR
+			= "-fx-background-color: palegreen";
 
 	// Settings settings (hehehe)
 	public static final String SETTINGS_FXML  = "/fxml/settings.fxml";

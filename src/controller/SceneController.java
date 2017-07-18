@@ -9,6 +9,10 @@ import java.io.IOException;
 
 import java.awt.Desktop;
 import java.net.URI;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedList;
 import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,23 +23,30 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TitledPane;
 import javafx.scene.control.ToolBar;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 import /*com.github.synthsgw.*/controller.BeatMaker;
 import /*com.github.synthsgw.*/controller.OpenFile;
+import com.github.synthsgw.model.Instrument;
 import com.github.synthsgw.model.Settings;
 
 public class SceneController {
@@ -43,21 +54,53 @@ public class SceneController {
     int openFileIndex = 0;
     BeatMaker beat;
     Duration duration;
-    
-    @FXML private SplitPane main_split_pane;
+
     @FXML private AnchorPane left_split_pane; 
     @FXML private AnchorPane right_split_pane;
-    @FXML private ToolBar audio_tool_bar;
+	@FXML private Button     newMidiButton;
+	@FXML private Button     newSampleButton;
+	@FXML private HBox       newInstrumentButtons;
+    @FXML private SplitPane  main_split_pane;
     @FXML private TitledPane mp3Pane;
-    @FXML private VBox main_vBox;
-	@FXML private VBox instrumentPane;
-	@FXML private Button newMidiButton;
-	@FXML private Button newSampleButton;
-	@FXML private HBox newInstrumentButtons;
+    @FXML private ToolBar    audio_tool_bar;
+	@FXML private VBox       instrumentPane;
+    @FXML private VBox       main_vBox;
+	@FXML private VBox       percussionEnumPane;
+	@FXML private VBox       synthEnumPane;
     
 	@FXML
 	protected void initialize() {
-		// nothing so far
+		instrumentPane.setOnDragOver(e -> {
+			if(e.getGestureSource() != instrumentPane &&
+			   e.getDragboard().hasString()) {
+				e.acceptTransferModes(TransferMode.LINK);
+			}
+			e.consume();
+		});
+		instrumentPane.setOnDragEntered(e -> {
+			if(e.getGestureSource() != instrumentPane &&
+			   e.getDragboard().hasString()) {
+				instrumentPane.setStyle(Settings.INSTPANE_ACC_COLOR);
+			}
+			e.consume();
+		});
+		instrumentPane.setOnDragExited(e -> {
+			instrumentPane.setStyle(Settings.INSTPANE_DEF_COLOR);
+			e.consume();
+		});
+		instrumentPane.setOnDragDropped(e -> {
+			e.acceptTransferModes(TransferMode.LINK);
+			Dragboard db = e.getDragboard();
+			boolean success = false;
+			if(db.hasString()) {
+				addInstrument(db.getString(), 0);
+				success = true;
+			}
+			e.setDropCompleted(success);
+			e.consume();
+		});
+
+		populateSynthPane();
 	}
 
     @FXML
@@ -70,17 +113,34 @@ public class SceneController {
 		displayScene(Settings.SETTINGS_FXML, Settings.SETTINGS_TITLE);
 	}
 
-	@FXML
-	public void addInstrument() {
+	public void addInstrument(String name, int index) {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource(Settings.INSTRUMENT_FXML));
 
 		try {
 			Parent instRoot = loader.load();
+
+			//TODO tell instRoot what instrument it's representing somehow
+			Instrument inst = Instrument.valueOf(name);
+			//NOTE: inst.name() is the dirty behind-the-scenes no spaces string,
+			//      inst.name is the user-friendly string
+			//FIXME lookup is returning a null pointer here
+			//(Label)(instRoot.lookup("#instrumentName")).setText(inst.name);
+
+			//*
+			LinkedList<Node> lst =
+					new LinkedList<>(instrumentPane.getChildren());
+
+			lst.add(index, instRoot);
+
+			instrumentPane.getChildren().setAll(lst);
+			//*/
+			/*
 			// Add new instrument gui to bottom of VBox
 			instrumentPane.getChildren().addAll(instRoot);
 			// Move the buttons to the bottom
 			newInstrumentButtons.toFront();
+			//*/
 		} catch(IOException e) {
 			e.printStackTrace();
 			Platform.exit();
@@ -104,6 +164,51 @@ public class SceneController {
 		} 
 		stage.setTitle(title);
 		stage.show();
+	}
+
+	private void populateSynthPane() {
+		URL loc = getClass().getResource(Settings.INST_ICON_FXML);
+
+		ArrayList<Pane> percs = makeInstPanes(Instrument.getPercussion(), loc);
+		percussionEnumPane.getChildren().addAll(percs);
+
+		ArrayList<Pane> synts = makeInstPanes(Instrument.getSynths(), loc);
+		synthEnumPane.getChildren().addAll(synts);
+	}
+
+	private ArrayList<Pane> makeInstPanes(Collection<Instrument> insts,
+	                                      URL location) {
+		ArrayList<Pane> panes = new ArrayList<>(insts.size());
+
+		for(Instrument i : insts) {
+			try {
+				final Pane pane = (Pane)FXMLLoader.load(location);
+
+				// Set the drag and drop handler
+				pane.setOnDragDetected(e -> {
+					Dragboard db = pane.startDragAndDrop(TransferMode.LINK);
+
+					// Put the Instrument in question on the dragboard
+					ClipboardContent instrument = new ClipboardContent();
+					//NOTE: i.name() gives the all-caps, no spaces version of
+					//      the name, whereas i.name gives the user-friendly
+					//      version.
+					instrument.putString(i.name());
+					db.setContent(instrument);
+
+					e.consume();
+				});
+				// Set the text of this thing's label
+				((Label)pane.lookup("#instrumentNameLabel")).setText(i.name);
+				panes.add(pane);
+			} catch(IOException e) {
+				e.printStackTrace();
+				Platform.exit();
+				System.exit(-2);
+			}
+		}
+
+		return panes;
 	}
     
     public void openMP3(ActionEvent e){
