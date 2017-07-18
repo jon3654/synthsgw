@@ -161,11 +161,36 @@ public class SceneController {
         });
         
          //Add everything to the window
-        mp3_vbox.getChildren().addAll(close_button, audio_label, audio_slider, volume_label, volume_slider);
-        mp3Pane.setContent(mp3_vbox);
-        main_vBox.getChildren().add(mp3Pane);
-        left_split_pane.getChildren().add(main_vBox);
         
+        
+        
+    }
+    
+    //This function adds Midi files to the GUI
+    public void addMidiToOpenFiles(String midi_name)
+    {
+        TitledPane midi_pane = new TitledPane();
+        midi_pane.setText(midi_name);
+        VBox midi_vbox = new VBox();
+        
+        //Close Button
+        //Close button for the mp3 song open
+        Button close_button = new Button("X");
+        close_button.setPrefSize(10, 10);
+        close_button.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override public void handle(ActionEvent e){
+                //Remove the Mp3 Pane and close the mp3
+                main_vBox.getChildren().remove(midi_pane);
+                close();
+            }
+        });
+        
+        //Add everything to the main pane
+        midi_vbox.getChildren().addAll(close_button);
+        midi_pane.setContent(midi_vbox);
+        main_vBox.getChildren().add(midi_pane);
+        left_split_pane.getChildren().add(main_vBox);
         
     }
     
@@ -243,6 +268,7 @@ public class SceneController {
         } catch (IOException ex) {
             Logger.getLogger(SceneController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        addMidiToOpenFiles(openFile[openFileIndex++].songName);
         return -1;
     }
     
