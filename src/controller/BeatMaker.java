@@ -77,7 +77,7 @@ public class BeatMaker {
 		downTempo.addActionListener(new MyDownTempoListener());
 		buttonBox.add(downTempo);
 
-		JButton sendIt = new JButton("Save It");
+		JButton sendIt = new JButton("Save as MIDI");
 		sendIt.addActionListener(new MySendListener());
 		buttonBox.add(sendIt);
 
