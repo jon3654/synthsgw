@@ -6,11 +6,37 @@
 package controller;
 
 import java.io.Serializable;
-
+import com.github.synthsgw.controller.SceneController;
 /**
  *
  * @author jon
  */
 public class SerializeBeatAndSynth implements Serializable{
+
+    public SerializeBeatAndSynth() {
+    }
     
+    public void serializeBeat(){
+    
+    }
+    
+    public void serializeSynth(){
+    
+    }
+    
+    public void serialize(){
+    
+    }
+    
+    public void deserializeBeat(){
+    
+    }
+    
+    public void deserializeSynth(){
+    
+    }
+    
+    public void deserialize(){
+    
+    }
 }

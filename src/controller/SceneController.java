@@ -42,8 +42,9 @@ import javafx.util.Duration;
 public class SceneController {
     OpenFile openFile[] = new OpenFile[10];
     int openFileIndex = 0;
-    BeatMaker beat;
+    public static BeatMaker beat;
     Duration duration;
+    public static Synth synth;
     
     @FXML private SplitPane main_split_pane;
     @FXML private AnchorPane left_split_pane; 
@@ -59,7 +60,6 @@ public class SceneController {
     
 	@FXML
 	protected void initialize() {
-		
 	}
 
     @FXML
@@ -257,6 +257,6 @@ public class SceneController {
     public void editSynth(){}
     
     public void newSynth(){
-        Synth synth = new Synth();
+        synth = new Synth();
     }
 }
