@@ -223,6 +223,9 @@ public class SceneController {
 					//      the name, whereas i.name gives the user-friendly
 					//      version.
 					instrument.putString(i.name());
+					db.setDragView(pane.snapshot(null, null),
+					               pane.getWidth()/2,
+								   pane.getHeight()/2);
 					db.setContent(instrument);
 
 					e.consume();
