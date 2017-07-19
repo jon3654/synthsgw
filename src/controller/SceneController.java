@@ -292,12 +292,13 @@ public class SceneController {
         synth = new Synth();
     }
     
-    public void saveProject() throws FileNotFoundException{
+    public void saveProject() throws FileNotFoundException, IOException{
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save Project");
         File file = fileChooser.showSaveDialog(stage);
         if(file != null){
             SerializeBeatAndSynth serialize = new SerializeBeatAndSynth(file);
+            serialize.serializeBeatAndSynth(beat, synth);
         }
     }
 }
