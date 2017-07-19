@@ -6,9 +6,11 @@
 package controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 /**
@@ -17,9 +19,11 @@ import java.io.Serializable;
  */
 public class SerializeBeatAndSynth implements Serializable{
     FileOutputStream fileOutput;
+    FileInputStream fileInput;
     
     public SerializeBeatAndSynth(File file) throws FileNotFoundException{
         fileOutput = new FileOutputStream(file);
+        fileInput = new FileInputStream(file);
     }
     
     public void serializeBeatAndSynth(BeatMaker beat, Synth synth) throws IOException{
@@ -37,11 +41,13 @@ public class SerializeBeatAndSynth implements Serializable{
         objectOutput.writeObject(synth);
     }
         
-    public void deserializeBeat(){
-        
+    public BeatMaker deserializeBeat() throws IOException, ClassNotFoundException{
+        ObjectInputStream objectInput = new ObjectInputStream(fileInput);
+        return (BeatMaker)objectInput.readObject();
     }
     
-    public void deserializeSynth(){
-        
+    public Synth deserializeSynth() throws IOException, ClassNotFoundException{
+        ObjectInputStream objectInput = new ObjectInputStream(fileInput);
+        return (Synth)objectInput.readObject();
     }
 }

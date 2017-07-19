@@ -62,6 +62,9 @@ public class SceneController {
     private Label volume_label;
     private Label audio_label;
     Window stage = null;
+    SerializeBeatAndSynth serialize;
+    File file;
+    FileChooser fileChooser;
     
     
 	@FXML
@@ -293,16 +296,23 @@ public class SceneController {
     }
     
     public void saveProject() throws FileNotFoundException, IOException{
-        FileChooser fileChooser = new FileChooser();
+        fileChooser = new FileChooser();
         fileChooser.setTitle("Save Project");
-        File file = fileChooser.showSaveDialog(stage);
+        file = fileChooser.showSaveDialog(stage);
         if(file != null){
-            SerializeBeatAndSynth serialize = new SerializeBeatAndSynth(file);
+            serialize = new SerializeBeatAndSynth(file);
             serialize.serializeBeatAndSynth(beat, synth);
         }
     }
     
-    public void openProject(){
-    
+    public void openProject() throws IOException, ClassNotFoundException{
+        fileChooser = new FileChooser();
+        fileChooser.setTitle("Open MP3");
+        file = fileChooser.showOpenDialog(stage);
+        if(file != null){
+            serialize = new SerializeBeatAndSynth(file);
+            beat = serialize.deserializeBeat();
+            synth = serialize.deserializeSynth();
+        }
     }
 }
