@@ -36,20 +36,12 @@ public class SerializeBeatAndSynth implements Serializable{
         ObjectOutputStream objectOutput = new ObjectOutputStream(fileOutput);
         objectOutput.writeObject(synth);
     }
-    
-    public void serialize(){
         
-    }
-    
     public void deserializeBeat(){
         
     }
     
     public void deserializeSynth(){
-        
-    }
-    
-    public void deserialize(){
         
     }
 }

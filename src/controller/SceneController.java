@@ -301,4 +301,8 @@ public class SceneController {
             serialize.serializeBeatAndSynth(beat, synth);
         }
     }
+    
+    public void openProject(){
+    
+    }
 }
