@@ -160,7 +160,11 @@ public class SceneController {
             }
         });
         
-         //Add everything to the window
+        //Add everything to the window
+        mp3_vbox.getChildren().addAll(close_button, audio_label, audio_slider, volume_label, volume_slider);
+        mp3Pane.setContent(mp3_vbox);
+        main_vBox.getChildren().add(mp3Pane);
+        left_split_pane.getChildren().add(main_vBox);
         
         
         
@@ -191,7 +195,6 @@ public class SceneController {
         midi_pane.setContent(midi_vbox);
         main_vBox.getChildren().add(midi_pane);
         left_split_pane.getChildren().add(main_vBox);
-        
     }
     
     //Updates volume, and time values for mp3
