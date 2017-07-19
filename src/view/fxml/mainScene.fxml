@@ -25,14 +25,15 @@
                   <items>
                         <Menu fx:id="newButton" mnemonicParsing="false" text="New">
                           <items>
-                            <MenuItem mnemonicParsing="false" text="New Project" />
                               <MenuItem fx:id="newBeatButton" mnemonicParsing="false" onAction="#newBeat" text="New Beat" />
                               <MenuItem fx:id="newSynthButton" mnemonicParsing="false" onAction="#newSynth" text="New Synth" />
                           </items>
                         </Menu>
+                        <MenuItem mnemonicParsing="false" onAction="#saveProject" text="Save Project" />
                     <MenuItem fx:id="close" mnemonicParsing="false" onAction="#close" text="Close File" />
                         <Menu mnemonicParsing="false" text="Open">
                           <items>
+                              <MenuItem mnemonicParsing="false" onAction="#openProject" text="Open Project" />
                               <MenuItem fx:id="openMIDIButton" mnemonicParsing="false" onAction="#openMIDI" text="Open Midi" />
                             <MenuItem fx:id="openMP3Button" mnemonicParsing="false" onAction="#openMP3" text="Open MP3" />
                           </items>

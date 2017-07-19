@@ -30,20 +30,26 @@ import javafx.scene.layout.VBox;
 import /*com.github.synthsgw.*/controller.BeatMaker;
 import /*com.github.synthsgw.*/controller.OpenFile;
 import com.github.synthsgw.model.Settings;
+import controller.SerializeBeatAndSynth;
 import controller.Synth;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.scene.control.Label;
+import javafx.stage.FileChooser;
+import javafx.stage.Window;
 import javafx.util.Duration;
 
 public class SceneController {
     OpenFile openFile[] = new OpenFile[10];
     int openFileIndex = 0;
-    BeatMaker beat;
+    public static BeatMaker beat;
     Duration duration;
+    public static Synth synth;
     
     @FXML private SplitPane main_split_pane;
     @FXML private AnchorPane left_split_pane; 
@@ -55,11 +61,14 @@ public class SceneController {
     private Slider volume_slider;
     private Label volume_label;
     private Label audio_label;
+    Window stage = null;
+    SerializeBeatAndSynth serialize;
+    File file;
+    FileChooser fileChooser;
     
     
 	@FXML
 	protected void initialize() {
-		
 	}
 
     @FXML
@@ -286,6 +295,28 @@ public class SceneController {
     public void editSynth(){}
     
     public void newSynth(){
-        Synth synth = new Synth();
+        synth = new Synth();
+    }
+    
+    public void saveProject() throws FileNotFoundException, IOException{
+        fileChooser = new FileChooser();
+        fileChooser.setTitle("Save Project");
+        file = fileChooser.showSaveDialog(stage);
+        if(file != null){
+            serialize = new SerializeBeatAndSynth(file);
+            serialize.serializeBeatAndSynth(beat, synth);
+        }
+    }
+    
+    public void openProject() throws IOException, ClassNotFoundException{
+        fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Project");
+        file = fileChooser.showOpenDialog(stage);
+        if(file != null){
+            serialize = new SerializeBeatAndSynth(file);
+            beat = serialize.deserializeBeat();
+            synth = serialize.deserializeSynth();
+            beat.buildGUI();
+        }
     }
 }
