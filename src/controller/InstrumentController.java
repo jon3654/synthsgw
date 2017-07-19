@@ -20,6 +20,8 @@ import javafx.scene.layout.Pane;
 import com.github.synthsgw.model.Settings;
 
 public class InstrumentController {
+	private InstrumentData track;
+
 	@FXML private BorderPane rootPane;
 	@FXML private AnchorPane instrumentSettingsPane;
 	@FXML private Label instrumentName;
@@ -50,6 +52,8 @@ public class InstrumentController {
 
 	@FXML
 	protected void initialize() {
+		track = new InstrumentData();
+
 		notes = new ToggleButton []
 				{ note0,  note1,  note2,  note3,
 				  note4,  note5,  note6,  note7,
