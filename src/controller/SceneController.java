@@ -307,12 +307,13 @@ public class SceneController {
     
     public void openProject() throws IOException, ClassNotFoundException{
         fileChooser = new FileChooser();
-        fileChooser.setTitle("Open MP3");
+        fileChooser.setTitle("Open Project");
         file = fileChooser.showOpenDialog(stage);
         if(file != null){
             serialize = new SerializeBeatAndSynth(file);
             beat = serialize.deserializeBeat();
             synth = serialize.deserializeSynth();
+            beat.buildGUI();
         }
     }
 }
