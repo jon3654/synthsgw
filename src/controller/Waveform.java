@@ -23,7 +23,6 @@ public class Waveform {
 
     public Waveform(AudioInputStream aiStream) {
         setAudio(aiStream);
-        save();
     }
 
     public int[][] getSamplesContainer() {
@@ -135,35 +134,5 @@ public class Waveform {
       return audioInputStream.getFrameLength();
     }
     
-    public void save()  {
-
-
-      File targetFile = new File("/home/ciembor/targ.wav");
-      
-      AudioFileFormat.Type	targetFileType = AudioFileFormat.Type.WAVE;
-      AudioFormat audioFormat = audioInputStream.getFormat();
-      
-            
-      AudioFileFormat fileFormat = new AudioFileFormat(targetFileType, audioFormat, (int)audioInputStream.getFrameLength()) ;
-      
-      byte[] samplebytes = new byte[(bytes.length/2) - 40000];
-
-      for (int i = 40000; i < bytes.length / 2; i++) {
-        samplebytes[i - 40000] = bytes[i];
-      }
-      ByteArrayInputStream bais = new ByteArrayInputStream(samplebytes);
-      AudioInputStream outputAIS = new AudioInputStream(bais, audioFormat, samplebytes.length / audioFormat.getFrameSize());
-      
-      try
-      {
-         AudioSystem.write(outputAIS, targetFileType, targetFile);
-      }
-      catch(Exception e)
-      {
-         e.printStackTrace();
-         System.out.println("Can't write audio to file.");
-      }
-
-    }
-
+   
 }
