@@ -5,70 +5,128 @@
 
 package com.github.synthsgw.controller;
 
+// Exception imports
 import java.io.IOException;
 
+// Java/Javax imports
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.net.URI;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.Observable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+// JavaFX imports
+import javafx.application.Platform;
+import javafx.beans.InvalidationListener;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
-
-import java.awt.Desktop;
-import java.net.URI;
-import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TitledPane;
 import javafx.scene.control.ToolBar;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-
-import /*com.github.synthsgw.*/controller.BeatMaker;
-import /*com.github.synthsgw.*/controller.OpenFile;
-import com.github.synthsgw.model.Settings;
-import controller.SerializeBeatAndSynth;
-import controller.Synth;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Observable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.application.Platform;
-import javafx.beans.InvalidationListener;
-import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.util.Duration;
+
+// SynthsGW imports
+import /*com.github.synthsgw.*/controller.BeatMaker;
+import /*com.github.synthsgw.*/controller.OpenFile;
+import /*com.github.synthsgw.*/controller.SerializeBeatAndSynth;
+import /*com.github.synthsgw.*/controller.Synth;
+import com.github.synthsgw.model.Instrument;
+import com.github.synthsgw.model.Settings;
+
 
 public class SceneController {
     OpenFile openFile[] = new OpenFile[10];
     int openFileIndex = 0;
+    File file;
+    FileChooser fileChooser;
+
     public static BeatMaker beat;
-    Duration duration;
     public static Synth synth;
+
+    Duration duration;
+    Window stage = null;
+    SerializeBeatAndSynth serialize;
     
-    @FXML private SplitPane main_split_pane;
     @FXML private AnchorPane left_split_pane; 
     @FXML private AnchorPane right_split_pane;
-    @FXML private ToolBar audio_tool_bar;
+	@FXML private Button     newMidiButton;
+	@FXML private Button     newSampleButton;
+	@FXML private HBox       newInstrumentButtons;
+    @FXML private SplitPane  main_split_pane;
     @FXML private TitledPane mp3Pane;
-    @FXML private VBox main_vBox;
+    @FXML private ToolBar    audio_tool_bar;
+	@FXML private VBox       instrumentPane;
+    @FXML private VBox       main_vBox;
+	@FXML private VBox       percussionEnumPane;
+	@FXML private VBox       synthEnumPane;
+
     private Slider audio_slider;
     private Slider volume_slider;
     private Label volume_label;
     private Label audio_label;
-    Window stage = null;
-    SerializeBeatAndSynth serialize;
-    File file;
-    FileChooser fileChooser;
-    
-    
+
 	@FXML
 	protected void initialize() {
+		////////////////////
+		// Event Handlers //
+		////////////////////
+		instrumentPane.setOnDragOver(e -> {
+			if(e.getGestureSource() != instrumentPane &&
+			   e.getDragboard().hasString()) {
+				e.acceptTransferModes(TransferMode.LINK);
+			}
+			e.consume();
+		});
+		instrumentPane.setOnDragEntered(e -> {
+			if(e.getGestureSource() != instrumentPane &&
+			   e.getDragboard().hasString()) {
+				instrumentPane.setStyle(Settings.INSTPANE_ACC_COLOR);
+			}
+			e.consume();
+		});
+		instrumentPane.setOnDragExited(e -> {
+			instrumentPane.setStyle(Settings.INSTPANE_DEF_COLOR);
+			e.consume();
+		});
+		instrumentPane.setOnDragDropped(e -> {
+			e.acceptTransferModes(TransferMode.LINK);
+			Dragboard db = e.getDragboard();
+			boolean success = false;
+			if(db.hasString()) {
+				addInstrument(db.getString(), -1);
+				success = true;
+			}
+			e.setDropCompleted(success);
+			e.consume();
+		});
+
+		populateSynthPane();
 	}
 
     @FXML
@@ -79,6 +137,44 @@ public class SceneController {
 	@FXML
 	public void openSettings() {
 		displayScene(Settings.SETTINGS_FXML, Settings.SETTINGS_TITLE);
+	}
+
+	public void addInstrument(String name, int index) {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource(Settings.INSTRUMENT_FXML));
+
+		try {
+			Parent instRoot = loader.load();
+
+			//TODO tell instRoot what instrument it's representing somehow
+			Instrument inst = Instrument.valueOf(name);
+			//NOTE: inst.name() is the dirty behind-the-scenes no spaces string,
+			//      inst.name is the user-friendly string
+			((InstrumentController)loader.getController())
+					.setInstName(inst.name);
+
+			//*
+			LinkedList<Node> lst =
+					new LinkedList<>(instrumentPane.getChildren());
+
+			if(index >= 0)
+				lst.add(index, instRoot);
+			else
+				lst.add(instRoot);
+
+			instrumentPane.getChildren().setAll(lst);
+			//*/
+			/*
+			// Add new instrument gui to bottom of VBox
+			instrumentPane.getChildren().addAll(instRoot);
+			// Move the buttons to the bottom
+			newInstrumentButtons.toFront();
+			//*/
+		} catch(IOException e) {
+			e.printStackTrace();
+			Platform.exit();
+			System.exit(-2);
+		}
 	}
 
 	public void displayScene(String fxml, String title) {
@@ -92,10 +188,56 @@ public class SceneController {
 			stage.setScene(scene);
 		} catch(IOException e) {
 			e.printStackTrace();
+			Platform.exit();
 			System.exit(-2);
 		} 
 		stage.setTitle(title);
 		stage.show();
+	}
+
+	private void populateSynthPane() {
+		URL loc = getClass().getResource(Settings.INST_ICON_FXML);
+
+		ArrayList<Pane> percs = makeInstPanes(Instrument.getPercussion(), loc);
+		percussionEnumPane.getChildren().addAll(percs);
+
+		ArrayList<Pane> synts = makeInstPanes(Instrument.getSynths(), loc);
+		synthEnumPane.getChildren().addAll(synts);
+	}
+
+	private ArrayList<Pane> makeInstPanes(Collection<Instrument> insts,
+	                                      URL location) {
+		ArrayList<Pane> panes = new ArrayList<>(insts.size());
+
+		for(Instrument i : insts) {
+			try {
+				final Pane pane = (Pane)FXMLLoader.load(location);
+
+				// Set the drag and drop handler
+				pane.setOnDragDetected(e -> {
+					Dragboard db = pane.startDragAndDrop(TransferMode.LINK);
+
+					// Put the Instrument in question on the dragboard
+					ClipboardContent instrument = new ClipboardContent();
+					//NOTE: i.name() gives the all-caps, no spaces version of
+					//      the name, whereas i.name gives the user-friendly
+					//      version.
+					instrument.putString(i.name());
+					db.setContent(instrument);
+
+					e.consume();
+				});
+				// Set the text of this thing's label
+				((Label)pane.lookup("#instrumentNameLabel")).setText(i.name);
+				panes.add(pane);
+			} catch(IOException e) {
+				e.printStackTrace();
+				Platform.exit();
+				System.exit(-2);
+			}
+		}
+
+		return panes;
 	}
     
     public void openMP3(ActionEvent e){
@@ -147,7 +289,7 @@ public class SceneController {
 
             @Override
             public void invalidated(javafx.beans.Observable observable) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                throw new UnsupportedOperationException("Not supported yet.");
             }
         });
         
@@ -202,7 +344,6 @@ public class SceneController {
         left_split_pane.getChildren().add(main_vBox);
         
     }
-    
     //Updates volume, and time values for mp3
     private void updateValues()
     {
