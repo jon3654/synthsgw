@@ -10,17 +10,17 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 //import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
 import com.github.synthsgw.model.Settings;
 
 public class InstrumentController {
-	@FXML private SplitPane rootPane;
+	@FXML private BorderPane rootPane;
 	@FXML private AnchorPane instrumentSettingsPane;
 	@FXML private Label instrumentName;
 	@FXML private ToggleButton muteButton;
@@ -28,8 +28,34 @@ public class InstrumentController {
 	@FXML private Button deleteButton;
 	@FXML private Slider panSlider;
 
+	// Note buttons
+	@FXML private ToggleButton note0;
+	@FXML private ToggleButton note1;
+	@FXML private ToggleButton note2;
+	@FXML private ToggleButton note3;
+	@FXML private ToggleButton note4;
+	@FXML private ToggleButton note5;
+	@FXML private ToggleButton note6;
+	@FXML private ToggleButton note7;
+	@FXML private ToggleButton note8;
+	@FXML private ToggleButton note9;
+	@FXML private ToggleButton note10;
+	@FXML private ToggleButton note11;
+	@FXML private ToggleButton note12;
+	@FXML private ToggleButton note13;
+	@FXML private ToggleButton note14;
+	@FXML private ToggleButton note15;
+	// Array provided for your convenience
+	private ToggleButton [] notes;
+
 	@FXML
 	protected void initialize() {
+		notes = new ToggleButton []
+				{ note0,  note1,  note2,  note3,
+				  note4,  note5,  note6,  note7,
+				  note8,  note9,  note10, note11,
+				  note12, note13, note14, note15 };
+
 		panSlider.setMin(Settings.MIN_SLIDE_PAN);
 		panSlider.setMax(Settings.MAX_SLIDE_PAN);
 		// *Should* set slider to halfway
@@ -81,6 +107,10 @@ public class InstrumentController {
 
 		((Pane)rootPane.getParent()).getChildren().remove(rootPane);
 		// And now let GC do its job
+	}
+
+	public void setInstName(String name) {
+		instrumentName.setText(name);
 	}
 }
 

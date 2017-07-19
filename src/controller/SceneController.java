@@ -70,6 +70,9 @@ public class SceneController {
     
 	@FXML
 	protected void initialize() {
+		////////////////////
+		// Event Handlers //
+		////////////////////
 		instrumentPane.setOnDragOver(e -> {
 			if(e.getGestureSource() != instrumentPane &&
 			   e.getDragboard().hasString()) {
@@ -93,7 +96,7 @@ public class SceneController {
 			Dragboard db = e.getDragboard();
 			boolean success = false;
 			if(db.hasString()) {
-				addInstrument(db.getString(), 0);
+				addInstrument(db.getString(), -1);
 				success = true;
 			}
 			e.setDropCompleted(success);
@@ -124,14 +127,17 @@ public class SceneController {
 			Instrument inst = Instrument.valueOf(name);
 			//NOTE: inst.name() is the dirty behind-the-scenes no spaces string,
 			//      inst.name is the user-friendly string
-			//FIXME lookup is returning a null pointer here
-			//(Label)(instRoot.lookup("#instrumentName")).setText(inst.name);
+			((InstrumentController)loader.getController())
+					.setInstName(inst.name);
 
 			//*
 			LinkedList<Node> lst =
 					new LinkedList<>(instrumentPane.getChildren());
 
-			lst.add(index, instRoot);
+			if(index >= 0)
+				lst.add(index, instRoot);
+			else
+				lst.add(instRoot);
 
 			instrumentPane.getChildren().setAll(lst);
 			//*/
