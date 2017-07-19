@@ -5,38 +5,51 @@
  */
 package controller;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import com.github.synthsgw.controller.SceneController;
 /**
  *
  * @author jon
  */
 public class SerializeBeatAndSynth implements Serializable{
-
-    public SerializeBeatAndSynth() {
+    FileOutputStream fileOutput;
+    
+    public SerializeBeatAndSynth(File file) throws FileNotFoundException{
+        fileOutput = new FileOutputStream(file);
     }
     
-    public void serializeBeat(){
-    
+    public void serializeBeatAndSynth(BeatMaker beat, Synth synth) throws IOException{
+        serializeBeat(beat);
+        serializeSynth(synth);
     }
     
-    public void serializeSynth(){
+    public void serializeBeat(BeatMaker beat) throws FileNotFoundException, IOException{
+        ObjectOutputStream objectOutput = new ObjectOutputStream(fileOutput);
+        objectOutput.writeObject(beat);
+    }
     
+    public void serializeSynth(Synth synth) throws IOException{
+        ObjectOutputStream objectOutput = new ObjectOutputStream(fileOutput);
+        objectOutput.writeObject(synth);
     }
     
     public void serialize(){
-    
+        
     }
     
     public void deserializeBeat(){
-    
+        
     }
     
     public void deserializeSynth(){
-    
+        
     }
     
     public void deserialize(){
-    
+        
     }
 }

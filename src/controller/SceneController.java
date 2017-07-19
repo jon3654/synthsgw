@@ -30,13 +30,18 @@ import javafx.scene.layout.VBox;
 import /*com.github.synthsgw.*/controller.BeatMaker;
 import /*com.github.synthsgw.*/controller.OpenFile;
 import com.github.synthsgw.model.Settings;
+import controller.SerializeBeatAndSynth;
 import controller.Synth;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.scene.control.Label;
+import javafx.stage.FileChooser;
+import javafx.stage.Window;
 import javafx.util.Duration;
 
 public class SceneController {
@@ -56,6 +61,7 @@ public class SceneController {
     private Slider volume_slider;
     private Label volume_label;
     private Label audio_label;
+    Window stage = null;
     
     
 	@FXML
@@ -284,5 +290,14 @@ public class SceneController {
     
     public void newSynth(){
         synth = new Synth();
+    }
+    
+    public void saveProject() throws FileNotFoundException{
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save Project");
+        File file = fileChooser.showSaveDialog(stage);
+        if(file != null){
+            SerializeBeatAndSynth serialize = new SerializeBeatAndSynth(file);
+        }
     }
 }
