@@ -75,16 +75,16 @@ public class SceneController {
     
     @FXML private AnchorPane left_split_pane; 
     @FXML private AnchorPane right_split_pane;
-	@FXML private Button     newMidiButton;
-	@FXML private Button     newSampleButton;
-	@FXML private HBox       newInstrumentButtons;
+    @FXML private Button     newMidiButton;
+    @FXML private Button     newSampleButton;
+    @FXML private HBox       newInstrumentButtons;
     @FXML private SplitPane  main_split_pane;
     @FXML private TitledPane mp3Pane;
     @FXML private ToolBar    audio_tool_bar;
-	@FXML private VBox       instrumentPane;
+    @FXML private VBox       instrumentPane;
     @FXML private VBox       main_vBox;
-	@FXML private VBox       percussionEnumPane;
-	@FXML private VBox       synthEnumPane;
+    @FXML private VBox       percussionEnumPane;
+    @FXML private VBox       synthEnumPane;
 
     private Slider audio_slider;
     private Slider volume_slider;
@@ -138,7 +138,8 @@ public class SceneController {
 	public void openSettings() {
 		displayScene(Settings.SETTINGS_FXML, Settings.SETTINGS_TITLE);
 	}
-
+        
+        //This is to add a synth or a beat
 	public void addInstrument(String name, int index) {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource(Settings.INSTRUMENT_FXML));
@@ -253,12 +254,12 @@ public class SceneController {
         //Actions to show the Panel for the song name
         String songName = openFile[openFileIndex-1].songName;
         
-        addmp3ToOpenFiles(songName);
+        addMP3(songName);
     }
 
     //This method will add a TitledPane to the VBox with the 
     //info for the mp3 playing
-    public void addmp3ToOpenFiles(String songName)
+    public void addMP3(String songName)
     {
         //Create a new TitledPane
         TitledPane mp3Pane = new TitledPane();
@@ -272,7 +273,7 @@ public class SceneController {
         {
             @Override public void handle(ActionEvent e){
                 //Remove the Mp3 Pane and close the mp3
-                main_vBox.getChildren().remove(mp3Pane);
+                instrumentPane.getChildren().remove(mp3Pane);
                 close();
             }
         }); 
@@ -317,11 +318,7 @@ public class SceneController {
         //Add everything to the window
         mp3_vbox.getChildren().addAll(close_button, audio_label, audio_slider, volume_label, volume_slider);
         mp3Pane.setContent(mp3_vbox);
-        main_vBox.getChildren().add(mp3Pane);
-        left_split_pane.getChildren().add(main_vBox);
-        
-        
-        
+        instrumentPane.getChildren().add(mp3Pane);
     }
     
     //This function adds Midi files to the GUI
