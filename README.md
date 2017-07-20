@@ -17,12 +17,14 @@ mp3 to share with others.
 
 ## Progress Videos
 See the progress of our software here:
-#Sprint 2
+
+Sprint 2
 
  * https://www.youtube.com/watch?v=_tLChjeKR1c
 
  * https://www.youtube.com/watch?v=VREWVBDSXEY
-#Sprint 3
+ 
+Sprint 3
  * TBD
  
 ## Diagrams
