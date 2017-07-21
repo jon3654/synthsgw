@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import static java.awt.image.ImageObserver.HEIGHT;
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
@@ -22,9 +24,12 @@ import javax.swing.UnsupportedLookAndFeelException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
+import javafx.stage.FileChooser;
+import javafx.stage.Window;
 
 public class Synth{
-
+        Window stage;
         Track track;
         Sequencer sequencer;
         Sequence sequence;
@@ -69,6 +74,8 @@ public class Synth{
             add(createButton("C", KeyEvent.VK_8));
             add(createRecordButton("Record", KeyEvent.VK_9));
             add(createStartButton("Start", KeyEvent.VK_0));
+            add(createSaveButton("Save", KeyEvent.VK_A));
+            
         }
 
         protected JButton createButton(String name, int virtualKey) {
@@ -111,6 +118,7 @@ public class Synth{
                             track = sequence.createTrack();                          
                             sequencer.setSequence(sequence);  
                             sequencer.recordEnable(track, HEIGHT);
+                            sequencer.startRecording();
                             } catch (MidiUnavailableException ex) {
                             Logger.getLogger(Synth.class.getName()).log(Level.SEVERE, null, ex);
                             } catch (InvalidMidiDataException ex) {
@@ -161,6 +169,45 @@ public class Synth{
                 
             });
             return btn;
+        }
+        protected JButton createSaveButton(String name, int virtualKey){
+        JButton btn = new JButton(name);
+        btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        FileChooser fileChooser = new FileChooser();
+                        fileChooser.setTitle("Save MIDI");
+                        File file = fileChooser.showSaveDialog(stage);
+                        if (file != null) {
+                            try {
+                                // serialize here
+                                MidiSystem.write(sequence,1,file);
+                            } catch (IOException ex) {
+                                Logger.getLogger(BeatMaker.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                    }   
+                });
+            }
+        });
+        btn.setMargin(new Insets(8, 8, 8, 8));
+        
+        InputMap im = btn.getInputMap(WHEN_IN_FOCUSED_WINDOW);
+        ActionMap am = btn.getActionMap();
+        
+        im.put(KeyStroke.getKeyStroke(virtualKey, 0), "clickMe");
+        am.put("clickMe", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JButton btn = (JButton) e.getSource();
+                btn.doClick();
+            }
+            
+        });
+        return btn;
         }
     }
 	
