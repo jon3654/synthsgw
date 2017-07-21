@@ -321,8 +321,22 @@ public class SceneController {
         instrumentPane.getChildren().add(mp3Pane);
     }
     
+    public int openMIDI(){
+        openFile[openFileIndex++] = new OpenFile("mid");
+        try {
+            return openFile[openFileIndex-1].openMIDI();
+        } catch (IOException ex) {
+            Logger.getLogger(SceneController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String songName = new String(openFile[openFileIndex - 1].songName);
+        
+        System.out.println("The song name for the MIDI is " + songName);
+        addMidi(songName);
+        return -1;
+    }
+    
     //This function adds Midi files to the GUI
-    public void addMidiToOpenFiles(String midi_name)
+    public void addMidi(String midi_name)
     {
         TitledPane midi_pane = new TitledPane();
         midi_pane.setText(midi_name);
@@ -336,16 +350,15 @@ public class SceneController {
         {
             @Override public void handle(ActionEvent e){
                 //Remove the Mp3 Pane and close the mp3
-                main_vBox.getChildren().remove(midi_pane);
+                instrumentPane.getChildren().remove(midi_pane);
                 close();
             }
         });
         
-        //Add everything to the main pane
+        //Add everything to the Instrument Pane
         midi_vbox.getChildren().addAll(close_button);
         midi_pane.setContent(midi_vbox);
-        main_vBox.getChildren().add(midi_pane);
-        left_split_pane.getChildren().add(main_vBox);
+        instrumentPane.getChildren().add(midi_pane);
     }
     //Updates volume, and time values for mp3
     private void updateValues()
@@ -378,24 +391,46 @@ public class SceneController {
     }
     
     public void play(){
+//        for(int i = openFileIndex; i > -1; --i)
+//            openFile[openFileIndex-1].play();
+//        if(openFileIndex == -1)
+//            OpenFile.noFileOpen();
+            
         int ret = openFile[openFileIndex-1].play();
         if(ret == -1)
             OpenFile.noFileOpen();
     }
     
     public void pause(){
+//        for(int i = openFileIndex; i > -1; --i)
+//            openFile[openFileIndex-1].pause();
+//        if(openFileIndex == -1)
+//            OpenFile.noFileOpen();
         int ret = openFile[openFileIndex-1].pause();
         if(ret == -1)
             OpenFile.noFileOpen();
     }
     
     public void stop(){
+//        for(int i = openFileIndex; i > -1; --i)
+//            openFile[openFileIndex-1].stop();
+//        if(openFileIndex == -1)
+//            OpenFile.noFileOpen();
         int ret = openFile[openFileIndex-1].stop();
         if(ret == -1)
             OpenFile.noFileOpen();
     }
     
     public void close(){
+//        if(openFile == null)
+//            OpenFile.noFileOpen();
+//        else
+//        {
+//            while(openFileIndex > 0)
+//                openFile[openFileIndex-1].stop();
+//                openFile[openFileIndex-1].close();
+//                --openFileIndex;
+//        }
         if(openFile == null)
             OpenFile.noFileOpen();
         else{
@@ -414,16 +449,6 @@ public class SceneController {
             return -1;
     }    
     
-    public int openMIDI(){
-        openFile[openFileIndex++] = new OpenFile("mid");
-        try {
-            return openFile[openFileIndex-1].openMIDI();
-        } catch (IOException ex) {
-            Logger.getLogger(SceneController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        addMidiToOpenFiles(openFile[openFileIndex++].songName);
-        return -1;
-    }
     
     public void editBeat(){
         if(openFile[openFileIndex-1].getFileExtension().equals("mid")){
