@@ -8,6 +8,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import static java.awt.image.ImageObserver.HEIGHT;
 import java.io.Serializable;
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
@@ -67,6 +68,7 @@ public class Synth{
             add(createButton("B", KeyEvent.VK_7));
             add(createButton("C", KeyEvent.VK_8));
             add(createRecordButton("Record", KeyEvent.VK_9));
+            add(createStartButton("Start", KeyEvent.VK_0));
         }
 
         protected JButton createButton(String name, int virtualKey) {
@@ -101,36 +103,24 @@ public class Synth{
             btn.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    if(sequencer == null){
+                    if(sequencer == null || !sequencer.isRecording()){
                         try {
-                        sequencer = MidiSystem.getSequencer();
-                        sequencer.open();
-                        if(sequence == null){
-                            try {
-                                sequence = new Sequence(Sequence.PPQ,4);
+                            sequencer = MidiSystem.getSequencer();                          
+                            sequencer.open();                           
+                            sequence = new Sequence(Sequence.PPQ,4);
+                            track = sequence.createTrack();                          
+                            sequencer.setSequence(sequence);  
+                            sequencer.recordEnable(track, HEIGHT);
+                            } catch (MidiUnavailableException ex) {
+                            Logger.getLogger(Synth.class.getName()).log(Level.SEVERE, null, ex);
                             } catch (InvalidMidiDataException ex) {
-                                Logger.getLogger(Synth.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(Synth.class.getName()).log(Level.SEVERE, null, ex);
                             }
+                    
                         }
-                        
-                        if(track == null){
-                            track = sequence.createTrack();
-                            try {    
-                                sequencer.setSequence(sequence);
-                                sequencer.start();
-                                
-                            } catch (InvalidMidiDataException ex) {
-                                Logger.getLogger(Synth.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                        }
-                        } catch (MidiUnavailableException ex) {
-                        Logger.getLogger(Synth.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                    if(!sequencer.isRecording())
-                        sequencer.recordEnable(track, HEIGHT);
-                    else
+                    else if (sequencer.isRecording()){
                         sequencer.recordDisable(track);
+                    }
                 }
             });
             btn.setMargin(new Insets(8, 8, 8, 8));
@@ -148,38 +138,66 @@ public class Synth{
             });
             return btn;
         }
+        protected JButton createStartButton(String name, int virtualKey){
+            JButton btn = new JButton(name);
+            btn.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    sequencer.start();
+                }
+            });
+            btn.setMargin(new Insets(8, 8, 8, 8));
+            
+            InputMap im = btn.getInputMap(WHEN_IN_FOCUSED_WINDOW);
+            ActionMap am = btn.getActionMap();
+            
+            im.put(KeyStroke.getKeyStroke(virtualKey, 0), "clickMe");
+            am.put("clickMe", new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    JButton btn = (JButton) e.getSource();
+                    btn.doClick();
+                }
+                
+            });
+            return btn;
+        }
     }
 	
 	
     public void playNote(int finalNote, int finalInstrument) {
         try {
-            if(sequencer == null){
-                sequencer = MidiSystem.getSequencer();
-                sequencer.open();                
-            }
-            else
-                sequencer.stop();
+            Sequencer temp_sequencer = MidiSystem.getSequencer();
+            Sequence temp_sequence = new Sequence(Sequence.PPQ,4);
+            temp_sequencer.open();
+            Track temp_track = temp_sequence.createTrack();
             
-            sequence = new Sequence(Sequence.PPQ,4);
-            track = sequence.createTrack();
             MidiEvent event = null;
 
             ShortMessage first = new ShortMessage();
             first.setMessage(192,1,finalInstrument,0);
             MidiEvent changeInstrument = new MidiEvent(first, 1);
-            track.add(changeInstrument);
+            if(sequencer != null)
+                track.add(changeInstrument);
+            temp_track.add(changeInstrument);
+            
 
             ShortMessage a = new ShortMessage();
             a.setMessage(144,1,finalNote,100);
             MidiEvent noteOn = new MidiEvent(a, 1);
-            track.add(noteOn);
+            if(sequencer != null)
+                track.add(noteOn);
+            temp_track.add(noteOn);
 
             ShortMessage b = new ShortMessage();
             b.setMessage(128,1,finalNote,100);
             MidiEvent noteOff = new MidiEvent(b, 16);
-            track.add(noteOff);
-            sequencer.setSequence(sequence);
-            sequencer.start();
+            if(sequencer != null)
+                track.add(noteOff);
+            temp_track.add(noteOff);
+            
+            temp_sequencer.setSequence(temp_sequence);
+            temp_sequencer.start();
             
             
         } catch (Exception ex) { ex.printStackTrace(); }
