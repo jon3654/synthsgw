@@ -389,34 +389,33 @@ public class SceneController {
     }
     
     public void play(){
-//        for(int i = openFileIndex; i > -1; --i)
-//            openFile[openFileIndex-1].play();
-//        if(openFileIndex == -1)
-//            OpenFile.noFileOpen();
-            
-        int ret = openFile[openFileIndex-1].play();
-        if(ret == -1)
+        if(openFileIndex == 0)
             OpenFile.noFileOpen();
+        else{
+            for(int i = openFileIndex; i > -1; --i)
+                openFile[openFileIndex-1].play();
+        }
+        
+        
     }
     
     public void pause(){
-//        for(int i = openFileIndex; i > -1; --i)
-//            openFile[openFileIndex-1].pause();
-//        if(openFileIndex == -1)
-//            OpenFile.noFileOpen();
-        int ret = openFile[openFileIndex-1].pause();
-        if(ret == -1)
+        if(openFileIndex == 0)
             OpenFile.noFileOpen();
+        else{
+            for(int i = openFileIndex; i > -1; --i)
+                openFile[openFileIndex-1].pause();
+        }
     }
     
     public void stop(){
-//        for(int i = openFileIndex; i > -1; --i)
-//            openFile[openFileIndex-1].stop();
-//        if(openFileIndex == -1)
-//            OpenFile.noFileOpen();
-        int ret = openFile[openFileIndex-1].stop();
-        if(ret == -1)
+        if(openFileIndex == 0)
             OpenFile.noFileOpen();
+        else {
+            for(int i = openFileIndex; i > -1; --i)
+                openFile[openFileIndex-1].stop();
+        }
+        
     }
     
     public void close(){
