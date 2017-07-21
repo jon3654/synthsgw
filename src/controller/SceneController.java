@@ -448,7 +448,12 @@ public class SceneController {
         file = fileChooser.showSaveDialog(stage);
         if(file != null){
             serialize = new SerializeBeatAndSynth(file);
-            serialize.serializeBeatAndSynth(beat, synth);
+            if(beat != null && synth != null)
+                serialize.serializeBeatAndSynth(beat.checkboxList, null);
+            else if(beat != null && synth == null)
+                serialize.serializeBeatAndSynth(beat.checkboxList, null);
+            else if(beat == null && synth != null)
+                serialize.serializeBeatAndSynth(null, null);
         }
     }
     
@@ -458,8 +463,9 @@ public class SceneController {
         file = fileChooser.showOpenDialog(stage);
         if(file != null){
             serialize = new SerializeBeatAndSynth(file);
-            beat = serialize.deserializeBeat();
-            synth = serialize.deserializeSynth();
+            beat.checkboxList = serialize.deserializeBeat();
+            //synth.track = serialize.deserializeSynth();
+            System.out.println("Test");
             beat.buildGUI();
         }
     }

@@ -20,11 +20,11 @@ import javafx.scene.control.MenuItem;
 import javax.imageio.ImageIO;
 
 
-public class BeatMaker { 
+public class BeatMaker{ 
 	JPanel mainPanel;
 	JList incomingList;
 	JTextField userMessage;
-	ArrayList<JCheckBox> checkboxList;
+	public ArrayList<JCheckBox> checkboxList;
 	int nextNum;
 	ObjectInputStream in;
 	ObjectOutputStream out;
@@ -121,6 +121,66 @@ public class BeatMaker {
 		theFrame.setVisible(true);
 	} // close method
 
+        public void rebuildGUI() {
+		theFrame = new JFrame("Cyber BeatBox");
+		theFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		BorderLayout layout = new BorderLayout();
+		JPanel background = new JPanel(layout);
+		background.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+
+		Box buttonBox = new Box(BoxLayout.Y_AXIS);
+
+		JButton start = new JButton("Start");
+		start.addActionListener(new MyStartListener());
+		buttonBox.add(start);          
+
+		JButton stop = new JButton("Stop");
+		stop.addActionListener(new MyStopListener());
+		buttonBox.add(stop);
+
+		JButton upTempo = new JButton("Tempo Up");
+		upTempo.addActionListener(new MyUpTempoListener());
+		buttonBox.add(upTempo);
+
+		JButton downTempo = new JButton("Tempo Down");
+		downTempo.addActionListener(new MyDownTempoListener());
+		buttonBox.add(downTempo);
+
+		JButton sendIt = new JButton("Save as MIDI");
+		sendIt.addActionListener(new MySendListener());
+		buttonBox.add(sendIt);
+
+		userMessage = new JTextField();
+		buttonBox.add(userMessage);
+
+		incomingList = new JList();
+		incomingList.addListSelectionListener(new MyListSelectionListener());
+		incomingList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		JScrollPane theList = new JScrollPane(incomingList);
+		buttonBox.add(theList);
+		incomingList.setListData(listVector);
+
+		Box nameBox = new Box(BoxLayout.Y_AXIS);
+
+		for (int i = 0; i < 16; i++) {
+			nameBox.add(new Label(instrumentNames[i]));
+		}
+
+		background.add(BorderLayout.EAST, buttonBox);
+		background.add(BorderLayout.WEST, nameBox);
+
+		theFrame.getContentPane().add(background);
+
+		GridLayout grid = new GridLayout(16,16);
+		grid.setVgap(1);
+		grid.setHgap(2);
+		mainPanel = new JPanel(grid);
+		background.add(BorderLayout.CENTER, mainPanel);
+
+		theFrame.setBounds(50,50,300,300);
+		theFrame.pack();
+		theFrame.setVisible(true);
+	} // close method
 
 	public void setUpMidi() {
 		try {
@@ -190,7 +250,7 @@ public class BeatMaker {
         public void start(){
             sequencer.start();
         }
-	public class MyStartListener implements ActionListener {
+	public class MyStartListener implements ActionListener{
 		public void actionPerformed(ActionEvent a) {
                     //if(sequencer.isOpen()){
                       //  sequencer.close();

@@ -13,6 +13,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
+import javax.sound.midi.Track;
+import javax.swing.JCheckBox;
 /**
  *
  * @author jon
@@ -26,28 +29,32 @@ public class SerializeBeatAndSynth implements Serializable{
         fileInput = new FileInputStream(file);
     }
     
-    public void serializeBeatAndSynth(BeatMaker beat, Synth synth) throws IOException{
-        serializeBeat(beat);
-        serializeSynth(synth);
+    public void serializeBeatAndSynth(ArrayList<JCheckBox> checkboxList, Track synthTrack) throws IOException{
+        if (checkboxList != null){
+            serializeBeat(checkboxList);
+            System.out.println("Test");
+        }
+        if (synthTrack != null)
+            serializeSynth(synthTrack);
     }
     
-    public void serializeBeat(BeatMaker beat) throws FileNotFoundException, IOException{
+    public void serializeBeat(ArrayList<JCheckBox> checkboxList) throws FileNotFoundException, IOException{
         ObjectOutputStream objectOutput = new ObjectOutputStream(fileOutput);
-        objectOutput.writeObject(beat);
+        objectOutput.writeObject(checkboxList);
     }
     
-    public void serializeSynth(Synth synth) throws IOException{
+    public void serializeSynth(Track synthTrack) throws IOException{
         ObjectOutputStream objectOutput = new ObjectOutputStream(fileOutput);
-        objectOutput.writeObject(synth);
+        objectOutput.writeObject(synthTrack);
     }
         
-    public BeatMaker deserializeBeat() throws IOException, ClassNotFoundException{
+    public ArrayList<JCheckBox> deserializeBeat() throws IOException, ClassNotFoundException{
         ObjectInputStream objectInput = new ObjectInputStream(fileInput);
-        return (BeatMaker)objectInput.readObject();
+        return (ArrayList<JCheckBox>)objectInput.readObject();
     }
     
-    public Synth deserializeSynth() throws IOException, ClassNotFoundException{
+    public Track deserializeSynth() throws IOException, ClassNotFoundException{
         ObjectInputStream objectInput = new ObjectInputStream(fileInput);
-        return (Synth)objectInput.readObject();
+        return (Track)objectInput.readObject();
     }
 }

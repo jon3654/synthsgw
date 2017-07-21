@@ -8,6 +8,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.Serializable;
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
 import javax.swing.InputMap;
@@ -21,6 +22,8 @@ import java.util.ArrayList;
 
 public class Synth{
 
+        Track track;
+        
 	public static void main (String[] args){
 		new Synth();
 	}
@@ -46,7 +49,7 @@ public class Synth{
             }			
 		});
 	}
-	public class TestPane extends JPanel {
+	public class TestPane extends JPanel{
         
 		// Need a place for the buttons 
 		public TestPane() {
@@ -95,7 +98,7 @@ public class Synth{
             Sequencer sequencer = MidiSystem.getSequencer();
             sequencer.open();
             Sequence sequence = new Sequence(Sequence.PPQ,4);
-            Track track = sequence.createTrack();
+            track = sequence.createTrack();
 
             MidiEvent event = null;
 
