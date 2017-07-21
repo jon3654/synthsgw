@@ -70,7 +70,6 @@ public class SceneController {
 
     Duration duration;
     Window stage = null;
-    SerializeBeatAndSynth serialize;
     
     @FXML private AnchorPane left_split_pane; 
     @FXML private AnchorPane right_split_pane;
