@@ -75,16 +75,16 @@ public class SceneController {
     
     @FXML private AnchorPane left_split_pane; 
     @FXML private AnchorPane right_split_pane;
-	@FXML private Button     newMidiButton;
-	@FXML private Button     newSampleButton;
-	@FXML private HBox       newInstrumentButtons;
+    @FXML private Button     newMidiButton;
+    @FXML private Button     newSampleButton;
+    @FXML private HBox       newInstrumentButtons;
     @FXML private SplitPane  main_split_pane;
     @FXML private TitledPane mp3Pane;
     @FXML private ToolBar    audio_tool_bar;
-	@FXML private VBox       instrumentPane;
+    @FXML private VBox       instrumentPane;
     @FXML private VBox       main_vBox;
-	@FXML private VBox       percussionEnumPane;
-	@FXML private VBox       synthEnumPane;
+    @FXML private VBox       percussionEnumPane;
+    @FXML private VBox       synthEnumPane;
 
     private Slider audio_slider;
     private Slider volume_slider;
@@ -138,7 +138,8 @@ public class SceneController {
 	public void openSettings() {
 		displayScene(Settings.SETTINGS_FXML, Settings.SETTINGS_TITLE);
 	}
-
+        
+        //This is to add a synth or a beat
 	public void addInstrument(String name, int index) {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource(Settings.INSTRUMENT_FXML));
@@ -253,12 +254,12 @@ public class SceneController {
         //Actions to show the Panel for the song name
         String songName = openFile[openFileIndex-1].songName;
         
-        addmp3ToOpenFiles(songName);
+        addMP3(songName);
     }
 
     //This method will add a TitledPane to the VBox with the 
     //info for the mp3 playing
-    public void addmp3ToOpenFiles(String songName)
+    public void addMP3(String songName)
     {
         //Create a new TitledPane
         TitledPane mp3Pane = new TitledPane();
@@ -272,7 +273,7 @@ public class SceneController {
         {
             @Override public void handle(ActionEvent e){
                 //Remove the Mp3 Pane and close the mp3
-                main_vBox.getChildren().remove(mp3Pane);
+                instrumentPane.getChildren().remove(mp3Pane);
                 close();
             }
         }); 
@@ -317,15 +318,25 @@ public class SceneController {
         //Add everything to the window
         mp3_vbox.getChildren().addAll(close_button, audio_label, audio_slider, volume_label, volume_slider);
         mp3Pane.setContent(mp3_vbox);
-        main_vBox.getChildren().add(mp3Pane);
-        left_split_pane.getChildren().add(main_vBox);
+        instrumentPane.getChildren().add(mp3Pane);
+    }
+    
+    public int openMIDI(){
+        openFile[openFileIndex++] = new OpenFile("mid");
+        try {
+            return openFile[openFileIndex-1].openMIDI();
+        } catch (IOException ex) {
+            Logger.getLogger(SceneController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String songName = new String(openFile[openFileIndex - 1].songName);
         
-        
-        
+        System.out.println("The song name for the MIDI is " + songName);
+        addMidi(songName);
+        return -1;
     }
     
     //This function adds Midi files to the GUI
-    public void addMidiToOpenFiles(String midi_name)
+    public void addMidi(String midi_name)
     {
         TitledPane midi_pane = new TitledPane();
         midi_pane.setText(midi_name);
@@ -339,16 +350,15 @@ public class SceneController {
         {
             @Override public void handle(ActionEvent e){
                 //Remove the Mp3 Pane and close the mp3
-                main_vBox.getChildren().remove(midi_pane);
+                instrumentPane.getChildren().remove(midi_pane);
                 close();
             }
         });
         
-        //Add everything to the main pane
+        //Add everything to the Instrument Pane
         midi_vbox.getChildren().addAll(close_button);
         midi_pane.setContent(midi_vbox);
-        main_vBox.getChildren().add(midi_pane);
-        left_split_pane.getChildren().add(main_vBox);
+        instrumentPane.getChildren().add(midi_pane);
     }
     //Updates volume, and time values for mp3
     private void updateValues()
@@ -381,24 +391,46 @@ public class SceneController {
     }
     
     public void play(){
+//        for(int i = openFileIndex; i > -1; --i)
+//            openFile[openFileIndex-1].play();
+//        if(openFileIndex == -1)
+//            OpenFile.noFileOpen();
+            
         int ret = openFile[openFileIndex-1].play();
         if(ret == -1)
             OpenFile.noFileOpen();
     }
     
     public void pause(){
+//        for(int i = openFileIndex; i > -1; --i)
+//            openFile[openFileIndex-1].pause();
+//        if(openFileIndex == -1)
+//            OpenFile.noFileOpen();
         int ret = openFile[openFileIndex-1].pause();
         if(ret == -1)
             OpenFile.noFileOpen();
     }
     
     public void stop(){
+//        for(int i = openFileIndex; i > -1; --i)
+//            openFile[openFileIndex-1].stop();
+//        if(openFileIndex == -1)
+//            OpenFile.noFileOpen();
         int ret = openFile[openFileIndex-1].stop();
         if(ret == -1)
             OpenFile.noFileOpen();
     }
     
     public void close(){
+//        if(openFile == null)
+//            OpenFile.noFileOpen();
+//        else
+//        {
+//            while(openFileIndex > 0)
+//                openFile[openFileIndex-1].stop();
+//                openFile[openFileIndex-1].close();
+//                --openFileIndex;
+//        }
         if(openFile == null)
             OpenFile.noFileOpen();
         else{
@@ -417,16 +449,6 @@ public class SceneController {
             return -1;
     }    
     
-    public int openMIDI(){
-        openFile[openFileIndex++] = new OpenFile("mid");
-        try {
-            return openFile[openFileIndex-1].openMIDI();
-        } catch (IOException ex) {
-            Logger.getLogger(SceneController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        addMidiToOpenFiles(openFile[openFileIndex++].songName);
-        return -1;
-    }
     
     public void editBeat(){
         if(openFile[openFileIndex-1].getFileExtension().equals("mid")){

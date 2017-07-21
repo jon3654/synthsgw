@@ -16,11 +16,16 @@ stitching, and cutting sections of music easy, as well as exporting the song to
 mp3 to share with others.
 
 ## Progress Videos
-Click on the following links to see the progress for Sprint 2
+See the progress of our software here:
+
+Sprint 2
 
  * https://www.youtube.com/watch?v=_tLChjeKR1c
 
  * https://www.youtube.com/watch?v=VREWVBDSXEY
+ 
+Sprint 3
+ * TBD
  
 ## Diagrams
 * [Use Case 1](https://github.com/jon3654/synthsgw/blob/master/diagrams/Use%20Case%201.pdf)

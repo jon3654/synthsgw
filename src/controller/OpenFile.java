@@ -89,6 +89,7 @@ public class OpenFile {
         fileChooser = new FileChooser();
         fileChooser.setTitle("Open MIDI");
         file = fileChooser.showOpenDialog(stage);
+        songName = file.getName();
         if(checkExt(file.getName().substring(
 				file.getName().lastIndexOf('.') + 1)) == 0){
             // read MIDI file to buffered input
