@@ -26,6 +26,7 @@ public class Synth{
 
         Track track;
         Sequencer sequencer;
+        Sequence sequence;
         
 	public static void main (String[] args){
 		new Synth();
@@ -44,7 +45,7 @@ public class Synth{
 
 				// this is the JFrame which contains the 8 buttons 
                 JFrame frame = new JFrame("Testing");
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 frame.add(new TestPane());
                 frame.pack();
                 frame.setLocationRelativeTo(null);
@@ -103,6 +104,25 @@ public class Synth{
                     if(sequencer == null){
                         try {
                         sequencer = MidiSystem.getSequencer();
+                        sequencer.open();
+                        if(sequence == null){
+                            try {
+                                sequence = new Sequence(Sequence.PPQ,4);
+                            } catch (InvalidMidiDataException ex) {
+                                Logger.getLogger(Synth.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                        
+                        if(track == null){
+                            track = sequence.createTrack();
+                            try {    
+                                sequencer.setSequence(sequence);
+                                sequencer.start();
+                                
+                            } catch (InvalidMidiDataException ex) {
+                                Logger.getLogger(Synth.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
                         } catch (MidiUnavailableException ex) {
                         Logger.getLogger(Synth.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -133,11 +153,15 @@ public class Synth{
 	
     public void playNote(int finalNote, int finalInstrument) {
         try {
-            sequencer = MidiSystem.getSequencer();
-            sequencer.open();
-            Sequence sequence = new Sequence(Sequence.PPQ,4);
+            if(sequencer == null){
+                sequencer = MidiSystem.getSequencer();
+                sequencer.open();                
+            }
+            else
+                sequencer.stop();
+            
+            sequence = new Sequence(Sequence.PPQ,4);
             track = sequence.createTrack();
-
             MidiEvent event = null;
 
             ShortMessage first = new ShortMessage();
@@ -154,9 +178,10 @@ public class Synth{
             b.setMessage(128,1,finalNote,100);
             MidiEvent noteOff = new MidiEvent(b, 16);
             track.add(noteOff);
-
             sequencer.setSequence(sequence);
             sequencer.start();
+            
+            
         } catch (Exception ex) { ex.printStackTrace(); }
     }
 }
