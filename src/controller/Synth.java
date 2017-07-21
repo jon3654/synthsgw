@@ -177,7 +177,7 @@ public class Synth{
             ShortMessage first = new ShortMessage();
             first.setMessage(192,1,finalInstrument,0);
             MidiEvent changeInstrument = new MidiEvent(first, 1);
-            if(sequencer != null)
+            if(sequencer != null && sequencer.isRecording())
                 track.add(changeInstrument);
             temp_track.add(changeInstrument);
             
@@ -185,14 +185,14 @@ public class Synth{
             ShortMessage a = new ShortMessage();
             a.setMessage(144,1,finalNote,100);
             MidiEvent noteOn = new MidiEvent(a, 1);
-            if(sequencer != null)
+            if(sequencer != null && sequencer.isRecording())
                 track.add(noteOn);
             temp_track.add(noteOn);
 
             ShortMessage b = new ShortMessage();
             b.setMessage(128,1,finalNote,100);
             MidiEvent noteOff = new MidiEvent(b, 16);
-            if(sequencer != null)
+            if(sequencer != null && sequencer.isRecording())
                 track.add(noteOff);
             temp_track.add(noteOff);
             
