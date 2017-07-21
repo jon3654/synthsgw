@@ -54,7 +54,6 @@ import javafx.util.Duration;
 // SynthsGW imports
 import /*com.github.synthsgw.*/controller.BeatMaker;
 import /*com.github.synthsgw.*/controller.OpenFile;
-import /*com.github.synthsgw.*/controller.SerializeBeatAndSynth;
 import /*com.github.synthsgw.*/controller.Synth;
 import com.github.synthsgw.model.Instrument;
 import com.github.synthsgw.model.Settings;
@@ -462,33 +461,5 @@ public class SceneController {
     
     public void newSynth(){
         synth = new Synth();
-    }
-    
-    public void saveProject() throws FileNotFoundException, IOException{
-        fileChooser = new FileChooser();
-        fileChooser.setTitle("Save Project");
-        file = fileChooser.showSaveDialog(stage);
-        if(file != null){
-            serialize = new SerializeBeatAndSynth(file);
-            if(beat != null && synth != null)
-                serialize.serializeBeatAndSynth(beat.checkboxList, null);
-            else if(beat != null && synth == null)
-                serialize.serializeBeatAndSynth(beat.checkboxList, null);
-            else if(beat == null && synth != null)
-                serialize.serializeBeatAndSynth(null, null);
-        }
-    }
-    
-    public void openProject() throws IOException, ClassNotFoundException{
-        fileChooser = new FileChooser();
-        fileChooser.setTitle("Open Project");
-        file = fileChooser.showOpenDialog(stage);
-        if(file != null){
-            serialize = new SerializeBeatAndSynth(file);
-            beat.checkboxList = serialize.deserializeBeat();
-            //synth.track = serialize.deserializeSynth();
-            System.out.println("Test");
-            beat.buildGUI();
-        }
     }
 }
