@@ -151,6 +151,7 @@ public class Synth{
             btn.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    sequencer.stop();
                     sequencer.start();
                 }
             });
@@ -218,7 +219,6 @@ public class Synth{
             Sequence temp_sequence = new Sequence(Sequence.PPQ,4);
             temp_sequencer.open();
             Track temp_track = temp_sequence.createTrack();
-            
             MidiEvent event = null;
 
             ShortMessage first = new ShortMessage();
@@ -245,8 +245,7 @@ public class Synth{
             
             temp_sequencer.setSequence(temp_sequence);
             temp_sequencer.start();
-            
-            
+            System.out.println(track.size());
         } catch (Exception ex) { ex.printStackTrace(); }
     }
 }
