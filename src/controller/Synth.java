@@ -1,5 +1,6 @@
 package controller;
 // Java Virtual Keyboard 
+import com.github.synthsgw.model.Settings;
 import javax.swing.*;
 import javax.sound.midi.*;
 import java.awt.EventQueue;
@@ -27,12 +28,17 @@ import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.DataLine.Info;
+import javax.sound.sampled.TargetDataLine;
+import javax.sound.sampled.AudioFormat;
 
 public class Synth{
         Window stage;
         Track track;
         Sequencer sequencer;
         Sequence sequence;
+        long time;
         
 	public static void main (String[] args){
 		new Synth();
@@ -112,12 +118,18 @@ public class Synth{
                 public void actionPerformed(ActionEvent e) {
                     if(sequencer == null || !sequencer.isRecording()){
                         try {
-                            sequencer = MidiSystem.getSequencer();                          
-                            sequencer.open();                           
+                            sequencer = MidiSystem.getSequencer();         
+                            sequencer.setMasterSyncMode(Sequencer.SyncMode.INTERNAL_CLOCK);
+                            
+                            sequencer.open();  
                             sequence = new Sequence(Sequence.PPQ,4);
+                            sequencer.setTempoInBPM(Settings.bpm);
                             track = sequence.createTrack();                          
                             sequencer.setSequence(sequence);  
+                            
                             sequencer.recordEnable(track, HEIGHT);
+                            sequencer.start();
+                            time = System.currentTimeMillis();
                             sequencer.startRecording();
                             } catch (MidiUnavailableException ex) {
                             Logger.getLogger(Synth.class.getName()).log(Level.SEVERE, null, ex);
@@ -127,7 +139,7 @@ public class Synth{
                     
                         }
                     else if (sequencer.isRecording()){
-                        sequencer.recordDisable(track);
+                        sequencer.stop();
                     }
                 }
             });
@@ -218,34 +230,48 @@ public class Synth{
             Sequencer temp_sequencer = MidiSystem.getSequencer();
             Sequence temp_sequence = new Sequence(Sequence.PPQ,4);
             temp_sequencer.open();
+            temp_sequencer.setTempoInBPM(Settings.bpm);
             Track temp_track = temp_sequence.createTrack();
             MidiEvent event = null;
+            int currentTick = (int) ((System.currentTimeMillis()-time)*Settings.bpm)/60000;
 
             ShortMessage first = new ShortMessage();
             first.setMessage(192,1,finalInstrument,0);
-            MidiEvent changeInstrument = new MidiEvent(first, 1);
-            if(sequencer != null && sequencer.isRecording())
+            MidiEvent changeInstrument;
+            if(sequencer != null && sequencer.isRecording()){
+                changeInstrument = new MidiEvent(first, currentTick);
                 track.add(changeInstrument);
+            }
+            else
+                changeInstrument = new MidiEvent(first, 1);
             temp_track.add(changeInstrument);
             
 
             ShortMessage a = new ShortMessage();
             a.setMessage(144,1,finalNote,100);
-            MidiEvent noteOn = new MidiEvent(a, 1);
-            if(sequencer != null && sequencer.isRecording())
+            MidiEvent noteOn;
+            if(sequencer != null && sequencer.isRecording()){
+                noteOn = new MidiEvent(a, currentTick);
                 track.add(noteOn);
+            }
+            else
+                noteOn = new MidiEvent(a, 1);
             temp_track.add(noteOn);
 
             ShortMessage b = new ShortMessage();
             b.setMessage(128,1,finalNote,100);
-            MidiEvent noteOff = new MidiEvent(b, 16);
-            if(sequencer != null && sequencer.isRecording())
+            MidiEvent noteOff;
+            if(sequencer != null && sequencer.isRecording()){
+                noteOff = new MidiEvent(b, currentTick+16);
                 track.add(noteOff);
+            }
+            else
+                noteOff = new MidiEvent(b, 16);
+            
             temp_track.add(noteOff);
             
             temp_sequencer.setSequence(temp_sequence);
             temp_sequencer.start();
-            System.out.println(track.size());
         } catch (Exception ex) { ex.printStackTrace(); }
     }
 }
