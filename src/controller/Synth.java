@@ -19,10 +19,13 @@ import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Synth{
 
         Track track;
+        Sequencer sequencer;
         
 	public static void main (String[] args){
 		new Synth();
@@ -53,7 +56,7 @@ public class Synth{
         
 		// Need a place for the buttons 
 		public TestPane() {
-            setLayout(new GridLayout(1, 8));
+            setLayout(new GridLayout(2, 8));
             add(createButton("C", KeyEvent.VK_1));
             add(createButton("D", KeyEvent.VK_2));
             add(createButton("E", KeyEvent.VK_3));
@@ -62,6 +65,7 @@ public class Synth{
             add(createButton("A", KeyEvent.VK_6));
             add(createButton("B", KeyEvent.VK_7));
             add(createButton("C", KeyEvent.VK_8));
+            add(createRecordButton("Record", KeyEvent.VK_9));
         }
 
         protected JButton createButton(String name, int virtualKey) {
@@ -69,22 +73,56 @@ public class Synth{
             btn.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-					// we need to get user input for the octave 
-					int octave = 12*3;
-					playNote(octave + (virtualKey - '1'), 1);
+                    // we need to get user input for the octave 
+                    int octave = 12*3;
+                    playNote(octave + (virtualKey - '1'), 1);
+                    
                 }
             });
             
-			btn.setMargin(new Insets(8, 8, 8, 8));
+            btn.setMargin(new Insets(8, 8, 8, 8));
             
-			InputMap im = btn.getInputMap(WHEN_IN_FOCUSED_WINDOW);
+            InputMap im = btn.getInputMap(WHEN_IN_FOCUSED_WINDOW);
             ActionMap am = btn.getActionMap();
             
-			im.put(KeyStroke.getKeyStroke(virtualKey, 0), "clickMe");
-			am.put("clickMe", new AbstractAction() {
-                @Override
+            im.put(KeyStroke.getKeyStroke(virtualKey, 0), "clickMe");
+            am.put("clickMe", new AbstractAction() {
+            @Override
                 public void actionPerformed(ActionEvent e) {
                     JButton btn = (JButton) e.getSource();
+                    btn.doClick();
+            }
+            });
+            return btn;
+        }
+        protected JButton createRecordButton(String name, int virtualKey){
+            JButton btn = new JButton(name);
+            btn.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if(sequencer == null){
+                        try {
+                        sequencer = MidiSystem.getSequencer();
+                        } catch (MidiUnavailableException ex) {
+                        Logger.getLogger(Synth.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    if(!sequencer.isRecording())
+                        sequencer.recordEnable(track, HEIGHT);
+                    else
+                        sequencer.recordDisable(track);
+                }
+            });
+            btn.setMargin(new Insets(8, 8, 8, 8));
+            
+            InputMap im = btn.getInputMap(WHEN_IN_FOCUSED_WINDOW);
+            ActionMap am = btn.getActionMap();
+            
+            im.put(KeyStroke.getKeyStroke(virtualKey, 0), "clickMe");
+            am.put("clickMe", new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    JButton btn = (JButton) e.getSource(); 
                     btn.doClick();
                 }
             });
@@ -95,7 +133,7 @@ public class Synth{
 	
     public void playNote(int finalNote, int finalInstrument) {
         try {
-            Sequencer sequencer = MidiSystem.getSequencer();
+            sequencer = MidiSystem.getSequencer();
             sequencer.open();
             Sequence sequence = new Sequence(Sequence.PPQ,4);
             track = sequence.createTrack();
