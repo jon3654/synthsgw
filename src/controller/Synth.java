@@ -12,7 +12,6 @@ import java.awt.event.KeyEvent;
 import static java.awt.image.ImageObserver.HEIGHT;
 import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
 import javax.swing.InputMap;
@@ -22,16 +21,11 @@ import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
-import javax.sound.sampled.DataLine;
-import javax.sound.sampled.DataLine.Info;
-import javax.sound.sampled.TargetDataLine;
-import javax.sound.sampled.AudioFormat;
 
 public class Synth{
         Window stage;
@@ -134,7 +128,7 @@ public class Synth{
                                 tempoEvent = new MidiEvent(tempoMessage, i);
                                 tempoTrack.add(tempoEvent);
                             }
-                            
+                            tempoSequencer.setTrackMute(0, true);
                             tempoSequencer.open();
                             tempoSequencer.start();
                             
