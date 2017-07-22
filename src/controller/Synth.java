@@ -114,7 +114,6 @@ public class Synth{
                     if(sequencer == null || !sequencer.isRecording()){
                         try {
                             tempoSequencer = MidiSystem.getSequencer();
-                            tempoSequencer.setTempoInBPM(Settings.bpm);
                             tempoSequencer.setLoopCount(sequencer.LOOP_CONTINUOUSLY);
                             Sequence tempoSequence = new Sequence(Sequence.PPQ,4);
                             Track tempoTrack = tempoSequence.createTrack();
@@ -129,6 +128,7 @@ public class Synth{
                                 tempoTrack.add(tempoEvent);
                             }
                             tempoSequencer.setTrackMute(0, true);
+                            tempoSequencer.setTempoInBPM(Settings.bpm);
                             tempoSequencer.open();
                             tempoSequencer.start();
                             
