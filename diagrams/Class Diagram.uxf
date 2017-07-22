@@ -4,10 +4,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>243</x>
-      <y>144</y>
+      <x>261</x>
+      <y>54</y>
       <w>189</w>
-      <h>171</h>
+      <h>108</h>
     </coordinates>
     <panel_attributes>&lt;&lt;App&gt;&gt;
 Package::View
@@ -24,46 +24,61 @@ start(Stage)
     <id>UMLClass</id>
     <coordinates>
       <x>0</x>
-      <y>153</y>
-      <w>189</w>
-      <h>207</h>
+      <y>18</y>
+      <w>216</w>
+      <h>414</h>
     </coordinates>
     <panel_attributes>&lt;&lt;OpenFile&gt;&gt;
 Package::controller
 --
-JFileChooser fc
-Component comp
+Window stage
+FileChooser fileChooser
+String fileExtension
+String songName
 Media song
 MediaPlayer player
-File file[MAX]
-int i
+File file
+Sequencer sequencer
+InputStream input
+BeatMaker beat
 --
 openFile()
+openPlayer()
+openMP3()
+openMIDI()
 checkExt()
+getPlayer()
+getFile()
+close()
 play()
-pause()
-stop()
+playMP3()
+playMIDI()
+pause(), pauseMP3(), pauseMIDI()
+stop(),stopMP3()stopMIDI()
+noFileOpen(), wrongFileOpen()
+getFileExtension(), editMIDI()
+
 bg=cyan</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>180</x>
-      <y>198</y>
-      <w>81</w>
-      <h>36</h>
+      <x>207</x>
+      <y>72</y>
+      <w>72</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>70.0;10.0;10.0;20.0</additional_attributes>
+    <additional_attributes>60.0;50.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>0</x>
-      <y>378</y>
+      <x>18</x>
+      <y>459</y>
       <w>189</w>
-      <h>171</h>
+      <h>369</h>
     </coordinates>
     <panel_attributes>&lt;&lt;BeatMaker&gt;&gt;
 Package::controller
@@ -75,8 +90,22 @@ String[] instrucmentNames
 int[] instruments
 --
 BeatMaker()
-startUp()
+start()
 setUpMidi()
+buildGUI()
+rebuildGUI()
+buildTrack()
+openForEdit()
+MyStartListener
+MyStopListener
+MyUpTempoListener
+MyDownTempoListener
+MySendListener
+MyListSelectionListener
+RemoteReader
+ChangeSequence()
+makeTracks()
+makeEvent()
 
 bg=cyan</panel_attributes>
     <additional_attributes/>
@@ -84,19 +113,19 @@ bg=cyan</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>81</x>
-      <y>351</y>
-      <w>36</w>
-      <h>45</h>
+      <x>99</x>
+      <y>423</y>
+      <w>27</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>20.0;10.0;10.0;30.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>0</x>
-      <y>558</y>
+      <x>252</x>
+      <y>648</y>
       <w>189</w>
       <h>171</h>
     </coordinates>
@@ -119,19 +148,19 @@ bg=cyan</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>180</x>
-      <y>369</y>
+      <x>198</x>
+      <y>216</y>
       <w>81</w>
-      <h>108</h>
+      <h>342</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;100.0;70.0;10.0</additional_attributes>
+    <additional_attributes>10.0;360.0;70.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>243</x>
-      <y>333</y>
+      <x>261</x>
+      <y>180</y>
       <w>189</w>
       <h>450</h>
     </coordinates>
@@ -173,19 +202,19 @@ bg=cyan</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>180</x>
-      <y>612</y>
-      <w>81</w>
-      <h>27</h>
+      <x>342</x>
+      <y>621</y>
+      <w>27</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;70.0;10.0</additional_attributes>
+    <additional_attributes>10.0;30.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>468</x>
-      <y>531</y>
+      <x>495</x>
+      <y>153</y>
       <w>189</w>
       <h>135</h>
     </coordinates>
@@ -206,8 +235,8 @@ bg=dark_gray</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>477</x>
-      <y>189</y>
+      <x>495</x>
+      <y>99</y>
       <w>189</w>
       <h>36</h>
     </coordinates>
@@ -221,8 +250,8 @@ bg=yellow</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>477</x>
-      <y>135</y>
+      <x>495</x>
+      <y>45</y>
       <w>189</w>
       <h>36</h>
     </coordinates>
@@ -236,8 +265,8 @@ bg=yellow</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>423</x>
-      <y>144</y>
+      <x>441</x>
+      <y>54</y>
       <w>72</w>
       <h>63</h>
     </coordinates>
@@ -247,8 +276,8 @@ bg=yellow</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>558</x>
-      <y>162</y>
+      <x>576</x>
+      <y>72</y>
       <w>27</w>
       <h>45</h>
     </coordinates>
@@ -258,19 +287,19 @@ bg=yellow</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>324</x>
-      <y>306</y>
-      <w>252</w>
-      <h>243</h>
+      <x>342</x>
+      <y>144</y>
+      <w>261</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;130.0;20.0;140.0;80.0;260.0;250.0</additional_attributes>
+    <additional_attributes>10.0;20.0;270.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>477</x>
-      <y>351</y>
+      <x>702</x>
+      <y>207</y>
       <w>189</w>
       <h>36</h>
     </coordinates>
@@ -284,8 +313,8 @@ bg=yellow</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>684</x>
-      <y>135</y>
+      <x>702</x>
+      <y>45</y>
       <w>189</w>
       <h>36</h>
     </coordinates>
@@ -299,8 +328,8 @@ bg=yellow</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>477</x>
-      <y>297</y>
+      <x>702</x>
+      <y>153</y>
       <w>189</w>
       <h>36</h>
     </coordinates>
@@ -314,8 +343,8 @@ bg=yellow</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>477</x>
-      <y>243</y>
+      <x>702</x>
+      <y>99</y>
       <w>189</w>
       <h>36</h>
     </coordinates>
@@ -329,8 +358,19 @@ bg=yellow</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>558</x>
-      <y>216</y>
+      <x>783</x>
+      <y>72</y>
+      <w>27</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>783</x>
+      <y>126</y>
       <w>27</w>
       <h>45</h>
     </coordinates>
@@ -340,19 +380,8 @@ bg=yellow</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>558</x>
-      <y>270</y>
-      <w>27</w>
-      <h>45</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;30.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>657</x>
-      <y>144</y>
+      <x>675</x>
+      <y>54</y>
       <w>45</w>
       <h>27</h>
     </coordinates>
@@ -362,12 +391,66 @@ bg=yellow</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>558</x>
-      <y>324</y>
+      <x>783</x>
+      <y>180</y>
       <w>27</w>
       <h>45</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>468</x>
+      <y>306</y>
+      <w>225</w>
+      <h>234</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Synth&gt;&gt;
+Package::controller
+--
+Window stage
+Track track
+Sequencer sequencer
+sequencer tempoSequencer
+Sequence sequence
+long time
+--
+main()
+Synth()
+TestPane()
+createButton(String, int)
+createRecordButton(String, int)
+createStartButton()createSaveButton()
+playNote(int, int)
+
+
+bg=cyan</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>468</x>
+      <y>549</y>
+      <w>225</w>
+      <h>171</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Instrument&gt;&gt;
+Package::model
+--
+percussion elements
+String name
+int code
+--
+Instrument(String, int)
+getPercussion()
+getSynths()
+getAll()
+toString()
+
+bg=green</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>

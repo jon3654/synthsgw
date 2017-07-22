@@ -285,7 +285,8 @@ public class BeatMaker{
 		public void actionPerformed(ActionEvent a) {
                     // make an arraylist of just the STATE of the checkboxes
                     // boolean[] checkboxState = new boolean[256];
-                        
+                    
+                    sequencer.stop();
                     buildTrack();
                     Platform.runLater(new Runnable() {
                         @Override
@@ -397,4 +398,6 @@ public class BeatMaker{
 		
 		return event;
 	}
+        
+        
 }
