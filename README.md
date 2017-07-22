@@ -25,7 +25,7 @@ Sprint 2
  * https://www.youtube.com/watch?v=VREWVBDSXEY
  
 Sprint 3
- * TBD
+ * https://youtu.be/IraGv4T0_Kg
  
 ## Diagrams
 * [Use Case 1](https://github.com/jon3654/synthsgw/blob/master/diagrams/Use%20Case%201.pdf)
