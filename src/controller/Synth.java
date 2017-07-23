@@ -246,7 +246,10 @@ public class Synth{
             btn.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    octaveChoice += 1;
+                    if(octaveChoice > 9) 
+                        return;
+                    else
+                        octaveChoice += 1;
                 }
             });
             
@@ -271,7 +274,10 @@ public class Synth{
             btn.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    octaveChoice -=1 ;
+                    if(octaveChoice < 1)
+                        return;
+                    else
+                        octaveChoice -=1;
                                                 
                 }
             });
