@@ -34,6 +34,7 @@ public class Synth{
         Sequencer tempoSequencer;
         Sequence sequence;
         long time;
+        int octaveChoice = 3;
         
 	public static void main (String[] args){
 		new Synth();
@@ -73,9 +74,12 @@ public class Synth{
             add(createButton("A", KeyEvent.VK_6));
             add(createButton("B", KeyEvent.VK_7));
             add(createButton("C", KeyEvent.VK_8));
+            add(createOctaveUpButton("Octave Up", KeyEvent.VK_U));
+            add(createOctaveDownButton("Octave Down", KeyEvent.VK_J));
             add(createRecordButton("Record", KeyEvent.VK_9));
             add(createStartButton("Start", KeyEvent.VK_0));
             add(createSaveButton("Save", KeyEvent.VK_A));
+            
             
         }
 
@@ -85,7 +89,7 @@ public class Synth{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     // we need to get user input for the octave 
-                    int octave = 12*3;
+                    int octave = 12*octaveChoice;
                     playNote(octave + (virtualKey - '1'), 1);
                     
                 }
@@ -199,18 +203,18 @@ public class Synth{
             return btn;
         }
         protected JButton createSaveButton(String name, int virtualKey){
-        JButton btn = new JButton(name);
-        btn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        FileChooser fileChooser = new FileChooser();
-                        fileChooser.setTitle("Save MIDI");
-                        File file = fileChooser.showSaveDialog(stage);
-                        if (file != null) {
-                            try {
+            JButton btn = new JButton(name);
+            btn.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            FileChooser fileChooser = new FileChooser();
+                            fileChooser.setTitle("Save MIDI");
+                            File file = fileChooser.showSaveDialog(stage);
+                            if (file != null) {
+                                try {
                                 // serialize here
                                 MidiSystem.write(sequence,1,file);
                             } catch (IOException ex) {
@@ -220,24 +224,76 @@ public class Synth{
                     }   
                 });
             }
-        });
-        btn.setMargin(new Insets(8, 8, 8, 8));
+            });
+            btn.setMargin(new Insets(8, 8, 8, 8));
         
-        InputMap im = btn.getInputMap(WHEN_IN_FOCUSED_WINDOW);
-        ActionMap am = btn.getActionMap();
+            InputMap im = btn.getInputMap(WHEN_IN_FOCUSED_WINDOW);
+            ActionMap am = btn.getActionMap();
         
-        im.put(KeyStroke.getKeyStroke(virtualKey, 0), "clickMe");
-        am.put("clickMe", new AbstractAction() {
+            im.put(KeyStroke.getKeyStroke(virtualKey, 0), "clickMe");
+            am.put("clickMe", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JButton btn = (JButton) e.getSource();
-                btn.doClick();
+                    btn.doClick();
             }
             
-        });
-        return btn;
+            });
+            return btn;
+        }
+        protected JButton createOctaveUpButton(String name, int virtualKey){
+            JButton btn = new JButton(name);
+            btn.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    octaveChoice += 1;
+                }
+            });
+            
+            btn.setMargin(new Insets(8, 8, 8, 8));
+        
+            InputMap im = btn.getInputMap(WHEN_IN_FOCUSED_WINDOW);
+            ActionMap am = btn.getActionMap();
+        
+            im.put(KeyStroke.getKeyStroke(virtualKey, 0), "clickMe");
+            am.put("clickMe", new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    JButton btn = (JButton) e.getSource();
+                    btn.doClick();
+                }
+            });
+            return btn;
+        }
+        
+        protected JButton createOctaveDownButton(String name, int virtualKey){
+            JButton btn = new JButton(name);
+            btn.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    octaveChoice -=1 ;
+                                                
+                }
+            });
+            
+            btn.setMargin(new Insets(8, 8, 8, 8));
+        
+            InputMap im = btn.getInputMap(WHEN_IN_FOCUSED_WINDOW);
+            ActionMap am = btn.getActionMap();
+        
+            im.put(KeyStroke.getKeyStroke(virtualKey, 0), "clickMe");
+            am.put("clickMe", new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    JButton btn = (JButton) e.getSource();
+                    btn.doClick();
+                }
+            });
+
+            return btn;
         }
     }
+        
 	
 	
     public void playNote(int finalNote, int finalInstrument) {
