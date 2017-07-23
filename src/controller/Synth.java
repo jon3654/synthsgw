@@ -79,6 +79,7 @@ public class Synth{
             add(createRecordButton("Record", KeyEvent.VK_9));
             add(createStartButton("Start", KeyEvent.VK_0));
             add(createSaveButton("Save", KeyEvent.VK_A));
+            add(createOctaveDisplay());
             
             
         }
@@ -297,6 +298,11 @@ public class Synth{
             });
 
             return btn;
+        }
+        
+        protected JTextField createOctaveDisplay(){
+            JTextField displayOctave = new JTextField("           Key: C");
+            return displayOctave;
         }
     }
         
