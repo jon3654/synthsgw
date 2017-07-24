@@ -21,14 +21,14 @@ clean:
 	fi; \
 	if [ -e sources.tmp ] ; \
 		then rm sources.tmp; \
-	fi#; \
-	#if [ -e SynthsGW.jar ] ; \
-		#then rm SynthsGW.jar;  \
-	#fi;
+	fi
 
 run:
 	java -classpath build $(MAINCLASS)
 
 jar:
+	if [ -e SynthsGW.jar ] ; \
+		then rm SynthsGW.jar;  \
+	fi; \
 	jar cvfe SynthsGW.jar $(MAINCLASS) -C build .
 
