@@ -128,7 +128,7 @@ public class InstrumentController {
 
 	@FXML
 	public void removeInstrument() {
-		//TODO remove the associated Sequence from the Sequencer
+		BeatArray.Beats.killInstrument(inst);
 
 		((Pane)rootPane.getParent()).getChildren().remove(rootPane);
 		// And now let GC do its job

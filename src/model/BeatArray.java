@@ -19,12 +19,12 @@ public class BeatArray {
 	public static BeatArray Beats = new BeatArray();
 
 	private EnumMap<Instrument, boolean []> beats;
-	private EnumMap<Instrument, Boolean>    muted;
+	private boolean [] muted;
 	private Instrument soloed;
 
 	public BeatArray() {
 		beats = new EnumMap<Instrument, boolean []>(Instrument.class);
-		muted = new EnumMap<Instrument, Boolean>(Instrument.class);
+		muted = new boolean[Instrument.values().length];
 		soloed = null;
 	}
 
@@ -36,8 +36,12 @@ public class BeatArray {
 		beats.get(inst)[beat] = value;
 	}
 
+	public void killInstrument(Instrument inst) {
+		beats.remove(inst);
+	}
+
 	public void setMute(Instrument inst, boolean value) {
-		muted.put(inst, value);
+		muted[inst.ordinal()] = value;
 	}
 
 	public void setSolo(Instrument inst) {
@@ -57,23 +61,29 @@ public class BeatArray {
 		}
 
 		for(Instrument ins : Instrument.values()) {
+			// there's no track for this instrument
+			if(!beats.containsKey(ins) ||
+			// this instrument is muted
+			   muted[ins.ordinal()] ||
+			// some other instrument is soloed
+			   soloed != null && soloed != ins)
+				continue;
+
 			Track track = seq.createTrack();
 			boolean [] instTrack = beats.get(ins);
 
 			// Make sure that a track is not muted or soloed
-			if((soloed == null || soloed == ins) && !muted.get(ins)) {
-				for(int i = 0; i < instTrack.length; i++) {
-					// if this beat is enabled
-					if(instTrack[i]) {
-						// Add the on and off events to the track for this note
-						track.add(makeEvent(144, 9, ins.code, 100, i));
-						track.add(makeEvent(128, 9, ins.code, 100, i+1));
-					}
+			for(int i = 0; i < instTrack.length; i++) {
+				// if this beat is enabled
+				if(instTrack[i]) {
+					// Add the on and off events to the track for this note
+					track.add(makeEvent(144, 9, ins.code, 100, i));
+					track.add(makeEvent(128, 9, ins.code, 100, i+1));
 				}
 			}
 
 			// I think this is the end of track symbol, but who really knows
-			track.add(makeEvent(192,9,1,0,15));
+			track.add(makeEvent(192,9,1,0,16));
 		}
 
 		return seq;
