@@ -319,22 +319,25 @@ public class SceneController {
     }
     
     public int openMIDI(){
+        
+        pause();
         openFile[openFileIndex++] = new OpenFile("mid");
         try {
-            return openFile[openFileIndex-1].openMIDI();
+            openFile[openFileIndex-1].openMIDI();
+            String songName = new String(openFile[openFileIndex - 1].songName);
+            addMidi(songName);
+            return 0;
         } catch (IOException ex) {
             Logger.getLogger(SceneController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        String songName = new String(openFile[openFileIndex - 1].songName);
         
-        System.out.println("The song name for the MIDI is " + songName);
-        addMidi(songName);
         return -1;
     }
     
     //This function adds Midi files to the GUI
     public void addMidi(String midi_name)
     {
+        
         TitledPane midi_pane = new TitledPane();
         midi_pane.setText(midi_name);
         VBox midi_vbox = new VBox();
