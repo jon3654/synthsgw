@@ -388,7 +388,7 @@ public class SceneController {
     }
     
     public void play(){
-		/*
+		//*
         if(openFileIndex == 0)
             OpenFile.noFileOpen();
         else{
@@ -399,7 +399,7 @@ public class SceneController {
     }
     
     public void pause(){
-		/*
+		//*
         if(openFileIndex == 0)
             OpenFile.noFileOpen();
         else{
@@ -410,7 +410,7 @@ public class SceneController {
     }
     
     public void stop(){
-		/*
+		//*
         if(openFileIndex == 0)
             OpenFile.noFileOpen();
         else {

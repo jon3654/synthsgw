@@ -223,7 +223,8 @@ public class BeatMaker{
 			makeTracks(trackList);
 		} // close outer
 
-		track.add(makeEvent(192,9,1,0,15)); // - so we always go to full 16 beats
+		// - so we always go to full 16 beats
+		track.add(makeEvent(192,9,1,0,15));
 
 		try {
                         sequencer.setTempoInBPM(Settings.bpm);
