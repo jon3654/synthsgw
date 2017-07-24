@@ -256,7 +256,7 @@ public class Synth{
                     if(octaveChoice > 9) 
                         return;
                     else
-                        octaveChoice -= 1;
+                        octaveChoice += 1;
                 }
             });
             
