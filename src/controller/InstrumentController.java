@@ -61,6 +61,18 @@ public class InstrumentController {
 				  note8,  note9,  note10, note11,
 				  note12, note13, note14, note15 };
 
+		for(int i = 0; i < notes.length; i++) {
+			notes[i].selectedProperty().addListener((obs, oldVal, newVal) -> {
+				if(newVal == true) {
+					
+				}
+				if(newVal == false) {
+					
+				}
+			});
+		}
+
+		// Initialize panSlider
 		panSlider.setMin(Settings.MIN_SLIDE_PAN);
 		panSlider.setMax(Settings.MAX_SLIDE_PAN);
 		// *Should* set slider to halfway
