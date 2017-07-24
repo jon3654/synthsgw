@@ -88,8 +88,8 @@ public class Synth{
             add(createStartButton("Start", KeyEvent.VK_0));
             add(createSaveButton("Save", KeyEvent.VK_A));
             add(createOctaveDisplay());
-            add(createChangeInstrumentUp("Change Instrument--^", KeyEvent.VK_O));
-            add(createChangeInstrumentUp("Change Instrument--v", KeyEvent.VK_L));
+            add(createChangeInstrumentUp("Change Instrument-^", KeyEvent.VK_O));
+            add(createChangeInstrumentUp("Change Instrument-v", KeyEvent.VK_L));
             
             
         }
