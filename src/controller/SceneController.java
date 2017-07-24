@@ -457,7 +457,14 @@ public class SceneController {
             OpenFile.noFileOpen();
     }
     
-    public void editSynth(){}
+    public void editSynth(){
+        synth = new Synth();
+        if(openFile[openFileIndex-1].getFileExtension().equals("mid")){
+            openFile[openFileIndex-1].editSynth();
+        }
+        else
+            OpenFile.noFileOpen();
+    }
     
     public void newSynth(){
         synth = new Synth();
