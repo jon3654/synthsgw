@@ -58,7 +58,6 @@ import /*com.github.synthsgw.*/controller.Synth;
 import com.github.synthsgw.model.Instrument;
 import com.github.synthsgw.model.Settings;
 
-
 public class SceneController {
     OpenFile openFile[] = new OpenFile[10];
     int openFileIndex = 0;
@@ -389,33 +388,36 @@ public class SceneController {
     }
     
     public void play(){
+		/*
         if(openFileIndex == 0)
             OpenFile.noFileOpen();
         else{
             for(int i = openFileIndex; i > -1; --i)
                 openFile[openFileIndex-1].play();
         }
-        
-        
+		//*/
     }
     
     public void pause(){
+		/*
         if(openFileIndex == 0)
             OpenFile.noFileOpen();
         else{
             for(int i = openFileIndex; i > -1; --i)
                 openFile[openFileIndex-1].pause();
         }
+		//*/
     }
     
     public void stop(){
+		/*
         if(openFileIndex == 0)
             OpenFile.noFileOpen();
         else {
             for(int i = openFileIndex; i > -1; --i)
                 openFile[openFileIndex-1].stop();
         }
-        
+        //*/
     }
     
     public void close(){
@@ -467,4 +469,8 @@ public class SceneController {
     public void newSynth(){
         synth = new Synth();
     }
+
+	////////////////////
+	// BeatMaker Code //
+	////////////////////
 }
