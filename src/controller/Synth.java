@@ -71,7 +71,7 @@ public class Synth{
         
 		// Need a place for the buttons 
 		public TestPane() {
-            setLayout(new GridLayout(2, 8));
+            setLayout(new GridLayout(3, 8));
             add(createButton("1", KeyEvent.VK_1));
             add(createButton("2", KeyEvent.VK_2));
             add(createButton("3", KeyEvent.VK_3));
@@ -88,8 +88,8 @@ public class Synth{
             add(createStartButton("Start", KeyEvent.VK_0));
             add(createSaveButton("Save", KeyEvent.VK_A));
             add(createOctaveDisplay());
-            add(createChangeInstrumentUp("Change Instrument--^", KeyEvent.VK_O));
-            add(createChangeInstrumentUp("Change Instrument--v", KeyEvent.VK_L));
+            add(createChangeInstrumentUp("Change Instrument-^", KeyEvent.VK_O));
+            add(createChangeInstrumentUp("Change Instrument-v", KeyEvent.VK_L));
             
             
         }

@@ -15,11 +15,13 @@ import java.io.FileNotFoundException;
 import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.sound.midi.Sequencer;
 
 // JavaFX imports
 import javafx.application.Platform;
@@ -55,6 +57,7 @@ import javafx.util.Duration;
 import /*com.github.synthsgw.*/controller.BeatMaker;
 import /*com.github.synthsgw.*/controller.OpenFile;
 import /*com.github.synthsgw.*/controller.Synth;
+import com.github.synthsgw.model.BeatArray;
 import com.github.synthsgw.model.Instrument;
 import com.github.synthsgw.model.Settings;
 
@@ -90,9 +93,26 @@ public class SceneController {
 
 	@FXML
 	protected void initialize() {
+		///////////////
+		// Sequencer //
+		///////////////
+		Sequencer seq = Settings.MyMixtape;
+
+		try {
+			seq.open();
+		} catch(Exception e) {
+			e.printStackTrace();
+			Platform.exit();
+			System.exit(-1);
+		}
+
+		seq.setTempoInBPM(Settings.bpm);
+		seq.setLoopCount(seq.LOOP_CONTINUOUSLY);
+
 		////////////////////
 		// Event Handlers //
 		////////////////////
+
 		instrumentPane.setOnDragOver(e -> {
 			if(e.getGestureSource() != instrumentPane &&
 			   e.getDragboard().hasString()) {
@@ -135,8 +155,26 @@ public class SceneController {
 	public void openSettings() {
 		displayScene(Settings.SETTINGS_FXML, Settings.SETTINGS_TITLE);
 	}
+
+	@FXML
+	public void startTheHotRhythm() {
+		try {
+			Settings.MyMixtape.setSequence(BeatArray.Beats.makeSequence());
+		} catch(Exception e) {
+			e.printStackTrace();
+			Platform.exit();
+			System.exit(-1);
+		}
+
+		Settings.MyMixtape.start();
+	}
+
+	@FXML
+	public void stopTheHotRhythm() {
+		Settings.MyMixtape.stop();
+	}
         
-        //This is to add a synth or a beat
+	//This is to add a synth or a beat
 	public void addInstrument(String name, int index) {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource(Settings.INSTRUMENT_FXML));
@@ -150,6 +188,8 @@ public class SceneController {
 			//      inst.name is the user-friendly string
 			((InstrumentController)loader.getController())
 					.setInstName(inst.name);
+			((InstrumentController)loader.getController())
+					.setInst(inst);
 
 			//*
 			LinkedList<Node> lst =
@@ -203,9 +243,13 @@ public class SceneController {
 		synthEnumPane.getChildren().addAll(synts);
 	}
 
-	private ArrayList<Pane> makeInstPanes(Collection<Instrument> insts,
+	private ArrayList<Pane> makeInstPanes(List<Instrument> insts,
 	                                      URL location) {
 		ArrayList<Pane> panes = new ArrayList<>(insts.size());
+
+		Collections.sort(insts, (o1, o2) -> {
+			return o1.name.compareTo(o2.name);
+		});
 
 		for(Instrument i : insts) {
 			try {

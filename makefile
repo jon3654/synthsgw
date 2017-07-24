@@ -1,4 +1,4 @@
-ARGS = -d build -verbose -cp build -g -Xlint:unchecked -Xlint:deprecation
+ARGS = -d build -cp build -g -Xlint:unchecked -Xlint:deprecation
 JC = javac
 MAINCLASS = com.github.synthsgw.App
 VIEW = src/view/fxml

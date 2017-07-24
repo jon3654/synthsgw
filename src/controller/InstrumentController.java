@@ -17,11 +17,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
+import com.github.synthsgw.model.BeatArray;
+import com.github.synthsgw.model.Instrument;
 import com.github.synthsgw.model.InstrumentData;
 import com.github.synthsgw.model.Settings;
 
 public class InstrumentController {
 	private InstrumentData track;
+	private Instrument inst;
 
 	@FXML private BorderPane rootPane;
 	@FXML private AnchorPane instrumentSettingsPane;
@@ -62,15 +65,20 @@ public class InstrumentController {
 				  note12, note13, note14, note15 };
 
 		for(int i = 0; i < notes.length; i++) {
+			final int index = i;
 			notes[i].selectedProperty().addListener((obs, oldVal, newVal) -> {
-				if(newVal == true) {
-					
-				}
-				if(newVal == false) {
-					
-				}
+				BeatArray.Beats.setBeat(inst, index, newVal);
 			});
 		}
+
+		// Mute and Solo buttons
+		muteButton.selectedProperty().addListener((obs, oldVal, newVal) -> {
+			BeatArray.Beats.setMute(inst, newVal);
+		});
+
+		soloButton.setToggleGroup(Settings.SoloGroup);
+		// Storing what instrument this Toggle represents
+		soloButton.setUserData(inst);
 
 		// Initialize panSlider
 		panSlider.setMin(Settings.MIN_SLIDE_PAN);
@@ -120,7 +128,7 @@ public class InstrumentController {
 
 	@FXML
 	public void removeInstrument() {
-		//TODO remove the associated Sequence from the Sequencer
+		BeatArray.Beats.killInstrument(inst);
 
 		((Pane)rootPane.getParent()).getChildren().remove(rootPane);
 		// And now let GC do its job
@@ -128,6 +136,10 @@ public class InstrumentController {
 
 	public void setInstName(String name) {
 		instrumentName.setText(name);
+	}
+
+	public void setInst(Instrument inst) {
+		this.inst = inst;
 	}
 }
 

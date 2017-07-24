@@ -58,6 +58,9 @@ public class MetronomeController {
 			bpmSlider.setValue(Settings.bpm);
 
 		bpmLabel.setText(Float.toString(Settings.bpm));
+
+		// Also tell sequencer it has changed
+		Settings.MyMixtape.setTempoInBPM(Settings.bpm);
 	}
 
 	// Returns an integer <= 0 if the input string is not a valid integer
