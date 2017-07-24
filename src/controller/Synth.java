@@ -35,6 +35,10 @@ public class Synth{
         Sequence sequence;
         long time;
         int octaveChoice = 3;
+        int key = '1';
+        String[] keyDisplay = {"C", "C#/Db", "D", "D#/Eb", "E", "F", "F#/Gb", "G", "G#/Ab", "A", "A#/Bb", "B"};
+        int keyDisplayIndex = 0;
+        JTextField displayOctave;
         
 	public static void main (String[] args){
 		new Synth();
@@ -66,16 +70,18 @@ public class Synth{
 		// Need a place for the buttons 
 		public TestPane() {
             setLayout(new GridLayout(2, 8));
-            add(createButton("C", KeyEvent.VK_1));
-            add(createButton("D", KeyEvent.VK_2));
-            add(createButton("E", KeyEvent.VK_3));
-            add(createButton("F", KeyEvent.VK_4));
-            add(createButton("G", KeyEvent.VK_5));
-            add(createButton("A", KeyEvent.VK_6));
-            add(createButton("B", KeyEvent.VK_7));
-            add(createButton("C", KeyEvent.VK_8));
+            add(createButton("1", KeyEvent.VK_1));
+            add(createButton("2", KeyEvent.VK_2));
+            add(createButton("3", KeyEvent.VK_3));
+            add(createButton("4", KeyEvent.VK_4));
+            add(createButton("5", KeyEvent.VK_5));
+            add(createButton("6", KeyEvent.VK_6));
+            add(createButton("7", KeyEvent.VK_7));
+            add(createButton("8", KeyEvent.VK_8));
             add(createOctaveUpButton("Octave Up", KeyEvent.VK_U));
             add(createOctaveDownButton("Octave Down", KeyEvent.VK_J));
+            add(createKeyChangeUp("Key Up", KeyEvent.VK_I));
+            add(createKeyChangeDown("Key Down", KeyEvent.VK_K));
             add(createRecordButton("Record", KeyEvent.VK_9));
             add(createStartButton("Start", KeyEvent.VK_0));
             add(createSaveButton("Save", KeyEvent.VK_A));
@@ -90,8 +96,8 @@ public class Synth{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     // we need to get user input for the octave 
-                    int octave = 12*octaveChoice;
-                    playNote(octave + (virtualKey - '1'), 1);
+                    int octave = 12 * octaveChoice;
+                    playNote(octave + (virtualKey - key), 1);
                     
                 }
             });
@@ -250,7 +256,7 @@ public class Synth{
                     if(octaveChoice > 9) 
                         return;
                     else
-                        octaveChoice += 1;
+                        octaveChoice -= 1;
                 }
             });
             
@@ -301,9 +307,82 @@ public class Synth{
         }
         
         protected JTextField createOctaveDisplay(){
-            JTextField displayOctave = new JTextField("           Key: C");
+            displayOctave = new JTextField("           Key: C");
+            displayOctave.setEditable(false);
             return displayOctave;
         }
+        
+        protected JButton createKeyChangeUp(String name, int virtualKey){
+            JButton btn = new JButton(name);
+            btn.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if(key == 1)
+                        key = 12;
+                    else
+                        key -= 1;     
+                    if(keyDisplayIndex == 11)
+                        keyDisplayIndex = 0;
+                    else
+                        keyDisplayIndex += 1;
+                        
+                    displayOctave.setText("           Key: " + keyDisplay[keyDisplayIndex]);
+                }
+            });
+            
+            btn.setMargin(new Insets(8, 8, 8, 8));
+        
+            InputMap im = btn.getInputMap(WHEN_IN_FOCUSED_WINDOW);
+            ActionMap am = btn.getActionMap();
+        
+            im.put(KeyStroke.getKeyStroke(virtualKey, 0), "clickMe");
+            am.put("clickMe", new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    JButton btn = (JButton) e.getSource();
+                    btn.doClick();
+                }
+            });
+
+            return btn;
+        }
+        
+        protected JButton createKeyChangeDown(String name, int virtualKey){
+            JButton btn = new JButton(name);
+            btn.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if(key == 12)
+                        key = 1;
+                    else
+                        key += 1;
+                    if(keyDisplayIndex == 0)
+                        keyDisplayIndex = 11;
+                    else
+                        keyDisplayIndex -= 1;
+                    
+                    
+                    displayOctave.setText("           Key: " + keyDisplay[keyDisplayIndex]);
+                }
+            });
+            
+            btn.setMargin(new Insets(8, 8, 8, 8));
+        
+            InputMap im = btn.getInputMap(WHEN_IN_FOCUSED_WINDOW);
+            ActionMap am = btn.getActionMap();
+        
+            im.put(KeyStroke.getKeyStroke(virtualKey, 0), "clickMe");
+            am.put("clickMe", new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    JButton btn = (JButton) e.getSource();
+                    btn.doClick();
+                }
+            });
+
+            return btn;
+        }
+
     }
         
 	
@@ -322,8 +401,6 @@ public class Synth{
             
             MidiEvent event = null;
             
-            //int currentTick = (int)((System.currentTimeMillis()-time)*Settings.bpm)/6000;
-
             ShortMessage first = new ShortMessage();
             first.setMessage(192,1,finalInstrument,0);
             MidiEvent changeInstrument;
