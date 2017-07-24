@@ -40,6 +40,7 @@ public class Synth{
         String[] keyDisplay = {"C", "C#/Db", "D", "D#/Eb", "E", "F", "F#/Gb", "G", "G#/Ab", "A", "A#/Bb", "B"};
         int keyDisplayIndex = 0;
         JTextField displayOctave;
+        int instrument = 1;
         
 	public static void main (String[] args){
 		new Synth();
@@ -87,6 +88,8 @@ public class Synth{
             add(createStartButton("Start", KeyEvent.VK_0));
             add(createSaveButton("Save", KeyEvent.VK_A));
             add(createOctaveDisplay());
+            add(createChangeInstrumentUp("Change Instrument--^", KeyEvent.VK_O));
+            add(createChangeInstrumentUp("Change Instrument--v", KeyEvent.VK_L));
             
             
         }
@@ -98,7 +101,7 @@ public class Synth{
                 public void actionPerformed(ActionEvent e) {
                     // we need to get user input for the octave 
                     int octave = 12 * octaveChoice;
-                    playNote(octave + (virtualKey - key), 1);
+                    playNote(octave + (virtualKey - key), instrument);
                     
                 }
             });
@@ -369,6 +372,64 @@ public class Synth{
                     
                     
                     displayOctave.setText("           Key: " + keyDisplay[keyDisplayIndex]);
+                }
+            });
+            
+            btn.setMargin(new Insets(8, 8, 8, 8));
+        
+            InputMap im = btn.getInputMap(WHEN_IN_FOCUSED_WINDOW);
+            ActionMap am = btn.getActionMap();
+        
+            im.put(KeyStroke.getKeyStroke(virtualKey, 0), "clickMe");
+            am.put("clickMe", new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    JButton btn = (JButton) e.getSource();
+                    btn.doClick();
+                }
+            });
+
+            return btn;
+        }
+        
+        protected JButton createChangeInstrumentUp(String name, int virtualKey){
+            JButton btn = new JButton(name);
+            btn.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if(instrument == 112)
+                        instrument = 1;
+                    else
+                        instrument++;
+                }
+            });
+            
+            btn.setMargin(new Insets(8, 8, 8, 8));
+        
+            InputMap im = btn.getInputMap(WHEN_IN_FOCUSED_WINDOW);
+            ActionMap am = btn.getActionMap();
+        
+            im.put(KeyStroke.getKeyStroke(virtualKey, 0), "clickMe");
+            am.put("clickMe", new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    JButton btn = (JButton) e.getSource();
+                    btn.doClick();
+                }
+            });
+
+            return btn;
+        }
+
+        protected JButton createChangeInstrumentDown(String name, int virtualKey){
+            JButton btn = new JButton(name);
+            btn.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if(instrument == 1)
+                        instrument = 112;
+                    else
+                        instrument--;
                 }
             });
             

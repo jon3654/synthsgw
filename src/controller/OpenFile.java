@@ -35,6 +35,7 @@ public class OpenFile {
     Sequencer sequencer;
     InputStream input;
     BeatMaker beat;
+    Synth synth;
     
     // class constructor
     public OpenFile(String str){
@@ -248,5 +249,15 @@ public class OpenFile {
             return 0;
         }
         else return -1;
+    }
+    
+    public void editSynth(){
+        if(fileExtension.equals("mid")){
+            synth = new Synth();
+            synth.openForEdit(sequencer);
+        }
+        else 
+            return;
+
     }
 }
