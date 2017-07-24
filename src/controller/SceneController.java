@@ -15,8 +15,9 @@ import java.io.FileNotFoundException;
 import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -242,9 +243,13 @@ public class SceneController {
 		synthEnumPane.getChildren().addAll(synts);
 	}
 
-	private ArrayList<Pane> makeInstPanes(Collection<Instrument> insts,
+	private ArrayList<Pane> makeInstPanes(List<Instrument> insts,
 	                                      URL location) {
 		ArrayList<Pane> panes = new ArrayList<>(insts.size());
+
+		Collections.sort(insts, (o1, o2) -> {
+			return o1.name.compareTo(o2.name);
+		});
 
 		for(Instrument i : insts) {
 			try {
