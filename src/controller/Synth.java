@@ -33,6 +33,7 @@ public class Synth{
         Sequencer sequencer;
         Sequencer tempoSequencer;
         Sequence sequence;
+        Sequence editSequence = null;
         long time;
         int octaveChoice = 3;
         int key = '1';
@@ -149,8 +150,13 @@ public class Synth{
                             sequencer.open();  
                             sequence = new Sequence(Sequence.PPQ,4);
                             sequencer.setTempoInBPM(Settings.bpm);
-                            track = sequence.createTrack();                          
-                            sequencer.setSequence(sequence);  
+                            if(editSequence == null){
+                                track = sequence.createTrack();                          
+                                sequencer.setSequence(sequence); 
+                            } 
+                            else {
+                                sequencer.setSequence(editSequence);
+                            }
                             
                             sequencer.recordEnable(track, HEIGHT);
                             sequencer.start();
@@ -439,5 +445,15 @@ public class Synth{
             temp_sequencer.start();
             
         } catch (Exception ex) { ex.printStackTrace(); }
+    }
+    public void openForEdit(Sequencer sequencer){
+        editSequence = sequencer.getSequence();
+        track = editSequence.createTrack();
+        try {
+            sequencer.open();
+        } catch (MidiUnavailableException ex) {
+            Logger.getLogger(BeatMaker.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Settings.bpm = sequencer.getTempoInBPM();
     }
 }
