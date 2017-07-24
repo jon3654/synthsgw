@@ -19,12 +19,12 @@ clean:
 	if [ -d build ] ; \
 		then rm -r build;  \
 	fi; \
-	if [ -e SynthsGW.jar ] ; \
-		then rm SynthsGW.jar;  \
-	fi; \
 	if [ -e sources.tmp ] ; \
 		then rm sources.tmp; \
-	fi
+	fi#; \
+	#if [ -e SynthsGW.jar ] ; \
+		#then rm SynthsGW.jar;  \
+	#fi;
 
 run:
 	java -classpath build $(MAINCLASS)
