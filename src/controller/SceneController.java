@@ -20,6 +20,7 @@ import java.util.LinkedList;
 import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.sound.midi.Sequencer;
 
 // JavaFX imports
 import javafx.application.Platform;
@@ -55,6 +56,7 @@ import javafx.util.Duration;
 import /*com.github.synthsgw.*/controller.BeatMaker;
 import /*com.github.synthsgw.*/controller.OpenFile;
 import /*com.github.synthsgw.*/controller.Synth;
+import com.github.synthsgw.model.BeatArray;
 import com.github.synthsgw.model.Instrument;
 import com.github.synthsgw.model.Settings;
 
@@ -90,9 +92,26 @@ public class SceneController {
 
 	@FXML
 	protected void initialize() {
+		///////////////
+		// Sequencer //
+		///////////////
+		Sequencer seq = Settings.MyMixtape;
+
+		try {
+			seq.open();
+		} catch(Exception e) {
+			e.printStackTrace();
+			Platform.exit();
+			System.exit(-1);
+		}
+
+		seq.setTempoInBPM(Settings.bpm);
+		seq.setLoopCount(seq.LOOP_CONTINUOUSLY);
+
 		////////////////////
 		// Event Handlers //
 		////////////////////
+
 		instrumentPane.setOnDragOver(e -> {
 			if(e.getGestureSource() != instrumentPane &&
 			   e.getDragboard().hasString()) {
@@ -135,8 +154,26 @@ public class SceneController {
 	public void openSettings() {
 		displayScene(Settings.SETTINGS_FXML, Settings.SETTINGS_TITLE);
 	}
+
+	@FXML
+	public void startTheHotRhythm() {
+		try {
+			Settings.MyMixtape.setSequence(BeatArray.Beats.makeSequence());
+		} catch(Exception e) {
+			e.printStackTrace();
+			Platform.exit();
+			System.exit(-1);
+		}
+
+		Settings.MyMixtape.start();
+	}
+
+	@FXML
+	public void stopTheHotRhythm() {
+		Settings.MyMixtape.stop();
+	}
         
-        //This is to add a synth or a beat
+	//This is to add a synth or a beat
 	public void addInstrument(String name, int index) {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource(Settings.INSTRUMENT_FXML));
@@ -150,6 +187,8 @@ public class SceneController {
 			//      inst.name is the user-friendly string
 			((InstrumentController)loader.getController())
 					.setInstName(inst.name);
+			((InstrumentController)loader.getController())
+					.setInst(inst);
 
 			//*
 			LinkedList<Node> lst =

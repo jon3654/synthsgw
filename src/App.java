@@ -21,6 +21,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import com.github.synthsgw.model.Settings;
+
 public class App extends Application {
     private static final String SCENE_FILE = "/fxml/mainScene.fxml"; 
     private static final String WINDOW_TITLE = "SynthsGW - COP 4331 Project";
@@ -39,25 +41,30 @@ public class App extends Application {
 	
     @Override
     public void start(Stage stage) {
-	FXMLLoader loader = new FXMLLoader();
-	loader.setLocation(getClass().getResource(SCENE_FILE)); 
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource(SCENE_FILE)); 
 
-	try {
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-	} catch(IOException e) {
-            e.printStackTrace();
-            System.exit(-1);
-	}
-        
-	stage.setOnCloseRequest((event) -> {
-		Platform.exit();
-		System.exit(0);
-	});
+		try {
+				Parent root = loader.load();
+				Scene scene = new Scene(root);
+				stage.setScene(scene);
+		} catch(IOException e) {
+				e.printStackTrace();
+				System.exit(-1);
+		}
+			
+		stage.setOnCloseRequest((event) -> {
+			Platform.exit();
+			System.exit(0);
+		});
 
-	stage.setTitle(WINDOW_TITLE);
-	stage.show();
+		stage.setTitle(WINDOW_TITLE);
+		stage.show();
     }
+
+	@Override
+	public void stop() {
+		Settings.MyMixtape.close();
+	}
 }
 

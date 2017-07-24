@@ -7,6 +7,12 @@
 
 package com.github.synthsgw.model;
 
+import javax.sound.midi.MidiSystem;
+import javax.sound.midi.Sequencer;
+
+import javafx.application.Platform;
+import javafx.scene.control.ToggleGroup;
+
 public class Settings {
 	// Metronome settings
 	public static float bpm;
@@ -30,6 +36,8 @@ public class Settings {
 	public static final String INSTPANE_ACC_COLOR
 			= "-fx-background-color: palegreen";
 
+	public static final ToggleGroup SoloGroup = new ToggleGroup();
+
 	// Settings settings (hehehe)
 	public static final String SETTINGS_FXML  = "/fxml/settings.fxml";
 	public static final String SETTINGS_TITLE = "Settings";
@@ -39,11 +47,35 @@ public class Settings {
 	public static final String BEATMAKER_FXML  = "/fxml/BeatMaker.fxml";
 	public static final String BEATMAKER_TITLE = "Beat Maker";
 
+	// BetaMaker settings
+	public static final Sequencer MyMixtape = retrieveSequencer();
+
 	// Static initialization
 	// (init the default values for your settings here, this block will run when
 	//  the class is loaded)
 	static {
 		bpm = DEFAULT_BPM;
+
+		SoloGroup.selectedToggleProperty().addListener((obs, old, newTog) -> {
+			if(newTog == null)
+				BeatArray.Beats.setSolo(null);
+			else
+				BeatArray.Beats.setSolo((Instrument)newTog.getUserData());
+		});
+	}
+
+	private static Sequencer retrieveSequencer() {
+		Sequencer s = null;
+
+		try {
+			s = MidiSystem.getSequencer();
+		} catch(Exception e) {
+			e.printStackTrace();
+			Platform.exit();
+			System.exit(-1);
+		}
+
+		return s;
 	}
 }
 
